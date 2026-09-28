@@ -1,0 +1,131 @@
+{
+  "_note": "Co-author and guild links. Every author string in publications.json is matched against `match` (case-insensitive) to attach a URL. Add/replace URLs freely; null = no link rendered.",
+  "people": [
+    {
+      "id": "ilo",
+      "match": [
+        "C. I. Ilo",
+        "C. Ilo",
+        "Cory I. Ilo",
+        "Cory Ilo"
+      ],
+      "name": "Cory “Ike” Ilo",
+      "url": "index.html",
+      "self": true
+    },
+    {
+      "id": "bowman",
+      "match": [
+        "D. A. Bowman",
+        "Doug A. Bowman"
+      ],
+      "name": "Doug A. Bowman",
+      "url": null,
+      "role": "Advisor · dissertation chair",
+      "candidateUrl": "https://people.cs.vt.edu/bowman/",
+      "verify": "candidateUrl unverified — confirm, then move it to url"
+    },
+    {
+      "id": "david-john",
+      "match": [
+        "B. David-John",
+        "Brendan David-John"
+      ],
+      "name": "Brendan David-John",
+      "url": null,
+      "role": "Co-author · dissertation committee · founding cell",
+      "verify": "candidateUrl unverified — confirm, then move it to url",
+      "candidateUrl": "https://people.cs.vt.edu/bmdj/"
+    },
+    {
+      "id": "diverdi",
+      "match": [
+        "S. DiVerdi",
+        "Stephen DiVerdi"
+      ],
+      "name": "Stephen DiVerdi",
+      "url": null,
+      "role": "Adobe Research · committee",
+      "verify": "candidateUrl unverified — confirm, then move it to url",
+      "candidateUrl": "https://research.adobe.com/person/stephen-diverdi/"
+    },
+    {
+      "id": "c-k-ilo",
+      "match": [
+        "C. K. Ilo",
+        "Cedrick K. Ilo"
+      ],
+      "name": "Cedrick K. Ilo",
+      "url": null,
+      "role": "Founding cell"
+    },
+    {
+      "id": "alabanza",
+      "match": [
+        "N. Alabanza",
+        "Nikki Alabanza"
+      ],
+      "name": "Nikki Alabanza",
+      "url": null,
+      "role": "Founding cell · protection / dark patterns"
+    },
+    {
+      "id": "connor",
+      "match": [
+        "C. Connor",
+        "Cherelle Connor"
+      ],
+      "name": "Cherelle Connor",
+      "url": null,
+      "role": "Founding cell"
+    },
+    {
+      "id": "davari",
+      "match": [
+        "S. Davari"
+      ],
+      "name": "Shakiba Davari",
+      "url": null
+    },
+    {
+      "id": "stover",
+      "match": [
+        "D. Stover"
+      ],
+      "name": "Daniel Stover",
+      "url": null
+    },
+    {
+      "id": "giovannelli",
+      "match": [
+        "A. Giovannelli"
+      ],
+      "name": "Alexander Giovannelli",
+      "url": null
+    },
+    {
+      "id": "gabbard",
+      "match": [
+        "J. Gabbard"
+      ],
+      "name": "Joseph Gabbard",
+      "url": null
+    },
+    {
+      "id": "lisle",
+      "match": [
+        "L. Lisle"
+      ],
+      "name": "Lee Lisle",
+      "url": null
+    },
+    {
+      "id": "zheng",
+      "match": [
+        "W. Zheng"
+      ],
+      "name": "W. Zheng",
+      "url": null
+    }
+  ]
+}

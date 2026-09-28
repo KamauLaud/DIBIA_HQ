@@ -1,0 +1,19 @@
+/* DIBIA #Tech4Gud — spacing, radius, elevation, motion. */
+:root{
+--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:32px;--space-7:48px;--space-8:64px;--space-9:96px;
+/* Radius — tech-cut: tight radii; hero surfaces get a single clipped corner instead of bigger rounding. */
+--radius-xs:3px;--radius-sm:6px;--radius-md:10px;--radius-lg:14px;--radius-pill:999px;
+--cut-corner:14px;/* for clip-path corner cuts */
+/* Elevation — glow over shadow. Dark city: light is elevation. */
+--shadow-card:0 1px 0 oklch(100% 0 0/0.06) inset,0 8px 24px oklch(0% 0 0/0.45);
+--shadow-overlay:0 1px 0 oklch(100% 0 0/0.08) inset,0 24px 64px oklch(0% 0 0/0.6);
+--glow-violet:0 0 24px oklch(58% 0.26 300/0.45);
+--glow-gold:0 0 24px oklch(80% 0.16 85/0.4);
+--glow-emerald:0 0 24px oklch(72% 0.17 163/0.4);
+--glow-danger:0 0 24px oklch(63% 0.22 22/0.4);
+/* Focus */
+--focus-ring:0 0 0 2px var(--surface-page),0 0 0 4px var(--accent-ring);
+/* Motion — deliberate, heavy, controlled (DIBIA's build). No bounces. */
+--ease-out:cubic-bezier(0.16,1,0.3,1);/* @kind other */--ease-in-out:cubic-bezier(0.65,0,0.35,1);/* @kind other */
+--dur-fast:120ms;/* @kind other */--dur-base:200ms;/* @kind other */--dur-slow:400ms;/* @kind other */
+}

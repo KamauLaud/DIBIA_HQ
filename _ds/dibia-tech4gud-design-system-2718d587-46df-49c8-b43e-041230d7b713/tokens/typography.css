@@ -1,0 +1,21 @@
+/* DIBIA #Tech4Gud — type tokens. Montserrat = display (user-provided); Kameron = body serif (user-provided); Space Mono = data/koans-attribution (substitute). */
+:root{
+--font-display:"Montserrat",system-ui,sans-serif;
+--font-body:"Kameron",Georgia,serif;
+--font-mono:"Space Mono","SFMono-Regular",monospace;
+--text-xs:12px;--text-sm:13.5px;--text-base:15.5px;--text-lg:18px;--text-xl:22px;--text-2xl:28px;--text-3xl:36px;--text-4xl:48px;--text-5xl:64px;
+--leading-tight:1.08;--leading-snug:1.25;--leading-normal:1.55;
+--tracking-wide:0.14em;--tracking-caps:0.22em;
+--weight-display:800;--weight-heading:700;--weight-medium:500;--weight-body:400;
+/* Semantic */
+--type-hero:800 var(--text-5xl)/var(--leading-tight) var(--font-display);
+--type-h1:800 var(--text-4xl)/var(--leading-tight) var(--font-display);
+--type-h2:800 var(--text-3xl)/1.12 var(--font-display);
+--type-h3:700 var(--text-xl)/var(--leading-snug) var(--font-display);
+--type-body:400 var(--text-base)/var(--leading-normal) var(--font-body);
+--type-body-strong:500 var(--text-base)/var(--leading-normal) var(--font-body);
+--type-caption:400 var(--text-sm)/var(--leading-snug) var(--font-body);
+--type-label:700 var(--text-xs)/1.2 var(--font-mono);/* letter-spacing: var(--tracking-caps); uppercase */
+--type-koan:italic 500 var(--text-xl)/var(--leading-snug) var(--font-body);
+--type-data:400 var(--text-sm)/var(--leading-snug) var(--font-mono);
+}

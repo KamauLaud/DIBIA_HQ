@@ -1,0 +1,53 @@
+{
+  "name": "Cory “Ike” Ilo",
+  "fullName": "Cory Ikechukwu Ilo",
+  "credential": "PhD",
+  "shortName": "C. I. Ilo",
+  "authorAliases": [
+    "C. I. Ilo",
+    "C. Ilo",
+    "Cory I. Ilo",
+    "Cory Ilo"
+  ],
+  "role": "XR privacy researcher · Founder, DIBIA",
+  "thesis": "Privacy in context-aware XR is necessary, feasible, and never automatic.",
+  "keywords": [
+    "XR Privacy",
+    "Gaze",
+    "Context-Aware AR",
+    "Everyday AR",
+    "Eye Tracking",
+    "Human-Computer Interaction"
+  ],
+  "brand": "DIBIA",
+  "brandNote": "Copy says “DIBIA” only — no entity suffix.",
+  "baseUrl": "https://kamaulaud.github.io/DIBIA_HQ",
+  "email": "coryikeilo84@gmail.com",
+  "emailNote": "Both render: `email` is the primary (pills, JSON-LD); `emailAcademic` is the academic line in footers/contact.",
+  "links": {
+    "scholar": "https://scholar.google.com/citations?hl=en&user=TeDW0NYAAAAJ&inst=13410158990364976897",
+    "github": "https://github.com/KamauLaud",
+    "linkedin": "https://www.linkedin.com/in/cilo9737",
+    "orcid": null,
+    "dblp": null
+  },
+  "linksNote": "VERIFY — ORCID and dblp: add when claimed; both are omitted from the page and the JSON-LD while null.",
+  "affiliations": [
+    {
+      "name": "Virginia Tech — 3D Interaction Group (alumni)",
+      "url": "https://wordpress.cs.vt.edu/3digroup/people/"
+    },
+    {
+      "name": "DIBIA — an independent research village",
+      "url": "org.html"
+    }
+  ],
+  "location": "Oakland, CA",
+  "advisor": {
+    "name": "Doug A. Bowman",
+    "url": "https://people.cs.vt.edu/bowman/"
+  },
+  "photo": "assets/photos/cory-suit-1.jpg",
+  "ogImage": "assets/og-card.png",
+  "emailAcademic": "ciilo@vt.edu"
+}

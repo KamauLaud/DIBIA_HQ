@@ -1,0 +1,23 @@
+{
+  "name": "ilo-website",
+  "private": true,
+  "version": "2.0.0",
+  "description": "Dr. Cory \u201cIke\u201d Ilo \u2014 DIBIA. Static export of the dc-runtime templates in src/ plus JSON-driven sections in data/.",
+  "type": "module",
+  "scripts": {
+    "build": "node build/build.mjs",
+    "og": "node build/og.mjs",
+    "check": "node build/check.mjs",
+    "all": "npm run build && npm run og && npm run check",
+    "serve": "npx --yes serve -l 8080 .",
+    "setup": "npm install && npx playwright install chromium"
+  },
+  "devDependencies": {
+    "@babel/standalone": "7.29.0",
+    "@fontsource/space-mono": "^5.3.0",
+    "playwright": "^1.56.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "sharp": "^0.34.0"
+  }
+}

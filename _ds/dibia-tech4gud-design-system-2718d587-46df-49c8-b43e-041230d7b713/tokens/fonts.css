@@ -1,0 +1,8 @@
+/* Self-hosted brand webfonts (user-provided, OFL). Space Mono self-hosted from fontsource. */
+@font-face{font-family:"Montserrat";src:url("../assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype-variations");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Montserrat";src:url("../assets/fonts/Montserrat-Italic-VariableFont_wght.ttf") format("truetype-variations");font-weight:100 900;font-style:italic;font-display:swap}
+@font-face{font-family:"Kameron";src:url("../assets/fonts/Kameron-VariableFont_wght.ttf") format("truetype-variations");font-weight:400 700;font-style:normal;font-display:swap}
+/* Space Mono — self-hosted (fontsource, OFL). Replaces the Google Fonts @import. */
+@font-face{font-family:"Space Mono";src:url("../assets/fonts/space-mono-latin-400-normal.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Space Mono";src:url("../assets/fonts/space-mono-latin-700-normal.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Space Mono";src:url("../assets/fonts/space-mono-latin-400-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}

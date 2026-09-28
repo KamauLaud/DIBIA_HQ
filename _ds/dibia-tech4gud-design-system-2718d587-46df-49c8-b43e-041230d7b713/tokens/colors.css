@@ -1,0 +1,33 @@
+/* DIBIA #Tech4Gud — color tokens. Dark-first: the megacity is night; the flame is the light. */
+:root{
+/* Violet Flame — DIBIA, primary. Protection. */
+--violet-100:oklch(93% 0.05 300);--violet-200:oklch(85% 0.1 300);--violet-300:oklch(76% 0.16 300);--violet-400:oklch(67% 0.22 300);--violet-500:oklch(58% 0.26 300);--violet-600:oklch(48% 0.24 300);--violet-700:oklch(38% 0.19 300);--violet-800:oklch(28% 0.13 300);--violet-900:oklch(20% 0.08 300);
+/* Gold — LUNAR, the giving-anchor. Yellow of the diaspora. */
+--gold-200:oklch(92% 0.09 90);--gold-300:oklch(86% 0.14 88);--gold-400:oklch(80% 0.16 85);--gold-500:oklch(74% 0.16 80);--gold-600:oklch(62% 0.14 75);
+/* Emerald — CEIBA. Protection network; pan-African green. */
+--emerald-300:oklch(80% 0.15 165);--emerald-400:oklch(72% 0.17 163);--emerald-500:oklch(62% 0.16 160);--emerald-600:oklch(50% 0.13 158);
+/* Crimson — the adversary's scan-light; pan-African red. Danger only. */
+--crimson-300:oklch(72% 0.17 20);--crimson-400:oklch(63% 0.22 22);--crimson-500:oklch(55% 0.22 25);--crimson-600:oklch(45% 0.18 25);
+/* Amber — ÁMBAR, avoidance. */
+--amber-400:oklch(78% 0.16 70);--amber-500:oklch(70% 0.17 60);
+/* Cyan — BATIK, mitigation. */
+--cyan-300:oklch(84% 0.12 200);--cyan-400:oklch(76% 0.13 205);--cyan-500:oklch(66% 0.12 210);
+/* Blacks & neutrals — the night city. Violet-cast, never pure gray. */
+--ink-950:oklch(13% 0.02 300);--ink-900:oklch(17% 0.025 300);--ink-850:oklch(21% 0.03 300);--ink-800:oklch(25% 0.035 300);--ink-700:oklch(33% 0.03 300);--ink-500:oklch(52% 0.025 300);--ink-300:oklch(72% 0.02 300);--ink-200:oklch(82% 0.015 300);--ink-100:oklch(92% 0.01 300);
+/* Semantic — surfaces */
+--surface-page:var(--ink-950);--surface-raised:var(--ink-900);--surface-card:var(--ink-900);--surface-overlay:var(--ink-850);--surface-sunken:oklch(10% 0.015 300);
+/* Semantic — text */
+--text-body:var(--ink-100);--text-strong:oklch(98% 0.005 300);--text-muted:var(--ink-300);--text-faint:var(--ink-500);--text-inverse:var(--ink-950);--text-accent:var(--violet-300);--text-gold:var(--gold-400);
+/* Semantic — interactive */
+--accent:var(--violet-500);--accent-strong:var(--violet-400);--accent-soft:oklch(58% 0.26 300 / 0.16);--accent-ring:oklch(67% 0.22 300 / 0.55);
+--positive:var(--emerald-400);--positive-soft:oklch(72% 0.17 163 / 0.14);
+--danger:var(--crimson-400);--danger-soft:oklch(63% 0.22 22 / 0.14);
+--warning:var(--amber-400);--warning-soft:oklch(78% 0.16 70 / 0.14);
+--info:var(--cyan-400);--info-soft:oklch(76% 0.13 205 / 0.14);
+/* Borders */
+--border-subtle:oklch(100% 0 0 / 0.08);--border-default:oklch(100% 0 0 / 0.14);--border-strong:oklch(100% 0 0 / 0.24);--border-accent:oklch(67% 0.22 300 / 0.5);
+/* Gradients — the flame & the grade arc (cool-extractive → warm-protective) */
+--grad-flame:linear-gradient(135deg,var(--violet-500),var(--violet-300) 55%,var(--gold-400));
+--grad-veil:linear-gradient(180deg,oklch(58% 0.26 300/0.22),oklch(58% 0.26 300/0));/* @kind other */
+--grad-council:linear-gradient(135deg,var(--violet-500),var(--cyan-400) 40%,var(--emerald-400) 75%,var(--gold-400));
+}

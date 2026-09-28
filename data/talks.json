@@ -1,0 +1,43 @@
+{
+  "_schema": { "date": "YYYY-MM or YYYY-MM-DD", "status": "SCHEDULED | DELIVERED | DEFENDED", "public": "false hides until verified" },
+  "talks": [
+    {
+      "date": "2026-10-05",
+      "public": true,
+      "title": "Paper presentation — Privacy on Autopilot: Examining XR Assistant Autonomy and Its Influence on Privacy Awareness",
+      "venue": "IEEE ISMAR 2026 · Bari, Italy · Oct 5–9, 2026",
+      "status": "SCHEDULED",
+      "link": "paper-arpa.html",
+      "verify": "Add session day/time and the recorded 12-minute video link after the conference."
+    },
+    {
+      "date": "2026-06-15",
+      "public": true,
+      "title": "Dissertation defense — Protection Behind the Veil",
+      "venue": "Virginia Tech · Blacksburg, VA · June 15, 2026",
+      "status": "DEFENDED",
+      "link": "research.html#dissertation"
+    },
+    {
+      "date": "2024-10",
+      "public": true,
+      "title": "Paper talk — GoldiLocks Zoning",
+      "venue": "ACM Symposium on Spatial User Interaction (SUI ’24)",
+      "status": "DELIVERED",
+      "link": "paper-goldilocks.html"
+    },
+    {
+      "date": "2022-03",
+      "public": true,
+      "title": "3DUI Contest entry — Clean the Ocean (1st place)",
+      "venue": "IEEE VR 2022 · 3DUI Contest",
+      "status": "DELIVERED",
+      "link": null
+    }
+  ],
+  "recognition": [
+    { "public": true, "year": "2022", "title": "1st place, IEEE VR 2022 3DUI Contest", "detail": "Clean the Ocean — with the Virginia Tech 3D Interaction Group" },
+    { "public": true, "year": null, "title": "GEM Fellow", "detail": "National GEM Consortium · sponsored alumni attendee, GEM 50th Annual Conference (Sep 2026)", "verify": "Fellowship year." },
+    { "public": true, "year": "2016–2022", "title": "Industry research: Intel · Adobe Research · Apple", "detail": "SoC validation and computer-vision applied research (Intel) · AR/VR notification research (Adobe) · camera hardware human-factors research (Apple)" }
+  ]
+}

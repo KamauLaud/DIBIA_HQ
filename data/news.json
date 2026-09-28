@@ -1,0 +1,99 @@
+{
+  "_schema": {
+    "date": "YYYY-MM or YYYY-MM-DD; rendered as MON YYYY",
+    "kind": "paper | talk | award | degree | venture | community",
+    "public": "false hides the entry until verified",
+    "collapseAfter": "entries beyond this count sit behind “Show earlier”"
+  },
+  "collapseAfter": 6,
+  "news": [
+    {
+      "date": "2026-10-05",
+      "kind": "talk",
+      "public": true,
+      "upcoming": true,
+      "text": "<b>Presenting at IEEE ISMAR 2026, Bari.</b> <i>Privacy on Autopilot</i> — the ARPA study on assistant autonomy and privacy awareness — runs in the research track, Oct 5–9.",
+      "link": "paper-arpa.html",
+      "short": "PRESENTING “PRIVACY ON AUTOPILOT” · IEEE ISMAR 2026 · BARI · OCT 5–9"
+    },
+    {
+      "date": "2026-09",
+      "kind": "paper",
+      "public": true,
+      "text": "<b>Privacy on Autopilot accepted to IEEE ISMAR 2026.</b> Automation redistributes the privacy burden rather than removing it — chapter 5 of the dissertation, to appear in the proceedings.",
+      "link": "paper-arpa.html"
+    },
+    {
+      "date": "2026-09",
+      "kind": "community",
+      "public": true,
+      "text": "<b>GEM at 50.</b> Sponsored alumni attendee at the National GEM Consortium’s 50th Annual Conference &amp; Board Meeting, Gaylord Texan.",
+      "link": "https://www.gemfellowship.org/"
+    },
+    {
+      "date": "2026-07",
+      "kind": "venture",
+      "public": true,
+      "text": "<b>The Purple Flame submitted to the SSRC Just Tech Fellowship (2027 cohort).</b> The myth and the mechanism — a 5-minute Afro-cyberpunk short plus a 2027 build-year work proposal.",
+      "link": "index.html#film",
+      "verify": "Submission month and application status."
+    },
+    {
+      "date": "2026-06-15",
+      "kind": "degree",
+      "public": true,
+      "text": "<b>Dissertation defended.</b> <i>Protection Behind the Veil: Gaze, Privacy, and Context-Aware Adaptation in Extended Reality</i> — Virginia Tech, chair Doug A. Bowman.",
+      "link": "research.html#dissertation"
+    },
+    {
+      "date": "2026-06",
+      "kind": "paper",
+      "public": true,
+      "text": "<b>Hidden in Plain Gaze — manuscript complete.</b> Gaze representation as a privacy control: engineered features keep ~85% of task utility while cutting re-identification by an order of magnitude (206 identities, HoloAssist).",
+      "link": "paper-inplaingaze.html"
+    },
+    {
+      "date": "2024-11",
+      "kind": "paper",
+      "public": true,
+      "text": "<b>iAR taxonomy preprint on arXiv.</b> Towards Intelligent Augmented Reality: a taxonomy of context, an architecture, and an empirical study (with Davari, Stover, Giovannelli, Bowman).",
+      "link": "https://arxiv.org/abs/2411.02684"
+    },
+    {
+      "date": "2024-10",
+      "kind": "talk",
+      "public": true,
+      "text": "<b>GoldiLocks Zoning presented at ACM SUI 2024.</b> Gaze alone, read as passive context, places VR notifications without imaging the world.",
+      "link": "paper-goldilocks.html"
+    },
+    {
+      "date": "2022-05",
+      "kind": "community",
+      "public": true,
+      "text": "<b>Apple.</b> Graduate camera-hardware research intern — connecting camera design specifications to perceptual end-user experience (May–Sep 2022).",
+      "link": null
+    },
+    {
+      "date": "2022-03",
+      "kind": "award",
+      "public": true,
+      "text": "<b>1st place, IEEE VR 2022 3DUI Contest.</b> <i>Clean the Ocean</i> — new Go-Go and World-in-Miniature modifications, with the 3D Interaction Group.",
+      "link": "research.html#publications"
+    },
+    {
+      "date": "2021-05",
+      "kind": "community",
+      "public": true,
+      "text": "<b>Adobe Research.</b> Graduate AR/VR research intern — notification delivery in VR/AR that balances understandability with minimal distraction (May–Aug 2021).",
+      "link": null
+    },
+    {
+      "date": "2019-09",
+      "kind": "degree",
+      "public": true,
+      "text": "<b>Started the PhD at Virginia Tech</b> — 3D Interaction Group, advised by Doug A. Bowman. GEM Fellow.",
+      "link": null,
+      "verify": "GEM Fellowship year."
+    }
+  ]
+}

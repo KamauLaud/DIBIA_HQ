@@ -1,0 +1,221 @@
+{
+  "_schema": {
+    "status": "published | accepted | under-review | in-submission | preprint | defended",
+    "group": "forthcoming | peer-reviewed | degree  (which heading on research.html the entry renders under)",
+    "public": "false hides the entry from every page until verified",
+    "verify": "free-text flag shown ONLY in the build log, never on the page",
+    "links": "pdf, doi, arxiv, page (internal study page), video, code, bibtex — null/omitted links are not rendered"
+  },
+  "publications": [
+    {
+      "id": "privacy-on-autopilot-ismar26",
+      "public": true,
+      "group": "forthcoming",
+      "badge": "ISMAR ’26",
+      "title": "Privacy on Autopilot: Examining XR Assistant Autonomy and Its Influence on Privacy Awareness",
+      "authors": [
+        "C. I. Ilo",
+        "B. David-John",
+        "D. A. Bowman"
+      ],
+      "venue": "IEEE International Symposium on Mixed and Augmented Reality (ISMAR 2026)",
+      "venueShort": "IEEE ISMAR 2026 · Bari, Italy · Oct 5–9, 2026",
+      "year": 2026,
+      "status": "accepted",
+      "statusLabel": "ACCEPTED · TO APPEAR",
+      "note": "the ARPA study · paper presentation in Bari",
+      "trilogy": "03 · PROTECTION",
+      "chapter": 5,
+      "links": {
+        "page": "paper-arpa.html",
+        "pdf": null,
+        "doi": null,
+        "video": null
+      },
+      "teaser": "assets/papers/arpa-home.webp",
+      "verify": "Add camera-ready PDF + DOI when IEEE Xplore posts it; ISMAR presentation video link once uploaded.",
+      "cardLine": "IEEE ISMAR ’26 · ACCEPTED · BARI"
+    },
+    {
+      "id": "hidden-in-plain-gaze",
+      "public": true,
+      "group": "forthcoming",
+      "badge": "2026",
+      "title": "Hidden in Plain Gaze: Gaze Representations as Privacy Controls for Utility and Re-identification Risk in XR",
+      "authors": [
+        "C. I. Ilo",
+        "B. David-John",
+        "D. A. Bowman"
+      ],
+      "venue": "Manuscript",
+      "venueShort": "manuscript · 2026",
+      "year": 2026,
+      "status": "in-submission",
+      "statusLabel": "MANUSCRIPT · 2026",
+      "note": "the InPlainGaze study · HoloAssist, 206 identities",
+      "trilogy": "02 · MITIGATION",
+      "chapter": 4,
+      "links": {
+        "page": "paper-inplaingaze.html"
+      },
+      "teaser": "assets/papers/inplaingaze-threatmodel.webp",
+      "verify": "Add the venue + badge when announced. Title is from the June 2026 manuscript PDF.",
+      "cardLine": "MANUSCRIPT · 2026"
+    },
+    {
+      "id": "privacy-aware-ar-unsafe-future",
+      "public": true,
+      "group": "forthcoming",
+      "badge": "2026",
+      "title": "Towards Privacy-Aware AR in a Pervasive (Unsafe) Future",
+      "authors": [
+        "C. I. Ilo",
+        "N. Alabanza",
+        "C. Connor",
+        "C. K. Ilo",
+        "B. David-John"
+      ],
+      "venue": "6-page design-space paper (the Spatial Sensai framework)",
+      "venueShort": "in submission · venue TBC",
+      "year": 2026,
+      "status": "in-submission",
+      "statusLabel": "IN SUBMISSION",
+      "note": "the privacy–utility plane: Grubert’s pervasive-AR axis plus the guild’s second axis",
+      "links": {},
+      "verify": "Target venue and decision status. Author list is from the July site copy; the anonymized PDF shows no authors."
+    },
+    {
+      "id": "goldilocks-sui24",
+      "public": true,
+      "group": "peer-reviewed",
+      "badge": "SUI ’24",
+      "title": "GoldiLocks Zoning: Evaluating a Gaze-Aware Approach to Task-Agnostic VR Notification Placement",
+      "authors": [
+        "C. Ilo",
+        "S. DiVerdi",
+        "D. A. Bowman"
+      ],
+      "venue": "Proceedings of the ACM Symposium on Spatial User Interaction (SUI ’24), Article 13, pp. 1–12",
+      "venueShort": "ACM SUI 2024",
+      "year": 2024,
+      "status": "published",
+      "statusLabel": "PUBLISHED",
+      "note": "the GoldiLocks study",
+      "trilogy": "01 · AVOIDANCE",
+      "chapter": 3,
+      "links": {
+        "page": "paper-goldilocks.html",
+        "doi": "10.1145/3677386.3682087"
+      },
+      "teaser": "assets/papers/goldilocks-teaser.webp",
+      "cardLine": "ACM SUI 2024 · THE STUDY"
+    },
+    {
+      "id": "iar-taxonomy-arxiv24",
+      "public": true,
+      "group": "peer-reviewed",
+      "badge": "ARXIV ’24",
+      "title": "Towards Intelligent Augmented Reality (iAR): A Taxonomy of Context, an Architecture, and an Empirical Study",
+      "authors": [
+        "S. Davari",
+        "D. Stover",
+        "A. Giovannelli",
+        "C. Ilo",
+        "D. A. Bowman"
+      ],
+      "venue": "arXiv preprint",
+      "venueShort": "arXiv:2411.02684",
+      "year": 2024,
+      "status": "preprint",
+      "statusLabel": "PREPRINT",
+      "links": {
+        "arxiv": "2411.02684"
+      }
+    },
+    {
+      "id": "buildar-vrw22",
+      "public": true,
+      "group": "peer-reviewed",
+      "badge": "VRW ’22",
+      "title": "BuildAR: A Proof-of-Concept Prototype of Intelligent Augmented Reality in Construction",
+      "authors": [
+        "D. A. Bowman",
+        "J. Gabbard",
+        "D. Auerbach",
+        "N. Roofigari-Esfahan",
+        "K. Britt",
+        "C. I. Ilo",
+        "K. Adapa"
+      ],
+      "venue": "IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW), pp. 508–512",
+      "venueShort": "IEEE VR Workshops 2022",
+      "year": 2022,
+      "status": "published",
+      "statusLabel": "PUBLISHED",
+      "links": {}
+    },
+    {
+      "id": "clean-the-ocean-vrw22",
+      "public": true,
+      "group": "peer-reviewed",
+      "badge": "VRW ’22",
+      "title": "Clean the Ocean: An Immersive VR Experience Proposing New Modifications to Go-Go and WiM Techniques",
+      "authors": [
+        "L. Lisle",
+        "F. Lu",
+        "S. Davari",
+        "I. A. Tahmid",
+        "A. Giovannelli",
+        "C. Ilo",
+        "L. Pavanatto",
+        "L. Zhang",
+        "L. Schlueter",
+        "D. A. Bowman"
+      ],
+      "venue": "IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)",
+      "venueShort": "IEEE VR Workshops 2022 · 1st place, IEEE VR 2022 3DUI Contest",
+      "year": 2022,
+      "status": "published",
+      "statusLabel": "PUBLISHED",
+      "award": "1st place · IEEE VR 2022 3DUI Contest",
+      "links": {}
+    },
+    {
+      "id": "virtual-loupes-vrw21",
+      "public": true,
+      "group": "peer-reviewed",
+      "badge": "VRW ’21",
+      "title": "Virtual Loupes: An Augmented Reality Aid for Microsurgery",
+      "authors": [
+        "C. Ilo",
+        "W. Zheng",
+        "D. A. Bowman"
+      ],
+      "venue": "IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW), pp. 617–618",
+      "venueShort": "IEEE VR Workshops 2021",
+      "year": 2021,
+      "status": "published",
+      "statusLabel": "PUBLISHED",
+      "links": {}
+    },
+    {
+      "id": "dissertation-2026",
+      "public": true,
+      "group": "degree",
+      "badge": "PHD 2026",
+      "title": "Protection Behind the Veil: Gaze, Privacy, and Context-Aware Adaptation in Extended Reality",
+      "authors": [
+        "Cory I. Ilo"
+      ],
+      "venue": "Doctor of Philosophy in Computer Science, Virginia Tech · chair: Doug A. Bowman",
+      "venueShort": "Virginia Tech · defended June 15, 2026",
+      "year": 2026,
+      "status": "defended",
+      "statusLabel": "DEFENDED",
+      "links": {
+        "page": "research.html#dissertation"
+      },
+      "verify": "Add the VTechWorks handle/URL when the ETD is final."
+    }
+  ]
+}

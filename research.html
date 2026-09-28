@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html><head><style>
+    .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
+      border:1px solid color-mix(in srgb,currentColor 50%,transparent);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:color-mix(in srgb,currentColor 70%,transparent);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:color-mix(in srgb,currentColor 50%,transparent);
+      background:color-mix(in srgb,currentColor 10%,transparent);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>x-dc{display:none!important}</style>
+<style></style><style>html,body{height:100%;margin:0}#dc-root,#dc-root>.sc-host{height:100%}</style><link rel="stylesheet" href="_ds/dibia-tech4gud-design-system-2718d587-46df-49c8-b43e-041230d7b713/tokens/fonts.css"><link rel="stylesheet" href="_ds/dibia-tech4gud-design-system-2718d587-46df-49c8-b43e-041230d7b713/tokens/colors.css"><link rel="stylesheet" href="_ds/dibia-tech4gud-design-system-2718d587-46df-49c8-b43e-041230d7b713/tokens/typography.css"><link rel="stylesheet" href="_ds/dibia-tech4gud-design-system-2718d587-46df-49c8-b43e-041230d7b713/tokens/spacing.css"><link rel="stylesheet" href="_ds/dibia-tech4gud-design-system-2718d587-46df-49c8-b43e-041230d7b713/tokens/base.css"><link rel="stylesheet" href="_ds/dibia-tech4gud-design-system-2718d587-46df-49c8-b43e-041230d7b713/components/components.css"><link rel="stylesheet" href="_ds/dibia-tech4gud-design-system-2718d587-46df-49c8-b43e-041230d7b713/styles.css"><title>Research — Impondo Zenkomo · Cory “Ike” Ilo, PhD</title><style data-dc-pseudo="">
+@font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');font-weight:100 900;font-style:normal}
+@font-face{font-family:'Montserrat';src:url('assets/fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');font-weight:100 900;font-style:italic}
+@font-face{font-family:'Kameron';src:url('assets/fonts/Kameron-VariableFont_wght.ttf') format('truetype');font-weight:400 700}
+html{scroll-behavior:smooth}
+body{margin:0;background:oklch(13% 0.02 300);color:oklch(92% 0.01 300);font-family:'Kameron',Georgia,serif;-webkit-font-smoothing:antialiased}
+a{color:oklch(76% 0.16 300);text-decoration:none;transition:color 120ms cubic-bezier(0.16,1,0.3,1)}
+a:hover{color:oklch(80% 0.16 85)}
+::selection{background:oklch(58% 0.26 300/0.3);color:oklch(98% 0.005 300)}
+@keyframes rainFall{0%{transform:translateY(-12%)}100%{transform:translateY(55%)}}
+@keyframes cursorBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
+
+@media (max-width:760px){[data-nav-cta="true"]{display:none!important}[data-nav-links="true"]{gap:12px 16px!important}nav[data-screen-label="Nav"]{gap:10px!important}}
+@media (max-width:480px){h1{font-size:clamp(34px,10.5vw,46px)!important}}
+</style><meta name="description" content="Three studies, one decision tree: GoldiLocks Zoning (ACM SUI ’24), Hidden in Plain Gaze (manuscript), and Privacy on Autopilot / ARPA (IEEE ISMAR ’26). The dissertation, publications, talks, and the 2027 build plan."><link rel="canonical" href="https://kamaulaud.github.io/DIBIA_HQ/research.html"><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#1a1523"><meta property="og:type" content="website"><meta property="og:site_name" content="Cory “Ike” Ilo — DIBIA"><meta property="og:title" content="Research — Impondo Zenkomo · Cory “Ike” Ilo, PhD"><meta property="og:description" content="Three studies, one decision tree: GoldiLocks Zoning (ACM SUI ’24), Hidden in Plain Gaze (manuscript), and Privacy on Autopilot / ARPA (IEEE ISMAR ’26). The dissertation, publications, talks, and the 2027 build plan."><meta property="og:url" content="https://kamaulaud.github.io/DIBIA_HQ/research.html"><meta property="og:image" content="https://kamaulaud.github.io/DIBIA_HQ/assets/og-card.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Research — Impondo Zenkomo · Cory “Ike” Ilo, PhD"><meta name="twitter:description" content="Three studies, one decision tree: GoldiLocks Zoning (ACM SUI ’24), Hidden in Plain Gaze (manuscript), and Privacy on Autopilot / ARPA (IEEE ISMAR ’26). The dissertation, publications, talks, and the 2027 build plan."><meta name="twitter:image" content="https://kamaulaud.github.io/DIBIA_HQ/assets/og-card.png"><script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://kamaulaud.github.io/DIBIA_HQ/#website","url":"https://kamaulaud.github.io/DIBIA_HQ/","name":"Cory “Ike” Ilo","publisher":{"@id":"https://kamaulaud.github.io/DIBIA_HQ/#person"}},{"@type":"Person","@id":"https://kamaulaud.github.io/DIBIA_HQ/#person","name":"Cory Ikechukwu Ilo","alternateName":["Cory “Ike” Ilo","Cory Ilo","Ike Ilo"],"givenName":"Cory","familyName":"Ilo","honorificSuffix":"PhD","jobTitle":"XR Privacy Researcher · Founder, DIBIA","url":"https://kamaulaud.github.io/DIBIA_HQ/","image":"https://kamaulaud.github.io/DIBIA_HQ/assets/photos/cory-suit-1.jpg","email":["mailto:coryikeilo84@gmail.com","mailto:ciilo@vt.edu"],"alumniOf":[{"@type":"CollegeOrUniversity","name":"Virginia Tech"},{"@type":"CollegeOrUniversity","name":"Rochester Institute of Technology"}],"knowsAbout":["XR Privacy","Gaze","Context-Aware AR","Everyday AR","Eye Tracking","Human-Computer Interaction","Privacy-Preserving Machine Learning","Mixed Reality","Virtual Reality","User Studies"],"sameAs":["https://scholar.google.com/citations?hl=en&user=TeDW0NYAAAAJ&inst=13410158990364976897","https://github.com/KamauLaud","https://www.linkedin.com/in/cilo9737"]},{"@type":"CollectionPage","@id":"https://kamaulaud.github.io/DIBIA_HQ/research.html#page","url":"https://kamaulaud.github.io/DIBIA_HQ/research.html","name":"Research — Impondo Zenkomo · Cory “Ike” Ilo, PhD","description":"Three studies, one decision tree: GoldiLocks Zoning (ACM SUI ’24), Hidden in Plain Gaze (manuscript), and Privacy on Autopilot / ARPA (IEEE ISMAR ’26). The dissertation, publications, talks, and the 2027 build plan.","isPartOf":{"@id":"https://kamaulaud.github.io/DIBIA_HQ/#website"},"mainEntity":{"@id":"https://kamaulaud.github.io/DIBIA_HQ/#person"}},{"@type":"ScholarlyArticle","headline":"Privacy on Autopilot: Examining XR Assistant Autonomy and Its Influence on Privacy Awareness","author":[{"@type":"Person","name":"C. I. Ilo"},{"@type":"Person","name":"B. David-John"},{"@type":"Person","name":"D. A. Bowman"}],"datePublished":"2026","publisher":"IEEE International Symposium on Mixed and Augmented Reality (ISMAR 2026)","url":"https://kamaulaud.github.io/DIBIA_HQ/paper-arpa.html"},{"@type":"ScholarlyArticle","headline":"GoldiLocks Zoning: Evaluating a Gaze-Aware Approach to Task-Agnostic VR Notification Placement","author":[{"@type":"Person","name":"C. Ilo"},{"@type":"Person","name":"S. DiVerdi"},{"@type":"Person","name":"D. A. Bowman"}],"datePublished":"2024","publisher":"Proceedings of the ACM Symposium on Spatial User Interaction (SUI ’24), Article 13, pp. 1–12","sameAs":"https://doi.org/10.1145/3677386.3682087","url":"https://kamaulaud.github.io/DIBIA_HQ/paper-goldilocks.html"},{"@type":"ScholarlyArticle","headline":"Towards Intelligent Augmented Reality (iAR): A Taxonomy of Context, an Architecture, and an Empirical Study","author":[{"@type":"Person","name":"S. Davari"},{"@type":"Person","name":"D. Stover"},{"@type":"Person","name":"A. Giovannelli"},{"@type":"Person","name":"C. Ilo"},{"@type":"Person","name":"D. A. Bowman"}],"datePublished":"2024","publisher":"arXiv preprint"},{"@type":"ScholarlyArticle","headline":"BuildAR: A Proof-of-Concept Prototype of Intelligent Augmented Reality in Construction","author":[{"@type":"Person","name":"D. A. Bowman"},{"@type":"Person","name":"J. Gabbard"},{"@type":"Person","name":"D. Auerbach"},{"@type":"Person","name":"N. Roofigari-Esfahan"},{"@type":"Person","name":"K. Britt"},{"@type":"Person","name":"C. I. Ilo"},{"@type":"Person","name":"K. Adapa"}],"datePublished":"2022","publisher":"IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW), pp. 508–512"},{"@type":"ScholarlyArticle","headline":"Clean the Ocean: An Immersive VR Experience Proposing New Modifications to Go-Go and WiM Techniques","author":[{"@type":"Person","name":"L. Lisle"},{"@type":"Person","name":"F. Lu"},{"@type":"Person","name":"S. Davari"},{"@type":"Person","name":"I. A. Tahmid"},{"@type":"Person","name":"A. Giovannelli"},{"@type":"Person","name":"C. Ilo"},{"@type":"Person","name":"L. Pavanatto"},{"@type":"Person","name":"L. Zhang"},{"@type":"Person","name":"L. Schlueter"},{"@type":"Person","name":"D. A. Bowman"}],"datePublished":"2022","publisher":"IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW)"},{"@type":"ScholarlyArticle","headline":"Virtual Loupes: An Augmented Reality Aid for Microsurgery","author":[{"@type":"Person","name":"C. Ilo"},{"@type":"Person","name":"W. Zheng"},{"@type":"Person","name":"D. A. Bowman"}],"datePublished":"2021","publisher":"IEEE Conference on Virtual Reality and 3D User Interfaces Abstracts and Workshops (VRW), pp. 617–618"}]}</script></head>
+<body>
+<div id="dc-root"><div class="sc-host" data-sc-name="research"><div style="min-height: 100vh; background: oklch(0.13 0.02 300);"><nav data-screen-label="Nav" style="position: sticky; top: 0px; z-index: 40; display: flex; align-items: center; gap: 8px 14px; padding: 8px clamp(16px, 4vw, 40px); min-height: 64px; flex-wrap: wrap; background: oklch(0.13 0.02 300 / 0.82); backdrop-filter: blur(12px); border-bottom: 1px solid oklch(1 0 0 / 0.08);">
+  <a href="index.html" style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 19px; color: oklch(0.98 0.005 300);">DIBIA</a>
+  <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 0.18em; color: oklch(0.52 0.025 300);">· #TECH4GUD</span>
+  <div data-nav-links="true" style="display: flex; gap: 26px; margin-left: auto; align-items: center; flex-wrap: wrap;">
+    <a href="index.html" class="scp0" style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.18em; color: oklch(0.72 0.02 300);">HOME</a>
+    <a href="research.html" style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.18em; color: oklch(0.76 0.16 300); border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5); padding-bottom: 2px;">RESEARCH</a>
+    <a href="cv.html" class="scp0" style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.18em; color: oklch(0.72 0.02 300);">CV</a>
+    <a href="org.html" class="scp0" style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.18em; color: oklch(0.72 0.02 300);">THE ORG</a>
+    <a href="marketplace.html" class="scp0" style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.18em; color: oklch(0.72 0.02 300);">MARKETPLACE</a>
+    <a href="contact.html" class="scp0" style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.18em; color: oklch(0.72 0.02 300);">CONTACT</a>
+  </div>
+  <a href="contact.html" data-nav-cta="true" class="scp1" style="display: inline-flex; align-items: center; height: 36px; padding: 0px 16px; border-radius: 6px; background: oklch(0.58 0.26 300); color: oklch(0.98 0.005 300); font-weight: 500; font-size: 14.5px;">Book the consultancy</a></nav><header data-screen-label="Research header" style="position: relative; overflow: hidden; background: oklch(0.1 0.015 300);">
+  <div style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; mask-image: linear-gradient(transparent, black 12%, black 82%, transparent);"><div style="position: absolute; top: -30%; left: 1.5%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.07); animation: 16s linear 0s infinite normal none running rainFall;">VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div><div style="position: absolute; top: -30%; left: 9.1%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.105); animation: 23s linear -4.3s infinite normal none running rainFall;">EIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div><div style="position: absolute; top: -30%; left: 16.7%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.14); animation: 30s linear -8.6s infinite normal none running rainFall;">IL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div><div style="position: absolute; top: -30%; left: 24.3%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.07); animation: 37s linear -12.9s infinite normal none running rainFall;">L 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div><div style="position: absolute; top: -30%; left: 31.9%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.105); animation: 44s linear -17.2s infinite normal none running rainFall;"> 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div><div style="position: absolute; top: -30%; left: 39.5%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.14); animation: 16s linear -21.5s infinite normal none running rainFall;">010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div><div style="position: absolute; top: -30%; left: 47.1%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.07); animation: 23s linear -25.8s infinite normal none running rainFall;">10 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div><div style="position: absolute; top: -30%; left: 54.7%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.105); animation: 30s linear -30.1s infinite normal none running rainFall;">0 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div><div style="position: absolute; top: -30%; left: 62.3%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.14); animation: 37s linear -34.4s infinite normal none running rainFall;"> GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div><div style="position: absolute; top: -30%; left: 69.9%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.07); animation: 44s linear -38.7s infinite normal none running rainFall;">GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div><div style="position: absolute; top: -30%; left: 77.5%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.105); animation: 16s linear -43s infinite normal none running rainFall;">AZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div><div style="position: absolute; top: -30%; left: 85.1%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.14); animation: 23s linear -47.3s infinite normal none running rainFall;">ZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div><div style="position: absolute; top: -30%; left: 92.7%; writing-mode: vertical-rl; text-orientation: upright; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 7px; white-space: nowrap; color: oklch(0.72 0.17 163 / 0.07); animation: 30s linear -51.6s infinite normal none running rainFall;">E 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 VEIL 010 GAZE 101 AVOID 001 MITIGATE 110 PROTECT 011 IMPONDO 100 ZENKOMO 010 </div></div>
+  <div style="position: absolute; inset: 0px; pointer-events: none; background: repeating-linear-gradient(0deg, transparent 0px, transparent 3px, oklch(0 0 0 / 0.22) 3px, oklch(0 0 0 / 0.22) 4px);"></div>
+  <div style="position: relative; max-width: 1160px; margin: 0px auto; padding: clamp(64px, 9vw, 96px) clamp(20px, 5vw, 40px) clamp(48px, 7vw, 72px); display: flex; flex-wrap: wrap; gap: 44px 56px; align-items: center;">
+    <div style="flex: 1 1 460px; min-width: 0px;">
+    <div style="font-family: &quot;Space Mono&quot;, monospace; font-size: 11.5px; color: oklch(0.52 0.025 300); margin-bottom: 18px;">dibia@nnewi:~$ ./research --tree impondo_zenkomo<span style="display: inline-block; width: 8px; height: 13px; background: oklch(0.72 0.17 163); vertical-align: -2px; margin-left: 5px; animation: 1.1s steps(1) 0s infinite normal none running cursorBlink;"></span></div>
+    <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.76 0.16 300);">IMPONDO ZENKOMO — “THE HORNS CLOSE AROUND THE HERD”</div>
+    <h1 style="margin: 20px 0px 0px; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(40px, 5vw, 64px); line-height: 1.04; color: oklch(0.98 0.005 300); max-width: 900px;">Privacy in context-aware XR is necessary, feasible, and never automatic.</h1>
+    <p style="margin: 24px 0px 0px; max-width: 680px; font-size: 18px; line-height: 1.6; color: oklch(0.72 0.02 300);">The same gaze signal that drives interface adaptation also encodes your identity. Privacy cannot be obtained by abstention — it must be engineered into how the signal is represented and mediated. Three studies, organized as a decision tree, each move forced by the failure of the last.</p>
+    <div style="display: flex; align-items: center; gap: 14px; margin-top: 40px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12.5px; letter-spacing: 0.18em;">
+      <span style="color: oklch(0.78 0.16 70);">AVOIDANCE</span><span style="color: oklch(0.52 0.025 300);">→</span>
+      <span style="color: oklch(0.76 0.13 205);">MITIGATION</span><span style="color: oklch(0.52 0.025 300);">→</span>
+      <span style="color: oklch(0.8 0.15 165);">PROTECTION</span>
+    </div>
+    </div>
+    <div style="flex: 0 1 400px; min-width: 300px; margin-left: auto;">
+      <div style="border: 1px solid oklch(1 0 0 / 0.14); background: oklch(0.13 0.02 300 / 0.7); clip-path: polygon(0px 0px, calc(100% - 14px) 0px, 100% 14px, 100% 100%, 0px 100%); box-shadow: oklch(1 0 0 / 0.06) 0px 1px 0px inset, oklch(0 0 0 / 0.45) 0px 8px 24px; padding: 16px 12px 10px;">
+        <svg viewBox="0 0 440 496" role="img" aria-label="Impondo Zenkomo — the horns close around the herd" style="display: block; width: 100%; height: auto; font-family: &quot;Space Mono&quot;, monospace;">
+          <defs>
+            <marker id="iz-amber" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="oklch(78% 0.16 70)"></path></marker>
+            <marker id="iz-cyan" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="oklch(76% 0.13 205)"></path></marker>
+            <marker id="iz-red" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="oklch(63% 0.22 22)"></path></marker>
+          </defs>
+          <text x="220" y="24" text-anchor="middle" font-size="11.5" font-weight="700" letter-spacing="3" fill="oklch(63% 0.22 22)">HYPERREALITY</text>
+          <text x="220" y="40" text-anchor="middle" font-size="8.5" letter-spacing="2" fill="oklch(63% 0.22 22/0.75)">SURVEILLANCE BY DEFAULT</text>
+          <path d="M220 52 L220 130" stroke="oklch(63% 0.22 22)" stroke-width="1.5" stroke-dasharray="5 5" fill="none" marker-end="url(#iz-red)"></path>
+          <path d="M156 60 L191 122" stroke="oklch(63% 0.22 22/0.55)" stroke-width="1.2" stroke-dasharray="4 5" fill="none" marker-end="url(#iz-red)"></path>
+          <path d="M284 60 L249 122" stroke="oklch(63% 0.22 22/0.55)" stroke-width="1.2" stroke-dasharray="4 5" fill="none" marker-end="url(#iz-red)"></path>
+          <circle cx="220" cy="258" r="108" fill="oklch(58% 0.26 300/0.06)" stroke="oklch(67% 0.22 300/0.8)" stroke-width="1.5" stroke-dasharray="7 6"></circle>
+          <circle cx="220" cy="150" r="4" fill="oklch(67% 0.22 300)"></circle>
+          <circle cx="220" cy="150" r="10" fill="none" stroke="oklch(67% 0.22 300/0.45)" stroke-width="1"></circle>
+          <text x="252" y="196" font-size="9.5" font-weight="700" letter-spacing="2" fill="oklch(76% 0.16 300)">THE VEIL</text>
+          <text x="252" y="208" font-size="7.5" letter-spacing="1.5" fill="oklch(52% 0.025 300)">DEFAULT-ON</text>
+          <circle cx="220" cy="258" r="58" fill="oklch(17% 0.025 300)" stroke="oklch(100% 0 0/0.16)" stroke-width="1"></circle>
+          <circle cx="220" cy="236" r="3.5" fill="oklch(92% 0.01 300)"></circle>
+          <circle cx="206" cy="246" r="3.5" fill="oklch(92% 0.01 300)"></circle>
+          <circle cx="234" cy="246" r="3.5" fill="oklch(92% 0.01 300)"></circle>
+          <text x="220" y="272" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="2.5" fill="oklch(98% 0.005 300)">THE HERD</text>
+          <text x="220" y="286" text-anchor="middle" font-size="7.5" letter-spacing="1.5" fill="oklch(72% 0.02 300)">WEARER · BYSTANDER</text>
+          <text x="220" y="298" text-anchor="middle" font-size="7.5" letter-spacing="1.5" fill="oklch(72% 0.02 300)">COMMUNITY</text>
+          <path d="M96 398 Q 28 252 114 130" stroke="oklch(78% 0.16 70)" stroke-width="3" fill="none" stroke-linecap="round" marker-end="url(#iz-amber)"></path>
+          <path d="M344 398 Q 412 252 326 130" stroke="oklch(76% 0.13 205)" stroke-width="3" fill="none" stroke-linecap="round" marker-end="url(#iz-cyan)"></path>
+          <path d="M116 410 Q 220 456 324 410" stroke="oklch(72% 0.17 163)" stroke-width="3" fill="none" stroke-linecap="round"></path>
+          <text x="12" y="436" font-size="10" font-weight="700" letter-spacing="2" fill="oklch(78% 0.16 70)">01 AVOIDANCE</text>
+          <text x="12" y="449" font-size="7.5" letter-spacing="1.5" fill="oklch(52% 0.025 300)">GOLDILOCKS · LEFT HORN</text>
+          <text x="428" y="436" text-anchor="end" font-size="10" font-weight="700" letter-spacing="2" fill="oklch(76% 0.13 205)">02 MITIGATION</text>
+          <text x="428" y="449" text-anchor="end" font-size="7.5" letter-spacing="1.5" fill="oklch(52% 0.025 300)">INPLAINGAZE · RIGHT HORN</text>
+          <text x="220" y="478" text-anchor="middle" font-size="10" font-weight="700" letter-spacing="2" fill="oklch(80% 0.15 165)">03 PROTECTION</text>
+          <text x="220" y="491" text-anchor="middle" font-size="7.5" letter-spacing="1.5" fill="oklch(52% 0.025 300)">ARPA · THE CHEST</text>
+        </svg>
+      </div>
+      <div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 10px; font-family: &quot;Space Mono&quot;, monospace; font-size: 10px; letter-spacing: 0.16em; color: oklch(0.52 0.025 300);"><span>IMPONDO ZENKOMO — THE FORMATION</span><span>NOTHING REACHES THE HERD UNVEILED</span></div>
+    </div>
+  </div>
+  <div style="height: 1px; background: linear-gradient(90deg, transparent, oklch(0.72 0.17 163 / 0.55) 35%, oklch(0.67 0.22 300 / 0.55) 65%, transparent);"></div></header><section id="trajectory" data-screen-label="Trajectory" style="padding: clamp(56px, 8vw, 80px) clamp(20px, 5vw, 40px) 8px;">
+  <div style="max-width: 1160px; margin: 0px auto;">
+    <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.76 0.16 300);">THE TRAJECTORY — SEEDS → STACK → DEFAULT</div>
+    <h2 style="margin: 16px 0px 0px; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 3.2vw, 40px); line-height: 1.1; color: oklch(0.98 0.005 300);">The long game.</h2>
+    <p style="margin: 16px 0px 0px; max-width: 660px; font-size: 17px; line-height: 1.6; color: oklch(0.72 0.02 300);">Six years of studies compose into a stack; the stack becomes a default. The tree is the design space; the chart is the year it ships.</p>
+    <div style="margin-top: 36px; border: 1px solid oklch(1 0 0 / 0.14); background: oklch(0.1 0.015 300); clip-path: polygon(0px 0px, calc(100% - 14px) 0px, 100% 14px, 100% 100%, 0px 100%); box-shadow: oklch(1 0 0 / 0.06) 0px 1px 0px inset, oklch(0 0 0 / 0.45) 0px 8px 24px;">
+      <div style="display: flex; align-items: center; gap: 8px; padding: 10px 16px; border-bottom: 1px solid oklch(1 0 0 / 0.08);">
+        <span style="width: 8px; height: 8px; border-radius: 50%; background: oklch(0.63 0.22 22);"></span><span style="width: 8px; height: 8px; border-radius: 50%; background: oklch(0.78 0.16 70);"></span><span style="width: 8px; height: 8px; border-radius: 50%; background: oklch(0.72 0.17 163);"></span>
+        <span style="margin-left: 8px; font-family: &quot;Space Mono&quot;, monospace; font-size: 11.5px; color: oklch(0.52 0.025 300);">dibia@nnewi:~$ tree impondo_zenkomo/ --seeds-to-default</span>
+      </div>
+      <div style="padding: 20px 20px 24px; overflow-x: auto;">
+        <div style="display: flex; justify-content: space-between; gap: 24px; align-items: baseline;"><span style="white-space: pre; font-family: &quot;Space Mono&quot;, monospace; font-size: 13.5px; line-height: 1.9; color: oklch(0.72 0.02 300);">impondo_zenkomo/ — <span style="color: oklch(0.92 0.01 300);">the design space: privacy engineered into the signal</span></span><span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.76 0.16 300); white-space: nowrap;">DISSERTATION ’26 · DEFENDED</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 24px; align-items: baseline;"><span style="white-space: pre; font-family: &quot;Space Mono&quot;, monospace; font-size: 13.5px; line-height: 1.9; color: oklch(0.72 0.02 300);">├── [?] can the world stay unimaged?</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 24px; align-items: baseline;"><span style="white-space: pre; font-family: &quot;Space Mono&quot;, monospace; font-size: 13.5px; line-height: 1.9; color: oklch(0.72 0.02 300);">│   ├── yes → <span style="color: oklch(0.78 0.16 70); font-weight: 700;">01_AVOIDANCE</span> · GoldiLocks — sense gaze, not the camera</span><span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.8 0.15 165); white-space: nowrap;">SUI ’24 · SHIPPED</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 24px; align-items: baseline;"><span style="white-space: pre; font-family: &quot;Space Mono&quot;, monospace; font-size: 13.5px; line-height: 1.9; color: oklch(0.72 0.02 300);">│   │   └── <span style="color: oklch(0.63 0.22 22);">[!]</span> the permitted signal still re-identifies — forcing the next move</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 24px; align-items: baseline;"><span style="white-space: pre; font-family: &quot;Space Mono&quot;, monospace; font-size: 13.5px; line-height: 1.9; color: oklch(0.72 0.02 300);">│   │       └── <span style="color: oklch(0.76 0.13 205); font-weight: 700;">02_MITIGATION</span> · InPlainGaze — re-encode the Veil; keep the use, shed the identity</span><span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.78 0.16 70); white-space: nowrap;">MANUSCRIPT · 2026</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 24px; align-items: baseline;"><span style="white-space: pre; font-family: &quot;Space Mono&quot;, monospace; font-size: 13.5px; line-height: 1.9; color: oklch(0.72 0.02 300);">│   └── no → <span style="color: oklch(0.8 0.15 165); font-weight: 700;">03_PROTECTION</span> · ARPA — assistant autonomy at the point of exposure</span><span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.78 0.16 70); white-space: nowrap;">ISMAR ’26 · ACCEPTED</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 24px; align-items: baseline;"><span style="white-space: pre; font-family: &quot;Space Mono&quot;, monospace; font-size: 13.5px; line-height: 1.9; color: oklch(0.72 0.02 300);">└── <span style="color: oklch(0.8 0.16 85);">★</span> compose all three → <span style="color: oklch(0.76 0.16 300); font-weight: 700;">SpatialSensai</span> — the Veil: on-device, continuous, default-on</span><span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.76 0.16 300); white-space: nowrap;">2027 · THE BUILD</span></div>
+      </div>
+    </div>
+    <div style="display: flex; gap: 14px; align-items: stretch; margin-top: 28px; flex-wrap: wrap;">
+      <div style="flex: 1 1 0%; min-width: 220px; border: 1px solid oklch(1 0 0 / 0.14); border-radius: 6px; padding: 14px 18px; background: oklch(0.17 0.025 300);"><div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.76 0.16 300);">2019–26 · THE SEEDS</div><div style="margin-top: 6px; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 17px; color: oklch(0.98 0.005 300);">The dissertation</div><div style="margin-top: 5px; font-size: 14px; line-height: 1.5; color: oklch(0.72 0.02 300);">Avoidance → Mitigation → Protection — three studies, one decision tree.</div></div>
+      <div style="align-self: center; font-family: &quot;Space Mono&quot;, monospace; color: oklch(0.52 0.025 300);">→</div>
+      <div style="flex: 1 1 0%; min-width: 220px; border: 1px solid oklch(1 0 0 / 0.14); border-radius: 6px; padding: 14px 18px; background: oklch(0.17 0.025 300);"><div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.76 0.16 300);">2027 · THE STACK</div><div style="margin-top: 6px; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 17px; color: oklch(0.98 0.005 300);">The build year</div><div style="margin-top: 5px; font-size: 14px; line-height: 1.5; color: oklch(0.72 0.02 300);">SpatialSensai · DigiDinar · #ThirdPlace — shipped by the village.</div></div>
+      <div style="align-self: center; font-family: &quot;Space Mono&quot;, monospace; color: oklch(0.52 0.025 300);">→</div>
+      <div style="flex: 1 1 0%; min-width: 220px; border: 1px solid oklch(1 0 0 / 0.14); border-radius: 6px; padding: 14px 18px; background: oklch(0.17 0.025 300);"><div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.76 0.16 300);">2028+ · THE DEFAULT</div><div style="margin-top: 6px; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 17px; color: oklch(0.98 0.005 300);">Protection on the regular</div><div style="margin-top: 5px; font-size: 14px; line-height: 1.5; color: oklch(0.72 0.02 300);">The Veil on for everyone — by default, wearer and bystander alike.</div></div>
+    </div>
+    <div style="margin-top: 28px; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 26px 30px; overflow-x: auto; box-shadow: oklch(1 0 0 / 0.06) 0px 1px 0px inset, oklch(0 0 0 / 0.45) 0px 8px 24px;">
+      <div style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: baseline;">
+        <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.76 0.16 300);">THE YEAR OF THE BUILD · JAN–DEC 2027</div>
+        <div style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">FROM THE JUST TECH WORK PROPOSAL</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 210px repeat(4, 1fr); gap: 10px; align-items: center; min-width: 720px; padding: 16px 0px 8px;">
+        <div></div>
+        <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.18em; color: oklch(0.52 0.025 300);">Q1 · JAN–MAR</div>
+        <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.18em; color: oklch(0.52 0.025 300);">Q2 · APR–JUN</div>
+        <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.18em; color: oklch(0.52 0.025 300);">Q3 · JUL–SEP</div>
+        <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.18em; color: oklch(0.8 0.16 85);">Q4 · OCT–DEC ★</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 210px repeat(4, 1fr); gap: 10px; align-items: center; min-width: 720px; padding: 10px 0px; border-top: 1px solid oklch(1 0 0 / 0.08);">
+        <div><div style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.5px; color: oklch(0.98 0.005 300);">SpatialSensai</div><div style="margin-top: 3px; font-family: &quot;Space Mono&quot;, monospace; font-size: 10px; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">FOUNDATION · GATES ALL TRACKS</div></div>
+        <div style="grid-column: 2 / 4; height: 34px; border-radius: 4px; display: flex; align-items: center; padding: 0px 12px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.1em; white-space: nowrap; overflow: hidden; background: oklch(0.58 0.26 300 / 0.85); border: 1px solid oklch(0.67 0.22 300); color: oklch(0.98 0.005 300); box-shadow: oklch(0.58 0.26 300 / 0.3) 0px 0px 18px;">BUILD · AWE DEMO, JUNE</div>
+        <div style="grid-column: 4 / 6; height: 34px; border-radius: 4px; display: flex; align-items: center; padding: 0px 12px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.1em; white-space: nowrap; overflow: hidden; border: 1px dashed oklch(0.67 0.22 300 / 0.6); color: oklch(0.76 0.16 300);">HARDEN · INTEGRATE</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 210px repeat(4, 1fr); gap: 10px; align-items: center; min-width: 720px; padding: 10px 0px; border-top: 1px solid oklch(1 0 0 / 0.08);">
+        <div><div style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.5px; color: oklch(0.98 0.005 300);">DigiDinar</div><div style="margin-top: 3px; font-family: &quot;Space Mono&quot;, monospace; font-size: 10px; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">TRUST AS CURRENCY</div></div>
+        <div style="grid-column: 3 / 4; height: 34px; border-radius: 4px; display: flex; align-items: center; padding: 0px 12px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.1em; white-space: nowrap; overflow: hidden; border: 1px dashed oklch(0.8 0.16 85 / 0.6); color: oklch(0.8 0.16 85);">SPEC</div>
+        <div style="grid-column: 4 / 5; height: 34px; border-radius: 4px; display: flex; align-items: center; padding: 0px 12px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.1em; white-space: nowrap; overflow: hidden; background: oklch(0.8 0.16 85 / 0.9); border: 1px solid oklch(0.8 0.16 85); color: oklch(0.13 0.02 300);">PROTOTYPE</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 210px repeat(4, 1fr); gap: 10px; align-items: center; min-width: 720px; padding: 10px 0px; border-top: 1px solid oklch(1 0 0 / 0.08);">
+        <div><div style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.5px; color: oklch(0.98 0.005 300);">#ThirdPlace + DIBIA</div><div style="margin-top: 3px; font-family: &quot;Space Mono&quot;, monospace; font-size: 10px; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">SOCIAL HUB · THE ORG</div></div>
+        <div style="grid-column: 4 / 6; height: 34px; border-radius: 4px; display: flex; align-items: center; padding: 0px 12px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.1em; white-space: nowrap; overflow: hidden; border: 1px dashed oklch(0.72 0.17 163 / 0.6); color: oklch(0.8 0.15 165);">SPEC &amp; DESIGN</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 210px repeat(4, 1fr); gap: 10px; align-items: center; min-width: 720px; padding: 10px 0px; border-top: 1px solid oklch(1 0 0 / 0.08);">
+        <div><div style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.5px; color: oklch(0.98 0.005 300);">★ Convergence</div><div style="margin-top: 3px; font-family: &quot;Space Mono&quot;, monospace; font-size: 10px; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">THE CAPSTONE</div></div>
+        <div style="grid-column: 5 / 6; height: 34px; border-radius: 4px; display: flex; align-items: center; padding: 0px 12px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.1em; white-space: nowrap; overflow: hidden; background: linear-gradient(135deg, oklch(0.58 0.26 300), oklch(0.76 0.13 205) 40%, oklch(0.72 0.17 163) 75%, oklch(0.8 0.16 85)); color: oklch(0.13 0.02 300);">★ RUNS LIVE</div>
+      </div>
+      <div style="display: grid; grid-template-columns: 210px repeat(4, 1fr); gap: 10px; align-items: center; min-width: 720px; padding: 10px 0px; border-top: 1px solid oklch(1 0 0 / 0.08);">
+        <div><div style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 15.5px; color: oklch(0.98 0.005 300);">Rest &amp; reflection</div><div style="margin-top: 3px; font-family: &quot;Space Mono&quot;, monospace; font-size: 10px; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">A SUSTAINABLE PACE</div></div>
+        <div style="grid-column: 2 / 6; height: 34px; border-radius: 4px; display: flex; align-items: center; padding: 0px 12px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.1em; white-space: nowrap; overflow: hidden; border: 1px dashed oklch(1 0 0 / 0.14); color: oklch(0.52 0.025 300);">REST · SCHEDULED EVERY QUARTER</div>
+      </div>
+      <div style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 16px; font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">
+        <span>SOLID = BUILD / PROTOTYPE · DASHED = SPEC &amp; DESIGN · ★ = #TECH4GUD SOCIETY EVENT</span>
+        <span>REST IS SCHEDULED, NOT EARNED.</span>
+      </div>
+    </div>
+  </div></section><section id="dissertation" data-screen-label="Dissertation" style="padding: clamp(56px, 8vw, 80px) clamp(20px, 5vw, 40px);">
+  <div style="max-width: 1160px; margin: 0px auto; background: oklch(0.17 0.025 300); border: 1px solid oklch(0.67 0.22 300 / 0.5); clip-path: polygon(0px 0px, calc(100% - 18px) 0px, 100% 18px, 100% 100%, 0px 100%); box-shadow: oklch(1 0 0 / 0.06) 0px 1px 0px inset, oklch(0 0 0 / 0.45) 0px 8px 24px, oklch(0.58 0.26 300 / 0.18) 0px 0px 48px; padding: clamp(24px, 5vw, 44px) clamp(20px, 4vw, 48px);">
+    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+      <span style="display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0px 10px; border-radius: 999px; background: oklch(0.58 0.26 300 / 0.16); color: oklch(0.76 0.16 300); font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.14em;"><span style="width: 5px; height: 5px; border-radius: 50%; background: currentcolor;"></span>THE DISSERTATION</span>
+      <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">DEFENDED 06.15.2026 · SUBMITTED 06.29.2026 · BLACKSBURG, VA</span>
+    </div>
+    <h2 style="margin: 18px 0px 0px; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(26px, 3vw, 38px); line-height: 1.1; color: oklch(0.98 0.005 300); max-width: 880px;">Protection Behind the Veil: Gaze, Privacy, and Context-Aware Adaptation in Extended Reality</h2>
+    <p style="margin: 18px 0px 0px; max-width: 760px; font-size: 16.5px; line-height: 1.6; color: oklch(0.72 0.02 300);">Doctor of Philosophy in Computer Science, Virginia Polytechnic Institute and State University.</p>
+    <div style="margin-top: 26px; border-top: 1px solid oklch(1 0 0 / 0.08); padding-top: 22px;">
+      <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.22em; color: oklch(0.76 0.16 300);">ABSTRACT</div>
+      <p style="margin: 16px 0px 0px; max-width: 880px; font-size: 15.5px; line-height: 1.68; color: oklch(0.72 0.02 300);">Context-aware extended reality (XR) systems tailor their interfaces to the user’s situation, but the sensing that makes this possible — outward-facing cameras, microphones, and eye trackers — creates substantial privacy risk for users and for the bystanders captured alongside them. This dissertation argues that privacy in context-aware XR is necessary, feasible, and never automatic, and develops a framework for achieving it. The central claim is that the same gaze signal that can drive interface adaptation also encodes the user’s identity, so privacy cannot be obtained by abstention or by treating gaze as a benign substitute for the camera; it must be engineered into how the signal is represented and mediated.</p>
+      <p style="margin: 14px 0px 0px; max-width: 880px; font-size: 15.5px; line-height: 1.68; color: oklch(0.72 0.02 300);">The argument is developed through three studies organized as a decision tree with two complementary strategies, avoidance and mitigation. GoldiLocks Zoning establishes the foundation, showing that gaze alone, read as passive context, can drive useful adaptation without imaging the environment, making avoidance of the camera viable. InPlainGaze examines the residual risk that avoidance leaves behind, demonstrating that the representation in which gaze is encoded is a privacy lever: a learned engineered-feature representation preserves most task-relevant utility while substantially attenuating re-identification — and, counterintuitively, a more abstract heatmap representation leaks more identity, showing that abstraction alone does not guarantee privacy. ARPA addresses the case in which environmental capture is unavoidable, studying how the autonomy of a human-in-the-loop privacy assistant shapes users’ situated awareness and the cognitive burden of managing exposure, and finding that automation redistributes that burden rather than removing it.</p>
+      <p style="margin: 14px 0px 0px; max-width: 880px; font-size: 15.5px; line-height: 1.68; color: oklch(0.72 0.02 300);">Synthesized, the studies contribute more than three systems: they yield an intermediate-level framework — avoidance and mitigation, with representational veiling as its core mechanism — for building context-aware XR that does not require users to surrender their identity to benefit from adaptation. The dissertation closes by arguing that such protection can become an ambient, on-device default rather than an expert-only setting, and by charting the open branches of the design space the framework reveals.</p>
+    </div>
+    <div style="display: flex; gap: 26px; margin-top: 24px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-size: 11.5px; letter-spacing: 0.12em; color: oklch(0.52 0.025 300);">
+      <span>CHAIR · DOUG A. BOWMAN</span><span>STEPHEN DIVERDI</span><span>BRENDAN DAVID-JOHN</span><span>RAFAEL PATRICK</span><span>CHRIS NORTH</span>
+    </div>
+  </div></section><section id="avoidance" data-screen-label="Study 01 Avoidance" style="padding: clamp(48px, 7vw, 72px) clamp(20px, 5vw, 40px); border-top: 1px solid oklch(1 0 0 / 0.08);">
+  <div style="max-width: 1160px; margin: 0px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px 56px; align-items: start;">
+    <div>
+      <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.78 0.16 70);">01 · AVOIDANCE</div>
+      <div style="margin-top: 12px; font-family: Montserrat, sans-serif; font-weight: 800; font-size: 30px; line-height: 1.1; color: oklch(0.98 0.005 300);">GoldiLocks Zoning</div>
+      <p style="margin: 16px 0px 0px; font-style: italic; font-size: 17px; line-height: 1.45; color: oklch(0.85 0.1 300);">“A stream never captured cannot betray you.”</p>
+      <div style="margin-top: 16px; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">ACM SUI 2024 · CHAPTER 3</div>
+      <div style="margin-top: 18px;"><a href="paper-goldilocks.html" style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.18em; padding-bottom: 4px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">OPEN THE STUDY →</a></div>
+    </div>
+    <div>
+      <p style="margin: 0px; font-size: 17px; line-height: 1.6; color: oklch(0.92 0.01 300);">The foundation: gaze alone, read as passive context, can drive useful adaptation without imaging the environment — making avoidance of the camera viable. GoldiLocks zoning places VR notifications by watching where attention already lives, task-agnostic, no world capture.</p>
+      <p style="margin: 14px 0px 0px; font-size: 16px; line-height: 1.6; color: oklch(0.72 0.02 300);">Subtraction is the first move: sense only what the adaptation needs. But avoidance leaves a residual risk behind — the gaze stream itself. The system adapts; so must we.</p>
+    </div>
+  </div></section><section id="mitigation" data-screen-label="Study 02 Mitigation" style="padding: clamp(48px, 7vw, 72px) clamp(20px, 5vw, 40px); border-top: 1px solid oklch(1 0 0 / 0.08);">
+  <div style="max-width: 1160px; margin: 0px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px 56px; align-items: start;">
+    <div>
+      <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.76 0.13 205);">02 · MITIGATION</div>
+      <div style="margin-top: 12px; font-family: Montserrat, sans-serif; font-weight: 800; font-size: 30px; line-height: 1.1; color: oklch(0.98 0.005 300);">Hidden in Plain Gaze</div>
+      <p style="margin: 16px 0px 0px; font-style: italic; font-size: 17px; line-height: 1.45; color: oklch(0.85 0.1 300);">“Veil the identity. Never blind the system.”</p>
+      <div style="margin-top: 16px; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">CH. 4 · MANUSCRIPT · 2026</div>
+      <div style="margin-top: 18px;"><a href="paper-inplaingaze.html" style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.18em; padding-bottom: 4px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">OPEN THE STUDY →</a></div>
+    </div>
+    <div>
+      <p style="margin: 0px; font-size: 17px; line-height: 1.6; color: oklch(0.92 0.01 300);">The representation in which gaze is encoded is a privacy lever. A learned engineered-feature representation preserves most task-relevant utility while substantially attenuating re-identification — representational veiling, the framework’s core mechanism.</p>
+      <p style="margin: 14px 0px 0px; font-size: 16px; line-height: 1.6; color: oklch(0.72 0.02 300);">Counterintuitively, a more abstract heatmap representation leaks more identity. Abstraction alone does not guarantee privacy — the veil must be engineered, not assumed.</p>
+    </div>
+  </div></section><section id="protection" data-screen-label="Study 03 Protection" style="padding: clamp(48px, 7vw, 72px) clamp(20px, 5vw, 40px); border-top: 1px solid oklch(1 0 0 / 0.08);">
+  <div style="max-width: 1160px; margin: 0px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px 56px; align-items: start;">
+    <div>
+      <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.8 0.15 165);">03 · PROTECTION</div>
+      <div style="margin-top: 12px; font-family: Montserrat, sans-serif; font-weight: 800; font-size: 30px; line-height: 1.1; color: oklch(0.98 0.005 300);">ARPA — the XR Privacy Assistant</div>
+      <p style="margin: 16px 0px 0px; font-style: italic; font-size: 17px; line-height: 1.45; color: oklch(0.85 0.1 300);">“I see the lie before it wears a face.”</p>
+      <div style="margin-top: 16px; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">CH. 5 · IEEE ISMAR ’26 · ACCEPTED · TO APPEAR</div>
+      <div style="margin-top: 18px;"><a href="paper-arpa.html" style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.18em; padding-bottom: 4px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">OPEN THE STUDY →</a></div>
+    </div>
+    <div>
+      <p style="margin: 0px; font-size: 17px; line-height: 1.6; color: oklch(0.92 0.01 300);">When environmental capture is unavoidable, a human-in-the-loop privacy assistant manages exposure. ARPA studies how the assistant’s autonomy shapes situated awareness and the cognitive burden of managing what leaks.</p>
+      <p style="margin: 14px 0px 0px; font-size: 16px; line-height: 1.6; color: oklch(0.72 0.02 300);">The finding: automation redistributes the burden rather than removing it. Protection must become an ambient, on-device default — not an expert-only setting. That default is what DIBIA exists to build.</p>
+    </div>
+  </div></section><section id="publications" data-screen-label="Publications" style="padding: clamp(64px, 9vw, 96px) clamp(20px, 5vw, 40px); border-top: 1px solid oklch(1 0 0 / 0.08); background: oklch(0.1 0.015 300);">
+  <div style="max-width: 1160px; margin: 0px auto;">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
+      <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.76 0.16 300);">PUBLICATIONS &amp; ARTIFACTS</div>
+      <div style="display: flex; gap: 22px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.18em;">
+        <a href="https://scholar.google.com/citations?hl=en&amp;user=TeDW0NYAAAAJ&amp;inst=13410158990364976897" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">GOOGLE SCHOLAR →</a>
+        <a href="assets/ilo.bib" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">BIBTEX · ALL →</a>
+      </div>
+    </div>
+    <h2 style="margin: 16px 0px 0px; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 3.2vw, 40px); line-height: 1.1; color: oklch(0.98 0.005 300);">The record.</h2>
+    <div style="display: grid; gap: 14px; margin-top: 40px;">
+      <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.22em; color: oklch(0.52 0.025 300); margin-top: 10px;">FORTHCOMING, UNDER REVIEW &amp; MANUSCRIPTS</div>
+      <div id="pub-privacy-on-autopilot-ismar26" style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">ISMAR ’26</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);"><a href="paper-arpa.html" class="scp2" style="color: oklch(0.98 0.005 300);">Privacy on Autopilot: Examining XR Assistant Autonomy and Its Influence on Privacy Awareness</a></div>
+          <div style="margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: oklch(0.72 0.02 300);"><b style="color: oklch(0.98 0.005 300); font-weight: 600;">C. I. Ilo</b>, B. David-John, D. A. Bowman · IEEE ISMAR 2026 · Bari, Italy · Oct 5–9, 2026 · the ARPA study · paper presentation in Bari</div>
+          <div style="margin-top: 10px; display: flex; gap: 18px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.16em;"><a href="paper-arpa.html" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">THE STUDY →</a><a href="assets/bib/privacy-on-autopilot-ismar26.bib" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">BIBTEX</a></div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.8 0.15 165);">ACCEPTED · TO APPEAR</span>
+      </div>
+      <div id="pub-hidden-in-plain-gaze" style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">2026</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);"><a href="paper-inplaingaze.html" class="scp2" style="color: oklch(0.98 0.005 300);">Hidden in Plain Gaze: Gaze Representations as Privacy Controls for Utility and Re-identification Risk in XR</a></div>
+          <div style="margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: oklch(0.72 0.02 300);"><b style="color: oklch(0.98 0.005 300); font-weight: 600;">C. I. Ilo</b>, B. David-John, D. A. Bowman · manuscript · 2026 · the InPlainGaze study · HoloAssist, 206 identities</div>
+          <div style="margin-top: 10px; display: flex; gap: 18px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.16em;"><a href="paper-inplaingaze.html" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">THE STUDY →</a><a href="assets/bib/hidden-in-plain-gaze.bib" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">BIBTEX</a></div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.78 0.16 70);">MANUSCRIPT · 2026</span>
+      </div>
+      <div id="pub-privacy-aware-ar-unsafe-future" style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">2026</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);">Towards Privacy-Aware AR in a Pervasive (Unsafe) Future</div>
+          <div style="margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: oklch(0.72 0.02 300);"><b style="color: oklch(0.98 0.005 300); font-weight: 600;">C. I. Ilo</b>, N. Alabanza, C. Connor, C. K. Ilo, B. David-John · in submission · venue TBC · the privacy–utility plane: Grubert’s pervasive-AR axis plus the guild’s second axis</div>
+          <div style="margin-top: 10px; display: flex; gap: 18px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.16em;"><a href="assets/bib/privacy-aware-ar-unsafe-future.bib" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">BIBTEX</a></div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.78 0.16 70);">IN SUBMISSION</span>
+      </div>
+      <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.22em; color: oklch(0.52 0.025 300); margin-top: 10px;">PEER-REVIEWED</div>
+      <div id="pub-goldilocks-sui24" style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">SUI ’24</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);"><a href="paper-goldilocks.html" class="scp2" style="color: oklch(0.98 0.005 300);">GoldiLocks Zoning: Evaluating a Gaze-Aware Approach to Task-Agnostic VR Notification Placement</a></div>
+          <div style="margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: oklch(0.72 0.02 300);"><b style="color: oklch(0.98 0.005 300); font-weight: 600;">C. Ilo</b>, S. DiVerdi, D. A. Bowman · ACM SUI 2024 · the GoldiLocks study</div>
+          <div style="margin-top: 10px; display: flex; gap: 18px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.16em;"><a href="paper-goldilocks.html" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">THE STUDY →</a><a href="https://doi.org/10.1145/3677386.3682087" target="_blank" rel="noopener" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">DOI</a><a href="assets/bib/goldilocks-sui24.bib" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">BIBTEX</a></div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.8 0.15 165);">PUBLISHED</span>
+      </div>
+      <div id="pub-iar-taxonomy-arxiv24" style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">ARXIV ’24</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);">Towards Intelligent Augmented Reality (iAR): A Taxonomy of Context, an Architecture, and an Empirical Study</div>
+          <div style="margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: oklch(0.72 0.02 300);">S. Davari, D. Stover, A. Giovannelli, <b style="color: oklch(0.98 0.005 300); font-weight: 600;">C. Ilo</b>, D. A. Bowman · arXiv:2411.02684</div>
+          <div style="margin-top: 10px; display: flex; gap: 18px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.16em;"><a href="https://arxiv.org/abs/2411.02684" target="_blank" rel="noopener" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">ARXIV</a><a href="assets/bib/iar-taxonomy-arxiv24.bib" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">BIBTEX</a></div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.76 0.13 205);">PREPRINT</span>
+      </div>
+      <div id="pub-buildar-vrw22" style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">VRW ’22</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);">BuildAR: A Proof-of-Concept Prototype of Intelligent Augmented Reality in Construction</div>
+          <div style="margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: oklch(0.72 0.02 300);">D. A. Bowman, J. Gabbard, D. Auerbach, N. Roofigari-Esfahan, K. Britt, <b style="color: oklch(0.98 0.005 300); font-weight: 600;">C. I. Ilo</b>, K. Adapa · IEEE VR Workshops 2022</div>
+          <div style="margin-top: 10px; display: flex; gap: 18px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.16em;"><a href="assets/bib/buildar-vrw22.bib" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">BIBTEX</a></div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.8 0.15 165);">PUBLISHED</span>
+      </div>
+      <div id="pub-clean-the-ocean-vrw22" style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">VRW ’22</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);">Clean the Ocean: An Immersive VR Experience Proposing New Modifications to Go-Go and WiM Techniques</div>
+          <div style="margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: oklch(0.72 0.02 300);">L. Lisle, F. Lu, S. Davari, I. A. Tahmid, A. Giovannelli, <b style="color: oklch(0.98 0.005 300); font-weight: 600;">C. Ilo</b>, L. Pavanatto, L. Zhang, L. Schlueter, D. A. Bowman · IEEE VR Workshops 2022 · 1st place, IEEE VR 2022 3DUI Contest</div><div style="margin-top: 6px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.16em; color: oklch(0.8 0.16 85);">★ 1ST PLACE · IEEE VR 2022 3DUI CONTEST</div>
+          <div style="margin-top: 10px; display: flex; gap: 18px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.16em;"><a href="assets/bib/clean-the-ocean-vrw22.bib" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">BIBTEX</a></div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.8 0.15 165);">PUBLISHED</span>
+      </div>
+      <div id="pub-virtual-loupes-vrw21" style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">VRW ’21</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);">Virtual Loupes: An Augmented Reality Aid for Microsurgery</div>
+          <div style="margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: oklch(0.72 0.02 300);"><b style="color: oklch(0.98 0.005 300); font-weight: 600;">C. Ilo</b>, W. Zheng, D. A. Bowman · IEEE VR Workshops 2021</div>
+          <div style="margin-top: 10px; display: flex; gap: 18px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.16em;"><a href="assets/bib/virtual-loupes-vrw21.bib" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">BIBTEX</a></div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.8 0.15 165);">PUBLISHED</span>
+      </div>
+      <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.22em; color: oklch(0.52 0.025 300); margin-top: 10px;">THE DEGREE</div>
+      <div id="pub-dissertation-2026" style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.76 0.16 300);">PHD 2026</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);"><a href="research.html#dissertation" class="scp2" style="color: oklch(0.98 0.005 300);">Protection Behind the Veil: Gaze, Privacy, and Context-Aware Adaptation in Extended Reality</a></div>
+          <div style="margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: oklch(0.72 0.02 300);"><b style="color: oklch(0.98 0.005 300); font-weight: 600;">Cory I. Ilo</b> · Virginia Tech · defended June 15, 2026</div>
+          <div style="margin-top: 10px; display: flex; gap: 18px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 10.5px; letter-spacing: 0.16em;"><a href="research.html#dissertation" style="padding-bottom: 3px; border-bottom: 1px solid oklch(0.67 0.22 300 / 0.5);">THE DISSERTATION →</a></div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.8 0.15 165);">DEFENDED</span>
+      </div>
+    </div>
+  </div></section><section id="speaking" data-screen-label="Speaking" style="padding: clamp(64px, 9vw, 96px) clamp(20px, 5vw, 40px); border-top: 1px solid oklch(1 0 0 / 0.08);">
+  <div style="max-width: 1160px; margin: 0px auto;">
+    <div style="font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.76 0.16 300);">SPEAKING &amp; APPEARANCES</div>
+    <h2 style="margin: 16px 0px 0px; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 3.2vw, 40px); line-height: 1.1; color: oklch(0.98 0.005 300);">The signal, spoken.</h2>
+    <div style="display: grid; gap: 14px; margin-top: 36px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">10.2026</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);"><a href="paper-arpa.html" class="scp2" style="color: oklch(0.98 0.005 300);">Paper presentation — Privacy on Autopilot: Examining XR Assistant Autonomy and Its Influence on Privacy Awareness</a></div>
+          <div style="margin-top: 6px; font-size: 14.5px; color: oklch(0.72 0.02 300);">IEEE ISMAR 2026 · Bari, Italy · Oct 5–9, 2026</div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.78 0.16 70);">SCHEDULED</span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">06.2026</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);"><a href="research.html#dissertation" class="scp2" style="color: oklch(0.98 0.005 300);">Dissertation defense — Protection Behind the Veil</a></div>
+          <div style="margin-top: 6px; font-size: 14.5px; color: oklch(0.72 0.02 300);">Virginia Tech · Blacksburg, VA · June 15, 2026</div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.8 0.15 165);">DEFENDED</span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">10.2024</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);"><a href="paper-goldilocks.html" class="scp2" style="color: oklch(0.98 0.005 300);">Paper talk — GoldiLocks Zoning</a></div>
+          <div style="margin-top: 6px; font-size: 14.5px; color: oklch(0.72 0.02 300);">ACM Symposium on Spatial User Interaction (SUI ’24)</div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.8 0.15 165);">DELIVERED</span>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; background: oklch(0.17 0.025 300); border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 22px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">03.2022</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 17px; line-height: 1.45; color: oklch(0.98 0.005 300);">3DUI Contest entry — Clean the Ocean (1st place)</div>
+          <div style="margin-top: 6px; font-size: 14.5px; color: oklch(0.72 0.02 300);">IEEE VR 2022 · 3DUI Contest</div>
+        </div>
+        <span style="font-family: &quot;Space Mono&quot;, monospace; font-size: 10.5px; letter-spacing: 0.14em; color: oklch(0.8 0.15 165);">DELIVERED</span>
+      </div>
+    </div>
+    <div style="margin-top: 56px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.22em; color: oklch(0.76 0.16 300);">RECOGNITION</div>
+    <div style="display: grid; gap: 14px; margin-top: 22px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 18px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">2022</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 16.5px; line-height: 1.45; color: oklch(0.98 0.005 300);">1st place, IEEE VR 2022 3DUI Contest</div>
+          <div style="margin-top: 5px; font-size: 14px; color: oklch(0.72 0.02 300);">Clean the Ocean — with the Virginia Tech 3D Interaction Group</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 18px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">—</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 16.5px; line-height: 1.45; color: oklch(0.98 0.005 300);">GEM Fellow</div>
+          <div style="margin-top: 5px; font-size: 14px; color: oklch(0.72 0.02 300);">National GEM Consortium · sponsored alumni attendee, GEM 50th Annual Conference (Sep 2026)</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: baseline; border: 1px solid oklch(1 0 0 / 0.08); border-radius: 10px; padding: 18px 26px;">
+        <span style="flex: 0 0 92px; font-family: &quot;Space Mono&quot;, monospace; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: oklch(0.8 0.16 85);">2016–2022</span>
+        <div style="flex: 1 1 240px; min-width: 0px;">
+          <div style="font-size: 16.5px; line-height: 1.45; color: oklch(0.98 0.005 300);">Industry research: Intel · Adobe Research · Apple</div>
+          <div style="margin-top: 5px; font-size: 14px; color: oklch(0.72 0.02 300);">SoC validation and computer-vision applied research (Intel) · AR/VR notification research (Adobe) · camera hardware human-factors research (Apple)</div>
+        </div>
+      </div>
+    </div>
+  </div></section><footer data-screen-label="Footer" style="border-top: 1px solid oklch(1 0 0 / 0.08); padding: 40px;">
+  <div style="max-width: 1160px; margin: 0px auto; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-family: &quot;Space Mono&quot;, monospace; font-size: 11px; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">
+    <span>© <span class="sc-interp">2026</span> DIBIA · #TECH4GUD</span>
+    <span style="display: flex; gap: 18px; flex-wrap: wrap;"><a href="mailto:coryikeilo84@gmail.com" style="font-family: &quot;Space Mono&quot;, monospace; letter-spacing: 0.14em;">CORYIKEILO84@GMAIL.COM</a><a href="mailto:ciilo@vt.edu" style="font-family: &quot;Space Mono&quot;, monospace; letter-spacing: 0.14em; color: oklch(0.52 0.025 300);">CIILO@VT.EDU · ACADEMIC</a></span>
+  </div></footer></div></div></div>
+
+
+
+<script src="assets/site.js" defer=""></script></body></html>
