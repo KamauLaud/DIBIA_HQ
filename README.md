@@ -6,7 +6,7 @@ Static site, zero runtime dependencies. What GitHub Pages serves is the set of `
 data/            ← the record: publications.json · news.json · talks.json · people.json · site.json
 src/             ← page templates (dc-runtime format, with <!-- @@marker --> slots) + the runtime used only at build time
 build/           ← render.mjs (JSON → cards) · build.mjs (headless hydrate + strip runtime) · og.mjs · check.mjs · pages.mjs (titles/descriptions)
-assets/          ← photos (≤1600px JPEG), paper figures (WebP), fonts, site.js (~2 KB), og-card.png, ilo.bib + bib/<id>.bib
+assets/          ← photos (≤1600px JPEG), paper figures (WebP), fonts, site.js (~2 KB), og-card.png, brand/ (DIBIA Netrunners emblem, nav mark, icons), ilo.bib + bib/<id>.bib
 _ds/             ← DIBIA / #Tech4Gud design system (tokens + self-hosted fonts)
 *.html           ← BUILD OUTPUT — do not hand-edit
 ```

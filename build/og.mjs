@@ -6,11 +6,12 @@ import { site, pubs } from './render.mjs';
 
 const ROOT = path.resolve(new URL('..', import.meta.url).pathname);
 const fontsDir = fs.readdirSync(path.join(ROOT, '_ds')).map((d) => path.join(ROOT, '_ds', d, 'assets/fonts')).find((d) => fs.existsSync(d));
-const mime = { '.ttf': 'font/ttf', '.woff2': 'font/woff2', '.jpg': 'image/jpeg', '.png': 'image/png' };
+const mime = { '.ttf': 'font/ttf', '.woff2': 'font/woff2', '.jpg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' };
 const dataUri = (fp) => `data:${mime[path.extname(fp)]};base64,${fs.readFileSync(fp).toString('base64')}`;
 const font = (f) => dataUri(path.join(fontsDir, f));
 const forthcoming = pubs.filter((p) => p.public && p.group === 'forthcoming' && p.status !== 'in-submission').map((p) => `${p.badge} · ${(p.statusLabel || '').split(' ·')[0]}`).join('   ·   ');
 const photo = dataUri(path.join(ROOT, site.photo));
+const mark = dataUri(path.join(ROOT, 'assets/brand/dibia-mark.webp'));
 
 const html = `<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{font-family:Montserrat;src:url("${font('Montserrat-VariableFont_wght.ttf')}");font-weight:100 900}
@@ -30,10 +31,10 @@ h1{margin:22px 0 0;font-family:Montserrat;font-weight:800;font-size:84px;line-he
 .frame{flex:0 0 300px;height:400px;position:relative;border:1px solid oklch(72% 0.17 163/0.55);clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,0 100%);box-shadow:0 8px 24px oklch(0% 0 0/0.45),0 0 40px oklch(72% 0.17 163/0.22);overflow:hidden;background:oklch(10% 0.015 300)}
 .frame img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
 .bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,oklch(58% 0.26 300),oklch(76% 0.13 205) 40%,oklch(72% 0.17 163) 75%,oklch(80% 0.16 85))}
-.brand{position:absolute;right:72px;top:52px;font-family:Montserrat;font-weight:800;font-size:22px;color:oklch(98% 0.005 300)}
-.brand span{font-family:"Space Mono";font-weight:700;font-size:12px;letter-spacing:0.18em;color:oklch(52% 0.025 300)}
+.brand{position:absolute;right:72px;top:26px;display:flex;align-items:center;gap:12px;font-family:"Space Mono";font-weight:700;font-size:12px;letter-spacing:0.18em;color:oklch(52% 0.025 300)}
+.brand img{height:64px;width:auto;display:block}
 </style></head><body><div class="glow"></div><div class="scan"></div>
-<div class="brand">DIBIA <span>· #TECH4GUD</span></div>
+<div class="brand"><span>#TECH4GUD</span><img src="${mark}" alt=""></div>
 <div class="wrap"><div class="left">
 <div class="kicker">XR PRIVACY · GAZE · CONTEXT-AWARE AR</div>
 <h1>Dr. Cory<br>“Ike” Ilo</h1>

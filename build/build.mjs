@@ -44,7 +44,7 @@ function jsonLd(page) {
   const person = {
     '@type': 'Person', '@id': `${base}/#person`, name: site.fullName, alternateName: [site.name, 'Cory Ilo', 'Ike Ilo'],
     givenName: 'Cory', familyName: 'Ilo', honorificSuffix: 'PhD', jobTitle: 'XR Privacy Researcher · Founder, DIBIA',
-    url: `${base}/`, image: `${base}/${site.photo}`, email: [site.email, site.emailAcademic].filter(Boolean).map((e) => `mailto:${e}`),
+    url: `${base}/`, image: `${base}/${site.photo}`, worksFor: { '@id': `${base}/#dibia` }, email: [site.email, site.emailAcademic].filter(Boolean).map((e) => `mailto:${e}`),
     alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'Virginia Tech' }, { '@type': 'CollegeOrUniversity', name: 'Rochester Institute of Technology' }],
     knowsAbout: site.keywords.concat(['Privacy-Preserving Machine Learning', 'Mixed Reality', 'Virtual Reality', 'User Studies']),
     sameAs
@@ -52,6 +52,7 @@ function jsonLd(page) {
   const graph = [
     { '@type': 'WebSite', '@id': `${base}/#website`, url: `${base}/`, name: site.name, publisher: { '@id': `${base}/#person` } },
     person,
+    { '@type': 'Organization', '@id': `${base}/#dibia`, name: site.brand, url: `${base}/org.html`, logo: { '@type': 'ImageObject', url: `${base}/${site.logo}`, width: 512, height: 512 }, founder: { '@id': `${base}/#person` } },
     { '@type': PAGE_META[page].type, '@id': `${url}#page`, url, name: PAGE_META[page].title, description: PAGE_META[page].description, isPartOf: { '@id': `${base}/#website` }, mainEntity: { '@id': `${base}/#person` } }
   ];
   if (page.startsWith('paper-')) {
@@ -100,10 +101,12 @@ const CLEANUP = ({ meta, ld, canonical, ogImage, twitter, slots, name }) => {
   d.title = meta.title;
   const head = d.head;
   const put = (tag, attrs) => { const el = d.createElement(tag); Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v)); head.appendChild(el); return el; };
-  head.querySelectorAll('meta[name="description"],meta[property^="og:"],meta[name^="twitter:"],link[rel="canonical"],script[type="application/ld+json"],link[rel="icon"]').forEach((e) => e.remove());
+  head.querySelectorAll('meta[name="description"],meta[property^="og:"],meta[name^="twitter:"],link[rel="canonical"],script[type="application/ld+json"],link[rel="icon"],link[rel="apple-touch-icon"]').forEach((e) => e.remove());
   put('meta', { name: 'description', content: meta.description });
   put('link', { rel: 'canonical', href: canonical });
-  put('link', { rel: 'icon', href: 'assets/favicon.svg', type: 'image/svg+xml' });
+  put('link', { rel: 'icon', href: 'assets/brand/favicon-32.png', sizes: '32x32', type: 'image/png' });
+  put('link', { rel: 'icon', href: 'assets/brand/icon-192.png', sizes: '192x192', type: 'image/png' });
+  put('link', { rel: 'apple-touch-icon', href: 'assets/brand/apple-touch-icon.png' });
   put('meta', { name: 'theme-color', content: '#1a1523' });
   [['og:type', meta.type === 'ProfilePage' ? 'profile' : 'website'], ['og:site_name', 'Cory “Ike” Ilo — DIBIA'], ['og:title', meta.title], ['og:description', meta.description], ['og:url', canonical], ['og:image', ogImage], ['og:image:width', '1200'], ['og:image:height', '630']].forEach(([p, c]) => put('meta', { property: p, content: c }));
   [['twitter:card', 'summary_large_image'], ['twitter:title', meta.title], ['twitter:description', meta.description], ['twitter:image', ogImage]].forEach(([n, c]) => put('meta', { name: n, content: c }));

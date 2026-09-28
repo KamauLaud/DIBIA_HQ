@@ -743,7 +743,7 @@ function Tech4GudSite() {
       gridTemplateColumns: '1fr 1fr',
       gap: '10px 24px'
     }
-  }, [['Cory “Ike” Ilo', 'Lead · XR privacy', 'violet'], ['Cedrick K. Ilo', '', 'gold'], ['Nikki Alabanza', 'Protection / dark patterns', 'emerald'], ['Cherelle Connor', '', 'cyan'], ['Brendan David-John', '', 'amber']].map(([n, r, t]) => /*#__PURE__*/React.createElement("div", {
+  }, [['Cory “Ike” Ilo', 'Lead · XR privacy', 'violet'], ['Cedrick K. Ilo', '', 'gold'], ['Nikki Alabanza', 'Protection / dark patterns', 'emerald'], ['Cherelle Connor', '', 'cyan']].map(([n, r, t]) => /*#__PURE__*/React.createElement("div", {
     key: n,
     style: {
       display: 'flex',
