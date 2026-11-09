@@ -9,7 +9,9 @@ import http from 'node:http';
 import { chromium } from 'playwright';
 
 const ROOT = path.resolve(new URL('..', import.meta.url).pathname);
-const PAGES = ['index', 'research', 'cv', 'org', 'marketplace', 'contact', 'paper-arpa', 'paper-goldilocks', 'paper-inplaingaze'];
+const PAGES = ['index', 'research', 'cv', 'org', 'marketplace', 'contact', 'paper-arpa', 'paper-goldilocks', 'paper-inplaingaze', 'dossier'];
+// static pages carry their own progressive JS and plain-CSS hover rules (no generated hover sheet)
+const STATIC = { dossier: ['dossier/members.js'] };
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.mp4': 'video/mp4', '.ttf': 'font/ttf', '.woff2': 'font/woff2', '.pdf': 'application/pdf', '.bib': 'text/plain', '.json': 'application/json' };
 const srv = http.createServer((req, r) => {
   const rel = decodeURIComponent(req.url.split('?')[0].split('#')[0]);
@@ -27,7 +29,7 @@ srv.listen(0, '127.0.0.1', async () => {
     const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } });
     const p = await ctx.newPage();
     const external = [], errors = [], notFound = [];
-    p.on('request', (r) => { if (!r.url().startsWith(`http://127.0.0.1:${port}`)) external.push(r.url()); });
+    p.on('request', (r) => { const u = r.url(); if (!u.startsWith(`http://127.0.0.1:${port}`) && !/^(chrome|chrome-extension|data|blob):/.test(u)) external.push(u); });   // browser-internal schemes (e.g. Chrome's PDF viewer) are not network requests
     p.on('response', (r) => { if (r.status() >= 400) notFound.push(r.status() + ' ' + r.url().replace(`http://127.0.0.1:${port}`, '')); });
     p.on('pageerror', (e) => errors.push(String(e)));
     p.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
@@ -54,18 +56,20 @@ srv.listen(0, '127.0.0.1', async () => {
     await p.setViewportSize({ width: 390, height: 844 });
     await p.waitForTimeout(300);
     await p.screenshot({ path: path.join(ROOT, `.tmp/shots/${page}-mobile.png`), fullPage: true });
-    const bad = external.length || errors.length || notFound.length || info.braces || !info.hover || !info.ld || info.brokenImgs.length || info.slotsLeft || linksLost || info.scripts.some((s) => s !== 'assets/site.js' && s !== 'inline');
+    const okScripts = ['assets/site.js', 'inline', ...(STATIC[page] || [])];
+    const needHover = !(page in STATIC);
+    const bad = external.length || errors.length || notFound.length || info.braces || (needHover && !info.hover) || !info.ld || info.brokenImgs.length || info.slotsLeft || linksLost > 0 || info.scripts.some((s) => !okScripts.includes(s));
     if (bad) failures++;
     console.log(`${bad ? '✗' : '✓'} ${page}.html — "${info.title}"`);
     if (external.length) console.log('   external requests:', external.join(', '));
     if (errors.length) console.log('   errors:', errors.join(' | ').slice(0, 400));
     if (notFound.length) console.log('   not found:', notFound.join(', '));
     if (info.braces) console.log('   unrendered {{ }} left in body');
-    if (!info.hover) console.log('   missing hover stylesheet');
+    if (needHover && !info.hover) console.log('   missing hover stylesheet');
     if (!info.ld) console.log('   missing JSON-LD');
     if (info.brokenImgs.length) console.log('   broken images:', info.brokenImgs.join(', '));
     if (info.slotsLeft) console.log(`   ${info.slotsLeft} unexported <image-slot>/<x-import> left (renders blank without the runtime)`);
-    if (linksLost) console.log(`   ${linksLost} link(s) in the HTML are gone after site.js ran`);
+    if (linksLost > 0) console.log(`   ${linksLost} link(s) in the HTML are gone after site.js ran`);
     console.log('   scripts:', info.scripts.join(', '));
     await ctx.close();
   }

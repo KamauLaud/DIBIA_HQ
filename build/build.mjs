@@ -117,6 +117,35 @@ const CLEANUP = ({ meta, ld, canonical, ogImage, twitter, slots, name }) => {
   return d.documentElement.outerHTML;
 };
 
+
+// Hand-written pages that ship their own (progressive) JS — copied from src/, not hydrated.
+// They get the same <head> metadata as the generated pages so titles, canonical, OG and JSON-LD stay in one place.
+const STATIC_PAGES = ['dossier'];
+function esc(v) { return String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+function buildStatic(page) {
+  const base = site.baseUrl.replace(/\/$/, '');
+  const meta = PAGE_META[page];
+  const canonical = `${base}/${page}.html`;
+  const ogImage = `${base}/${site.ogImage}`;
+  let html = fs.readFileSync(path.join(ROOT, 'src', `${page}.html`), 'utf8');
+  html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(meta.title)}</title>`)
+             .replace(/\s*<meta name="description"[^>]*>/, '');
+  const tags = [
+    `<meta name="description" content="${esc(meta.description)}">`,
+    `<link rel="canonical" href="${canonical}">`,
+    `<link rel="icon" href="assets/brand/favicon-32.png" sizes="32x32" type="image/png">`,
+    `<link rel="icon" href="assets/brand/icon-192.png" sizes="192x192" type="image/png">`,
+    `<link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png">`,
+    `<meta name="theme-color" content="#1a1523">`,
+    ...[['og:type', 'website'], ['og:site_name', 'Cory “Ike” Ilo — DIBIA'], ['og:title', meta.title], ['og:description', meta.description], ['og:url', canonical], ['og:image', ogImage], ['og:image:width', '1200'], ['og:image:height', '630']].map(([k, v]) => `<meta property="${k}" content="${esc(v)}">`),
+    ...[['twitter:card', 'summary_large_image'], ['twitter:title', meta.title], ['twitter:description', meta.description], ['twitter:image', ogImage]].map(([k, v]) => `<meta name="${k}" content="${esc(v)}">`),
+    `<script type="application/ld+json">${JSON.stringify(jsonLd(page)).replace(/</g, '\\u003c')}</script>`
+  ];
+  html = html.replace('</head>', tags.join('\n') + '\n</head>');
+  fs.writeFileSync(path.join(ROOT, `${page}.html`), html);
+  console.log(`✓ ${page}.html  ${(fs.statSync(path.join(ROOT, `${page}.html`)).size / 1024).toFixed(0)} KB  (static)`);
+}
+
 async function main() {
   const t0 = Date.now();
   const pageIds = renderAll();
@@ -156,6 +185,7 @@ async function main() {
   }
   await browser.close();
   srv.close();
+  STATIC_PAGES.forEach(buildStatic);
   if (warnings.length) { console.log('\nContent flags (not rendered on the site):'); warnings.forEach((w) => console.log('  • ' + w)); }
   console.log(`\nbuilt in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
 }
