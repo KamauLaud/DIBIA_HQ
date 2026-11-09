@@ -9,6 +9,7 @@ import http from 'node:http';
 import { chromium } from 'playwright';
 import { renderAll, site, pubs, warnings } from './render.mjs';
 import { pages as PAGE_META } from './pages.mjs';
+import { renderJourney } from './journey.mjs';
 
 const ROOT = path.resolve(new URL('..', import.meta.url).pathname);
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.mp4': 'video/mp4', '.ttf': 'font/ttf', '.woff2': 'font/woff2', '.pdf': 'application/pdf', '.ico': 'image/x-icon', '.webp': 'image/webp' };
@@ -178,7 +179,12 @@ async function main() {
       if (id && style) slots[id[1]] = style[1];
     }
     const html = await p.evaluate(CLEANUP, { meta, ld: jsonLd(page), canonical, ogImage: `${base}/${site.ogImage}`, slots, name: site.name });
-    fs.writeFileSync(path.join(ROOT, `${page}.html`), '<!DOCTYPE html>\n' + html + '\n');
+    // post-hydration injections: sections generated as plain HTML (kept out of the dc-runtime on purpose)
+    let out = html;
+    if (out.includes('<div data-inject="journey"></div>')) {
+      out = out.replace('<div data-inject="journey"></div>', renderJourney()).replace('</head>', '<link rel="stylesheet" href="assets/journey.css">\n</head>');
+    }
+    fs.writeFileSync(path.join(ROOT, `${page}.html`), '<!DOCTYPE html>\n' + out + '\n');
     const size = (fs.statSync(path.join(ROOT, `${page}.html`)).size / 1024).toFixed(0);
     console.log(`✓ ${page}.html  ${size} KB${errors.length ? '  ⚠ ' + errors.join(' | ').slice(0, 300) : ''}`);
     await p.close();
