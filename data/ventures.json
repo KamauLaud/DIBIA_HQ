@@ -1,0 +1,45 @@
+{
+  "_schema": {
+    "subsystems": "ventures in active development, drawn as modules wired to the chip. slot: left | right | bottom",
+    "statusKey": "architecting | building | dogfooding (LED colour)",
+    "later": "ventures not started yet, listed in the open socket"
+  },
+  "eyebrow": "WHAT WE'RE BUILDING",
+  "title": "One core, connected subsystems.",
+  "lede": "DIBIA is the processor: shared methods, review, and infrastructure. Each venture plugs into it like a subsystem on a motherboard, the same way the SpatialSENSai paper describes context sensing as a portable layer that any XR app can plug into.",
+  "ariaLabel": "Diagram: the DIBIA chip connected to SpatialSENSai, sudo / Aperture and DigiGreenBookZ, with open sockets for Third Place and DigiDinar",
+  "subsystems": [
+    {
+      "slot": "left",
+      "name": "SpatialSENSai",
+      "bus": "CONTEXT BUS",
+      "status": "ARCHITECTING",
+      "statusKey": "architecting",
+      "blurb": "A drop-in context layer for XR apps. Its engine, ContextLogger, reads gaze, head motion and scene signals on-device and returns a privacy-preserving context stream.",
+      "link": "research.html#publications",
+      "linkLabel": "The paper"
+    },
+    {
+      "slot": "right",
+      "name": "sudo / Aperture",
+      "bus": "I/O",
+      "status": "BUILDING · IEEE VR 2027",
+      "statusKey": "building",
+      "blurb": "A universal remote for shared spatial interaction. Our entry for the IEEE VR 2027 3DUI Contest.",
+      "link": null
+    },
+    {
+      "slot": "bottom",
+      "name": "DigiGreenBookZ",
+      "bus": "APP BUS",
+      "status": "DOGFOODING",
+      "statusKey": "dogfooding",
+      "blurb": "A trip builder for travel planning. We use it to plan our own trips while we build it.",
+      "link": null
+    }
+  ],
+  "later": [
+    { "name": "Third Place", "blurb": "a community social hub." },
+    { "name": "DigiDinar", "blurb": "a ledger for trust and contribution across the collective." }
+  ]
+}

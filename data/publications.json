@@ -10,7 +10,7 @@
     {
       "id": "privacy-on-autopilot-ismar26",
       "public": true,
-      "group": "forthcoming",
+      "group": "peer-reviewed",
       "badge": "ISMAR ’26",
       "title": "Privacy on Autopilot: Examining XR Assistant Autonomy and Its Influence on Privacy Awareness",
       "authors": [
@@ -19,11 +19,11 @@
         "D. A. Bowman"
       ],
       "venue": "IEEE International Symposium on Mixed and Augmented Reality (ISMAR 2026)",
-      "venueShort": "IEEE ISMAR 2026 · Bari, Italy · Oct 5–9, 2026",
+      "venueShort": "IEEE ISMAR 2026 · Bari, Italy",
       "year": 2026,
-      "status": "accepted",
-      "statusLabel": "ACCEPTED · TO APPEAR",
-      "note": "the ARPA study · paper presentation in Bari",
+      "status": "published",
+      "statusLabel": "PRESENTED · OCT 2026",
+      "note": "the ARPA study",
       "trilogy": "03 · PROTECTION",
       "chapter": 5,
       "links": {
@@ -34,7 +34,7 @@
       },
       "teaser": "assets/papers/arpa-home.webp",
       "verify": "Add camera-ready PDF + DOI when IEEE Xplore posts it; ISMAR presentation video link once uploaded.",
-      "cardLine": "IEEE ISMAR ’26 · ACCEPTED · BARI"
+      "cardLine": "IEEE ISMAR ’26 · PRESENTED"
     },
     {
       "id": "hidden-in-plain-gaze",
@@ -66,7 +66,7 @@
       "id": "privacy-aware-ar-unsafe-future",
       "public": true,
       "group": "forthcoming",
-      "badge": "2026",
+      "badge": "XRSEC ’26",
       "title": "Towards Privacy-Aware AR in a Pervasive (Unsafe) Future",
       "authors": [
         "C. I. Ilo",
@@ -75,14 +75,14 @@
         "C. K. Ilo",
         "B. David-John"
       ],
-      "venue": "6-page design-space paper (the Spatial Sensai framework)",
-      "venueShort": "in submission · venue TBC",
+      "venue": "XRSecurity 2026: Workshop on XR Security and Privacy, co-located with ACM MobiCom 2026 (workshop poster)",
+      "venueShort": "XRSecurity 2026 @ ACM MobiCom · Austin, TX · workshop poster",
       "year": 2026,
-      "status": "in-submission",
-      "statusLabel": "IN SUBMISSION",
-      "note": "the privacy–utility plane: Grubert’s pervasive-AR axis plus the guild’s second axis",
+      "status": "accepted",
+      "statusLabel": "ACCEPTED · WORKSHOP POSTER",
+      "note": "the privacy–utility design space behind SpatialSENSai",
       "links": {},
-      "verify": "Target venue and decision status. Author list is from the July site copy; the anonymized PDF shows no authors."
+      "verify": "Confirm final author list and whether a PDF/abstract goes in the workshop proceedings."
     },
     {
       "id": "goldilocks-sui24",

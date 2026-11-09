@@ -10,6 +10,19 @@ import { chromium } from 'playwright';
 import { renderAll, site, pubs, warnings } from './render.mjs';
 import { pages as PAGE_META } from './pages.mjs';
 import { renderJourney } from './journey.mjs';
+import { renderBoard } from './board.mjs';
+import { renderServices, renderFounders } from './services.mjs';
+
+// <div data-inject="KEY"></div> in a src template → generated section + its stylesheet
+let _journey;
+const journeyParts = () => (_journey ||= renderJourney());
+const INJECT = {
+  receipts: () => ({ html: journeyParts().receipts, css: 'assets/journey.css' }),
+  journey: () => ({ html: journeyParts().journey, css: 'assets/journey.css' }),
+  board: () => ({ html: renderBoard(), css: 'assets/board.css' }),
+  services: () => ({ html: renderServices(), css: 'assets/services.css' }),
+  founders: () => ({ html: renderFounders(), css: 'assets/founders.css' })
+};
 
 const ROOT = path.resolve(new URL('..', import.meta.url).pathname);
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.svg': 'image/svg+xml', '.mp4': 'video/mp4', '.ttf': 'font/ttf', '.woff2': 'font/woff2', '.pdf': 'application/pdf', '.ico': 'image/x-icon', '.webp': 'image/webp' };
@@ -121,7 +134,7 @@ const CLEANUP = ({ meta, ld, canonical, ogImage, twitter, slots, name }) => {
 
 // Hand-written pages that ship their own (progressive) JS — copied from src/, not hydrated.
 // They get the same <head> metadata as the generated pages so titles, canonical, OG and JSON-LD stay in one place.
-const STATIC_PAGES = ['dossier'];
+const STATIC_PAGES = ['dossier', 'cv'];   // cv: redirect to the CV section on the home page
 function esc(v) { return String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
 function buildStatic(page) {
   const base = site.baseUrl.replace(/\/$/, '');
@@ -181,8 +194,12 @@ async function main() {
     const html = await p.evaluate(CLEANUP, { meta, ld: jsonLd(page), canonical, ogImage: `${base}/${site.ogImage}`, slots, name: site.name });
     // post-hydration injections: sections generated as plain HTML (kept out of the dc-runtime on purpose)
     let out = html;
-    if (out.includes('<div data-inject="journey"></div>')) {
-      out = out.replace('<div data-inject="journey"></div>', renderJourney()).replace('</head>', '<link rel="stylesheet" href="assets/journey.css">\n</head>');
+    for (const [key, make] of Object.entries(INJECT)) {
+      const slot = `<div data-inject="${key}"></div>`;
+      if (!out.includes(slot)) continue;
+      const { html: frag, css } = make();
+      out = out.replace(slot, frag);
+      if (css && !out.includes(`href="${css}"`)) out = out.replace('</head>', `<link rel="stylesheet" href="${css}">\n</head>`);
     }
     fs.writeFileSync(path.join(ROOT, `${page}.html`), '<!DOCTYPE html>\n' + out + '\n');
     const size = (fs.statSync(path.join(ROOT, `${page}.html`)).size / 1024).toFixed(0);

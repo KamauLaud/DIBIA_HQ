@@ -391,7 +391,7 @@
       "sharpened": [
         "ops"
       ],
-      "link": "index.html#film",
+      "link": "index.html#just-tech",
       "source": "news.json"
     },
     {
@@ -401,7 +401,7 @@
       "start": "2026-10",
       "title": "Privacy on Autopilot",
       "org": "IEEE ISMAR 2026",
-      "blurb": "More assistant autonomy moved users into a supervisory “auditor” role: detection accuracy went up with no measured cost to workload or trust (N=30).",
+      "blurb": "Presented at IEEE ISMAR 2026, Bari. More assistant autonomy moved users into a supervisory “auditor” role: detection accuracy went up with no measured cost to workload or trust (N=30).",
       "forged": [],
       "sharpened": [
         "privacy",
@@ -412,6 +412,23 @@
       "source": "news.json"
     },
     {
+      "id": "xrsec",
+      "kind": "academic",
+      "type": "event",
+      "start": "2026-10",
+      "title": "Towards Privacy-Aware AR in a Pervasive (Unsafe) Future",
+      "org": "XRSecurity 2026 · ACM MobiCom (poster)",
+      "blurb": "The privacy–utility design space (avoidance, mitigation, protection) and SpatialSENSai as its reference architecture.",
+      "forged": [],
+      "sharpened": [
+        "privacy",
+        "xr",
+        "fullstack"
+      ],
+      "link": "research.html#publications",
+      "source": "memory 2026-09-30"
+    },
+    {
       "id": "sensai",
       "kind": "guild",
       "type": "span",
@@ -419,7 +436,7 @@
       "end": "2027-12",
       "planned": true,
       "title": "SpatialSENSai: a context-sensing layer for XR",
-      "org": "DIBIA · trajectory",
+      "org": "DIBIA · planned",
       "blurb": "A portable Unity/Unreal layer that fuses intrinsic and egocentric signals into a privacy-preserving context stream, so the privacy posture travels with the app.",
       "forged": [],
       "sharpened": [
@@ -428,8 +445,42 @@
         "hai",
         "fullstack"
       ],
-      "link": "research.html#trajectory",
+      "link": "research.html#journey",
       "source": "plan"
+    },
+    {
+      "id": "digigreenbookz",
+      "kind": "guild",
+      "type": "span",
+      "start": "2026-10",
+      "end": null,
+      "title": "DigiGreenBookZ trip builder",
+      "org": "DIBIA venture",
+      "short": "DigiGreenBookZ",
+      "blurb": "A trip builder for travel planning, built while we use it to plan our own trips.",
+      "forged": [],
+      "sharpened": [
+        "fullstack",
+        "hai"
+      ],
+      "link": "org.html#ventures",
+      "source": "memory 2026-10-11"
+    },
+    {
+      "id": "3dui27",
+      "kind": "academic",
+      "type": "event",
+      "start": "2027",
+      "planned": true,
+      "title": "3DUI Contest: sudo / Aperture",
+      "org": "IEEE VR 2027",
+      "blurb": "A universal remote for shared spatial interaction, built by a DIBIA team for the IEEE VR 2027 3DUI Contest.",
+      "forged": [],
+      "sharpened": [
+        "xr",
+        "hai"
+      ],
+      "source": "VERIFY dates"
     }
   ],
   "receipts": {
@@ -458,7 +509,7 @@
       },
       {
         "entry": "defense",
-        "text": "Dissertation defended, Virginia Tech, June 2026."
+        "text": "Virginia Tech, June 2026."
       }
     ],
     "ml": [
@@ -472,21 +523,21 @@
       },
       {
         "entry": "inplaingaze",
-        "text": "Gaze representation keeps ~85% of task utility, ~10× less re-identification, 206 identities."
+        "text": "Engineered gaze features keep ~85% of task utility with ~10× less re-identification across 206 identities."
       }
     ],
     "xr": [
       {
         "entry": "loupes",
-        "text": "Virtual Loupes: AR for microsurgery, IEEE VRW 2021."
+        "text": "AR aid for microsurgery, IEEE VRW 2021."
       },
       {
         "entry": "clean-ocean",
-        "text": "1st of 17 teams, IEEE VR 2022 3DUI Contest."
+        "text": "IEEE VR 2022 3DUI Contest."
       },
       {
         "entry": "goldilocks",
-        "text": "GoldiLocks Zoning, ACM SUI 2024: gaze-aware notification placement."
+        "text": "ACM SUI 2024: gaze-aware notification placement."
       }
     ],
     "privacy": [
@@ -496,21 +547,21 @@
       },
       {
         "entry": "inplaingaze",
-        "text": "Representation, not abstention, as the privacy lever."
+        "text": "How gaze is represented, not whether it is collected, is the privacy lever."
       },
       {
-        "entry": "arpa",
-        "text": "Privacy on Autopilot: automation moves the privacy burden rather than removing it."
+        "entry": "xrsec",
+        "text": "The privacy–utility design space and the SpatialSENSai architecture, XRSecurity 2026 (ACM MobiCom)."
       }
     ],
     "hai": [
       {
         "entry": "buildar",
-        "text": "BuildAR: intelligent AR in construction, IEEE VRW 2022."
+        "text": "Intelligent AR in construction, IEEE VRW 2022."
       },
       {
         "entry": "iar",
-        "text": "Towards Intelligent AR: a taxonomy of context, an architecture, and an empirical study."
+        "text": "A taxonomy of context, an architecture, and an empirical study."
       },
       {
         "entry": "arpa",

@@ -10,7 +10,7 @@ const ROOT = path.resolve(new URL('..', import.meta.url).pathname);
 const J = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/journey.json'), 'utf8'));
 const PEOPLE = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/people.json'), 'utf8')).people;
 
-const PX_PER_YEAR = 150, CARD_W = 184, EVENT_W = 170, CARD_H = 112, ROW_GAP = 10, LANE_PAD = 14, LABEL_W = 108, GAP = 8;
+const PX_PER_YEAR = 190, CARD_W = 184, EVENT_W = 160, CARD_H = 112, ROW_GAP = 10, LANE_PAD = 14, LABEL_W = 108, GAP = 8;
 const MONTHS = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 const KINDS = [
   { id: 'academic', label: 'Academic' },
@@ -20,7 +20,7 @@ const KINDS = [
 
 const ym = (s) => { const [y, m] = s.split('-').map(Number); return y + ((m || 1) - 1) / 12; };
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-const fmt = (s) => { const [y, m] = s.split('-'); return m ? `${MONTHS[+m - 1]} ${y}` : y; };
+const fmt = (s) => { const [y, m] = s.split('-'); return m ? `${MONTHS[+m - 1]} ${y}` : y; };  // 'YYYY' renders as the year alone
 
 export function renderJourney(now = new Date()) {
   const t0 = ym(J.range.start), t1 = ym(J.range.end);
@@ -99,7 +99,7 @@ export function renderJourney(now = new Date()) {
     return `<div class="rc" data-c="${c.id}"><div class="rc-n">CLAIM ${String(i + 1).padStart(2, '0')}</div>`
       + `<h3>${esc(c.headline)}</h3><p class="rc-l">${esc(c.long)}</p>`
       + `<div class="rc-since">SINCE ${first.start.slice(0, 4)} · FIRST: ${esc((first.type === 'event' ? first.title : (first.short || first.org)).toUpperCase())}</div>`
-      + `<ul>${rows}</ul><label class="rc-trace" for="jc-${c.id}">Trace on the timeline →</label></div>`;
+      + `<ul>${rows}</ul><a class="rc-trace" href="research.html#trace-${c.id}">Trace on the timeline →</a></div>`;
   }).join('');
 
   // ── the list view (no-JS, print, screen readers) ─────────────────────────
@@ -116,23 +116,27 @@ export function renderJourney(now = new Date()) {
   }]));
   const claimLabels = Object.fromEntries(J.claims.map((c) => [c.id, c.label]));
 
-  const html = `
-<div class="jr" id="receipts-and-journey">${inputs}
+  const receipts = `
+<div class="jr jr-rc">
 <section class="jr-sec" id="receipts" aria-labelledby="rc-h">
   <div class="jr-wrap">
-    <div class="jr-prompt">dibia@nnewi:~$ ./receipts --claim "Full-Stack HCI Researcher · ML · AR/VR · Privacy · Human-Centered AI"</div>
     <div class="jr-eyebrow">THE TITLE, ITEMIZED</div>
     <h2 id="rc-h">Every word of the headline, with receipts.</h2>
-    <p class="jr-lede">The title makes six claims. Each card names where the claim was first earned and the work that backs it. Pick “Trace on the timeline” to see where each claim was forged and where it was sharpened.</p>
-    <div class="rc-insight"><b>Read across the cards:</b> the privacy thread starts at Intel in 2016, three years before the PhD, and the stack runs from silicon (RIT, Intel) through hardware perception (Apple) and interaction (Adobe, Virginia Tech) to the people in the studies (up to N=206).</div>
+    <p class="jr-lede">“Full-Stack HCI Researcher · ML · AR/VR · Privacy · Human-Centered AI” makes six claims. Each card shows where the claim was first earned and the work that backs it.</p>
+    <div class="rc-insight"><b>Read across the cards:</b> the privacy work started at Intel in 2016, three years before the PhD. The experience runs from silicon (RIT, Intel) through hardware perception (Apple) and interaction research (Adobe, Virginia Tech) to the people in the studies (up to N=206).</div>
     <div class="rc-grid">${receiptCards}</div>
+    <div class="rc-cv"><a href="assets/Cory_Ilo_CV.pdf" target="_blank" rel="noopener">Download the CV (PDF) →</a><a href="research.html#journey">See the full journey on the Research page →</a></div>
   </div>
 </section>
+</div>`;
+
+  const journey = `
+<div class="jr" id="journey-wrap">${inputs}
 <section class="jr-sec" id="journey" aria-labelledby="jr-h">
   <div class="jr-wrap">
-    <div class="jr-eyebrow">THE JOURNEY · ${J.range.start.slice(0, 4)} → NOW → TRAJECTORY</div>
-    <h2 id="jr-h">Where each skill was forged.</h2>
-    <p class="jr-lede">Drawn to scale. Pick a claim: <span class="lg lg-f">●&nbsp;forged</span> marks first real evidence, <span class="lg">○&nbsp;sharpened</span> marks added evidence. Hatched area is planned work.</p>
+    <div class="jr-eyebrow">JOURNEY · ${J.range.start.slice(0, 4)} → NOW → PLANNED</div>
+    <h2 id="jr-h">Where each skill came from, and what's next.</h2>
+    <p class="jr-lede">Drawn to scale. Pick a claim: <span class="lg lg-f">●&nbsp;first evidence</span>, <span class="lg">○&nbsp;added evidence</span>. The hatched area is planned work.</p>
     <div class="jr-bar">
       <div class="jr-row"><span class="jr-k">LANES</span>${kindChips}</div>
       <div class="jr-row"><span class="jr-k">CLAIM</span>${claimChips}</div>
@@ -160,7 +164,7 @@ export function renderJourney(now = new Date()) {
 </div>`;
 
   fs.writeFileSync(path.join(ROOT, 'assets/journey.css'), css(J.claims.map((c) => c.id)));
-  return html;
+  return { receipts, journey };
 }
 
 function css(ids) {
@@ -168,8 +172,8 @@ function css(ids) {
     `.jr:has(#jc-${c}:checked) .it:not([data-s~="${c}"]){opacity:.16;filter:saturate(.3)}`,
     `.jr:has(#jc-${c}:checked) .it[data-s~="${c}"]{border-color:var(--j-violet-hi);opacity:1}`,
     `.jr:has(#jc-${c}:checked) .it[data-f~="${c}"]{border-color:var(--j-gold);box-shadow:0 0 0 1px var(--j-gold),0 0 28px oklch(80% 0.16 85/0.25)}`,
-    `.jr:has(#jc-${c}:checked) .it[data-f~="${c}"]::after{content:"● FORGED"}`,
-    `.jr:has(#jc-${c}:checked) .it[data-s~="${c}"]:not([data-f~="${c}"])::after{content:"○ SHARPENED";color:var(--j-violet-text)}`,
+    `.jr:has(#jc-${c}:checked) .it[data-f~="${c}"]::after{content:"● FIRST"}`,
+    `.jr:has(#jc-${c}:checked) .it[data-s~="${c}"]:not([data-f~="${c}"])::after{content:"○ ADDED";color:var(--j-violet-text)}`,
     `.jr:has(#jc-${c}:checked) .jt[data-c="${c}"]{background:oklch(58% 0.26 300/0.3);color:var(--j-strong)}`,
     `.jr:has(#jc-${c}:checked) label[for="jc-${c}"].chip{background:oklch(58% 0.26 300/0.18);border-color:oklch(67% 0.22 300/0.6);color:var(--j-violet-text)}`,
     `.jr:has(#jc-${c}:checked) .rc[data-c="${c}"]{border-color:var(--j-gold)}`
@@ -199,6 +203,9 @@ function css(ids) {
 .rc-y{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--j-violet-text);padding-top:2px}
 .rc-trace{margin-top:auto;padding-top:8px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--j-violet-text);cursor:pointer}
 .rc-trace:hover{color:var(--j-gold)}
+.rc-cv{margin-top:28px;display:flex;gap:28px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em}
+.jr-rc .jr-sec{padding-top:clamp(40px,6vw,64px)}
+#journey{border-top:1px solid var(--j-line)}
 .jr a{color:var(--j-violet-text);text-decoration:none}.jr a:hover{color:var(--j-gold)}
 .jr-bar{margin-top:24px;display:flex;flex-direction:column;gap:10px}
 .jr-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
@@ -224,7 +231,7 @@ ${['academic', 'industry', 'guild'].map((k) => `.jr:has(#jk-${k}:checked) label[
 .jr-grid{position:absolute;top:0;bottom:0;width:1px;background:var(--j-line)}
 .jr-future{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,oklch(80% 0.16 85/0.05) 0 6px,transparent 6px 14px)}
 .jr-now{position:absolute;top:-34px;bottom:0;width:0;border-left:1px dashed var(--j-gold);z-index:1;pointer-events:none}
-.jr-now span{position:absolute;top:8px;left:6px;font-family:'Space Mono',monospace;font-weight:700;font-size:10.5px;letter-spacing:.16em;color:var(--j-gold);background:var(--j-sunken);padding:0 4px}
+.jr-now span{position:absolute;top:8px;right:6px;font-family:'Space Mono',monospace;font-weight:700;font-size:10.5px;letter-spacing:.16em;color:var(--j-gold);background:var(--j-sunken);padding:0 4px}
 .lane{position:relative;border-bottom:1px solid var(--j-line)}
 .lane-l{position:sticky;left:0;float:left;height:100%;display:flex;align-items:flex-start;padding-top:18px;padding-left:clamp(12px,3vw,24px);font-family:'Space Mono',monospace;font-weight:700;font-size:10.5px;letter-spacing:.18em;color:var(--j-faint);background:linear-gradient(90deg,var(--j-sunken) 72%,transparent);z-index:4}
 .lane[data-k=academic] .lane-l{color:var(--k-academic)}.lane[data-k=industry] .lane-l{color:var(--k-industry)}.lane[data-k=guild] .lane-l{color:var(--k-guild)}

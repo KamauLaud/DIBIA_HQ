@@ -153,7 +153,7 @@ export function renderNextLine() {
 export function renderContactPills() {
   const pill = (href, label, ext = false) => `<a href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''} style="display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:999px;border:1px solid oklch(100% 0 0/0.16);${MONO};font-weight:700;font-size:10.5px;letter-spacing:0.16em;color:${C.body}" style-hover="border-color:oklch(72% 0.17 163/0.6);color:${C.text}">${label}</a>`;
   const L = site.links;
-  const out = [pill('cv.html', 'CV'), pill(`mailto:${site.email}`, 'EMAIL'), pill(L.scholar, 'SCHOLAR', true), pill(L.github, 'GITHUB', true), pill(L.linkedin, 'LINKEDIN', true)];
+  const out = [pill('assets/Cory_Ilo_CV.pdf', 'CV'), pill(`mailto:${site.email}`, 'EMAIL'), pill(L.scholar, 'SCHOLAR', true), pill(L.github, 'GITHUB', true), pill(L.linkedin, 'LINKEDIN', true)];
   if (L.orcid) out.push(pill(L.orcid, 'ORCID', true));
   return out.join('\n      ');
 }
@@ -180,7 +180,7 @@ export function renderBib(p) {
 }
 
 // ---------- fill templates ----------
-const PAGES = ['index', 'research', 'cv', 'org', 'marketplace', 'contact', 'paper-arpa', 'paper-goldilocks', 'paper-inplaingaze'];
+const PAGES = ['index', 'research', 'org', 'marketplace', 'contact', 'paper-arpa', 'paper-goldilocks', 'paper-inplaingaze'];
 export function renderAll() {
   fs.mkdirSync(path.join(ROOT, '.tmp'), { recursive: true });
   fs.rmSync(path.join(ROOT, 'assets/bib'), { recursive: true, force: true });   // build-owned: drop bibs for renamed/hidden ids

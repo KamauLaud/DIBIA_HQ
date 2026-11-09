@@ -9,9 +9,9 @@ import http from 'node:http';
 import { chromium } from 'playwright';
 
 const ROOT = path.resolve(new URL('..', import.meta.url).pathname);
-const PAGES = ['index', 'research', 'cv', 'org', 'marketplace', 'contact', 'paper-arpa', 'paper-goldilocks', 'paper-inplaingaze', 'dossier'];
+const PAGES = ['index', 'research', 'org', 'marketplace', 'contact', 'paper-arpa', 'paper-goldilocks', 'paper-inplaingaze', 'dossier'];
 // static pages carry their own progressive JS and plain-CSS hover rules (no generated hover sheet)
-const STATIC = { dossier: ['dossier/members.js'] };
+const STATIC = { dossier: ['dossier/members.js'], cv: [] };
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.mp4': 'video/mp4', '.ttf': 'font/ttf', '.woff2': 'font/woff2', '.pdf': 'application/pdf', '.bib': 'text/plain', '.json': 'application/json' };
 const srv = http.createServer((req, r) => {
   const rel = decodeURIComponent(req.url.split('?')[0].split('#')[0]);

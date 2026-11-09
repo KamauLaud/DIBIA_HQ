@@ -23,6 +23,9 @@
 .rc-y{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.06em;color:var(--j-violet-text);padding-top:2px}
 .rc-trace{margin-top:auto;padding-top:8px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--j-violet-text);cursor:pointer}
 .rc-trace:hover{color:var(--j-gold)}
+.rc-cv{margin-top:28px;display:flex;gap:28px;flex-wrap:wrap;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em}
+.jr-rc .jr-sec{padding-top:clamp(40px,6vw,64px)}
+#journey{border-top:1px solid var(--j-line)}
 .jr a{color:var(--j-violet-text);text-decoration:none}.jr a:hover{color:var(--j-gold)}
 .jr-bar{margin-top:24px;display:flex;flex-direction:column;gap:10px}
 .jr-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
@@ -56,7 +59,7 @@
 .jr-grid{position:absolute;top:0;bottom:0;width:1px;background:var(--j-line)}
 .jr-future{position:absolute;top:0;bottom:0;background:repeating-linear-gradient(135deg,oklch(80% 0.16 85/0.05) 0 6px,transparent 6px 14px)}
 .jr-now{position:absolute;top:-34px;bottom:0;width:0;border-left:1px dashed var(--j-gold);z-index:1;pointer-events:none}
-.jr-now span{position:absolute;top:8px;left:6px;font-family:'Space Mono',monospace;font-weight:700;font-size:10.5px;letter-spacing:.16em;color:var(--j-gold);background:var(--j-sunken);padding:0 4px}
+.jr-now span{position:absolute;top:8px;right:6px;font-family:'Space Mono',monospace;font-weight:700;font-size:10.5px;letter-spacing:.16em;color:var(--j-gold);background:var(--j-sunken);padding:0 4px}
 .lane{position:relative;border-bottom:1px solid var(--j-line)}
 .lane-l{position:sticky;left:0;float:left;height:100%;display:flex;align-items:flex-start;padding-top:18px;padding-left:clamp(12px,3vw,24px);font-family:'Space Mono',monospace;font-weight:700;font-size:10.5px;letter-spacing:.18em;color:var(--j-faint);background:linear-gradient(90deg,var(--j-sunken) 72%,transparent);z-index:4}
 .lane[data-k=academic] .lane-l{color:var(--k-academic)}.lane[data-k=industry] .lane-l{color:var(--k-industry)}.lane[data-k=guild] .lane-l{color:var(--k-guild)}
@@ -93,64 +96,64 @@
 .jr:has(#jc-fullstack:checked) .it:not([data-s~="fullstack"]){opacity:.16;filter:saturate(.3)}
 .jr:has(#jc-fullstack:checked) .it[data-s~="fullstack"]{border-color:var(--j-violet-hi);opacity:1}
 .jr:has(#jc-fullstack:checked) .it[data-f~="fullstack"]{border-color:var(--j-gold);box-shadow:0 0 0 1px var(--j-gold),0 0 28px oklch(80% 0.16 85/0.25)}
-.jr:has(#jc-fullstack:checked) .it[data-f~="fullstack"]::after{content:"● FORGED"}
-.jr:has(#jc-fullstack:checked) .it[data-s~="fullstack"]:not([data-f~="fullstack"])::after{content:"○ SHARPENED";color:var(--j-violet-text)}
+.jr:has(#jc-fullstack:checked) .it[data-f~="fullstack"]::after{content:"● FIRST"}
+.jr:has(#jc-fullstack:checked) .it[data-s~="fullstack"]:not([data-f~="fullstack"])::after{content:"○ ADDED";color:var(--j-violet-text)}
 .jr:has(#jc-fullstack:checked) .jt[data-c="fullstack"]{background:oklch(58% 0.26 300/0.3);color:var(--j-strong)}
 .jr:has(#jc-fullstack:checked) label[for="jc-fullstack"].chip{background:oklch(58% 0.26 300/0.18);border-color:oklch(67% 0.22 300/0.6);color:var(--j-violet-text)}
 .jr:has(#jc-fullstack:checked) .rc[data-c="fullstack"]{border-color:var(--j-gold)}
 .jr:has(#jc-methods:checked) .it:not([data-s~="methods"]){opacity:.16;filter:saturate(.3)}
 .jr:has(#jc-methods:checked) .it[data-s~="methods"]{border-color:var(--j-violet-hi);opacity:1}
 .jr:has(#jc-methods:checked) .it[data-f~="methods"]{border-color:var(--j-gold);box-shadow:0 0 0 1px var(--j-gold),0 0 28px oklch(80% 0.16 85/0.25)}
-.jr:has(#jc-methods:checked) .it[data-f~="methods"]::after{content:"● FORGED"}
-.jr:has(#jc-methods:checked) .it[data-s~="methods"]:not([data-f~="methods"])::after{content:"○ SHARPENED";color:var(--j-violet-text)}
+.jr:has(#jc-methods:checked) .it[data-f~="methods"]::after{content:"● FIRST"}
+.jr:has(#jc-methods:checked) .it[data-s~="methods"]:not([data-f~="methods"])::after{content:"○ ADDED";color:var(--j-violet-text)}
 .jr:has(#jc-methods:checked) .jt[data-c="methods"]{background:oklch(58% 0.26 300/0.3);color:var(--j-strong)}
 .jr:has(#jc-methods:checked) label[for="jc-methods"].chip{background:oklch(58% 0.26 300/0.18);border-color:oklch(67% 0.22 300/0.6);color:var(--j-violet-text)}
 .jr:has(#jc-methods:checked) .rc[data-c="methods"]{border-color:var(--j-gold)}
 .jr:has(#jc-ml:checked) .it:not([data-s~="ml"]){opacity:.16;filter:saturate(.3)}
 .jr:has(#jc-ml:checked) .it[data-s~="ml"]{border-color:var(--j-violet-hi);opacity:1}
 .jr:has(#jc-ml:checked) .it[data-f~="ml"]{border-color:var(--j-gold);box-shadow:0 0 0 1px var(--j-gold),0 0 28px oklch(80% 0.16 85/0.25)}
-.jr:has(#jc-ml:checked) .it[data-f~="ml"]::after{content:"● FORGED"}
-.jr:has(#jc-ml:checked) .it[data-s~="ml"]:not([data-f~="ml"])::after{content:"○ SHARPENED";color:var(--j-violet-text)}
+.jr:has(#jc-ml:checked) .it[data-f~="ml"]::after{content:"● FIRST"}
+.jr:has(#jc-ml:checked) .it[data-s~="ml"]:not([data-f~="ml"])::after{content:"○ ADDED";color:var(--j-violet-text)}
 .jr:has(#jc-ml:checked) .jt[data-c="ml"]{background:oklch(58% 0.26 300/0.3);color:var(--j-strong)}
 .jr:has(#jc-ml:checked) label[for="jc-ml"].chip{background:oklch(58% 0.26 300/0.18);border-color:oklch(67% 0.22 300/0.6);color:var(--j-violet-text)}
 .jr:has(#jc-ml:checked) .rc[data-c="ml"]{border-color:var(--j-gold)}
 .jr:has(#jc-xr:checked) .it:not([data-s~="xr"]){opacity:.16;filter:saturate(.3)}
 .jr:has(#jc-xr:checked) .it[data-s~="xr"]{border-color:var(--j-violet-hi);opacity:1}
 .jr:has(#jc-xr:checked) .it[data-f~="xr"]{border-color:var(--j-gold);box-shadow:0 0 0 1px var(--j-gold),0 0 28px oklch(80% 0.16 85/0.25)}
-.jr:has(#jc-xr:checked) .it[data-f~="xr"]::after{content:"● FORGED"}
-.jr:has(#jc-xr:checked) .it[data-s~="xr"]:not([data-f~="xr"])::after{content:"○ SHARPENED";color:var(--j-violet-text)}
+.jr:has(#jc-xr:checked) .it[data-f~="xr"]::after{content:"● FIRST"}
+.jr:has(#jc-xr:checked) .it[data-s~="xr"]:not([data-f~="xr"])::after{content:"○ ADDED";color:var(--j-violet-text)}
 .jr:has(#jc-xr:checked) .jt[data-c="xr"]{background:oklch(58% 0.26 300/0.3);color:var(--j-strong)}
 .jr:has(#jc-xr:checked) label[for="jc-xr"].chip{background:oklch(58% 0.26 300/0.18);border-color:oklch(67% 0.22 300/0.6);color:var(--j-violet-text)}
 .jr:has(#jc-xr:checked) .rc[data-c="xr"]{border-color:var(--j-gold)}
 .jr:has(#jc-privacy:checked) .it:not([data-s~="privacy"]){opacity:.16;filter:saturate(.3)}
 .jr:has(#jc-privacy:checked) .it[data-s~="privacy"]{border-color:var(--j-violet-hi);opacity:1}
 .jr:has(#jc-privacy:checked) .it[data-f~="privacy"]{border-color:var(--j-gold);box-shadow:0 0 0 1px var(--j-gold),0 0 28px oklch(80% 0.16 85/0.25)}
-.jr:has(#jc-privacy:checked) .it[data-f~="privacy"]::after{content:"● FORGED"}
-.jr:has(#jc-privacy:checked) .it[data-s~="privacy"]:not([data-f~="privacy"])::after{content:"○ SHARPENED";color:var(--j-violet-text)}
+.jr:has(#jc-privacy:checked) .it[data-f~="privacy"]::after{content:"● FIRST"}
+.jr:has(#jc-privacy:checked) .it[data-s~="privacy"]:not([data-f~="privacy"])::after{content:"○ ADDED";color:var(--j-violet-text)}
 .jr:has(#jc-privacy:checked) .jt[data-c="privacy"]{background:oklch(58% 0.26 300/0.3);color:var(--j-strong)}
 .jr:has(#jc-privacy:checked) label[for="jc-privacy"].chip{background:oklch(58% 0.26 300/0.18);border-color:oklch(67% 0.22 300/0.6);color:var(--j-violet-text)}
 .jr:has(#jc-privacy:checked) .rc[data-c="privacy"]{border-color:var(--j-gold)}
 .jr:has(#jc-hai:checked) .it:not([data-s~="hai"]){opacity:.16;filter:saturate(.3)}
 .jr:has(#jc-hai:checked) .it[data-s~="hai"]{border-color:var(--j-violet-hi);opacity:1}
 .jr:has(#jc-hai:checked) .it[data-f~="hai"]{border-color:var(--j-gold);box-shadow:0 0 0 1px var(--j-gold),0 0 28px oklch(80% 0.16 85/0.25)}
-.jr:has(#jc-hai:checked) .it[data-f~="hai"]::after{content:"● FORGED"}
-.jr:has(#jc-hai:checked) .it[data-s~="hai"]:not([data-f~="hai"])::after{content:"○ SHARPENED";color:var(--j-violet-text)}
+.jr:has(#jc-hai:checked) .it[data-f~="hai"]::after{content:"● FIRST"}
+.jr:has(#jc-hai:checked) .it[data-s~="hai"]:not([data-f~="hai"])::after{content:"○ ADDED";color:var(--j-violet-text)}
 .jr:has(#jc-hai:checked) .jt[data-c="hai"]{background:oklch(58% 0.26 300/0.3);color:var(--j-strong)}
 .jr:has(#jc-hai:checked) label[for="jc-hai"].chip{background:oklch(58% 0.26 300/0.18);border-color:oklch(67% 0.22 300/0.6);color:var(--j-violet-text)}
 .jr:has(#jc-hai:checked) .rc[data-c="hai"]{border-color:var(--j-gold)}
 .jr:has(#jc-teach:checked) .it:not([data-s~="teach"]){opacity:.16;filter:saturate(.3)}
 .jr:has(#jc-teach:checked) .it[data-s~="teach"]{border-color:var(--j-violet-hi);opacity:1}
 .jr:has(#jc-teach:checked) .it[data-f~="teach"]{border-color:var(--j-gold);box-shadow:0 0 0 1px var(--j-gold),0 0 28px oklch(80% 0.16 85/0.25)}
-.jr:has(#jc-teach:checked) .it[data-f~="teach"]::after{content:"● FORGED"}
-.jr:has(#jc-teach:checked) .it[data-s~="teach"]:not([data-f~="teach"])::after{content:"○ SHARPENED";color:var(--j-violet-text)}
+.jr:has(#jc-teach:checked) .it[data-f~="teach"]::after{content:"● FIRST"}
+.jr:has(#jc-teach:checked) .it[data-s~="teach"]:not([data-f~="teach"])::after{content:"○ ADDED";color:var(--j-violet-text)}
 .jr:has(#jc-teach:checked) .jt[data-c="teach"]{background:oklch(58% 0.26 300/0.3);color:var(--j-strong)}
 .jr:has(#jc-teach:checked) label[for="jc-teach"].chip{background:oklch(58% 0.26 300/0.18);border-color:oklch(67% 0.22 300/0.6);color:var(--j-violet-text)}
 .jr:has(#jc-teach:checked) .rc[data-c="teach"]{border-color:var(--j-gold)}
 .jr:has(#jc-ops:checked) .it:not([data-s~="ops"]){opacity:.16;filter:saturate(.3)}
 .jr:has(#jc-ops:checked) .it[data-s~="ops"]{border-color:var(--j-violet-hi);opacity:1}
 .jr:has(#jc-ops:checked) .it[data-f~="ops"]{border-color:var(--j-gold);box-shadow:0 0 0 1px var(--j-gold),0 0 28px oklch(80% 0.16 85/0.25)}
-.jr:has(#jc-ops:checked) .it[data-f~="ops"]::after{content:"● FORGED"}
-.jr:has(#jc-ops:checked) .it[data-s~="ops"]:not([data-f~="ops"])::after{content:"○ SHARPENED";color:var(--j-violet-text)}
+.jr:has(#jc-ops:checked) .it[data-f~="ops"]::after{content:"● FIRST"}
+.jr:has(#jc-ops:checked) .it[data-s~="ops"]:not([data-f~="ops"])::after{content:"○ ADDED";color:var(--j-violet-text)}
 .jr:has(#jc-ops:checked) .jt[data-c="ops"]{background:oklch(58% 0.26 300/0.3);color:var(--j-strong)}
 .jr:has(#jc-ops:checked) label[for="jc-ops"].chip{background:oklch(58% 0.26 300/0.18);border-color:oklch(67% 0.22 300/0.6);color:var(--j-violet-text)}
 .jr:has(#jc-ops:checked) .rc[data-c="ops"]{border-color:var(--j-gold)}

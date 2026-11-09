@@ -46,7 +46,7 @@
 
   /* Journey (cv.html): everything here is an extra. The CSS :has() rules already highlight a
      traced claim with JS off; this adds the thread line, the detail panel, prev/next, and opens at NOW. */
-  var jr = document.querySelector('.jr');
+  var jr = document.getElementById('journey-wrap');
   if (jr) {
     var scroller = jr.querySelector('.jr-scroll'), body = jr.querySelector('.jr-body'), svg = jr.querySelector('.jr-thread');
     var panel = jr.querySelector('.jr-detail'), nav = jr.querySelector('.jr-nav'), now = jr.querySelector('.jr-now');
@@ -61,7 +61,7 @@
         scroller.scrollBy({ left: Number(b.getAttribute('data-jr-step')) * scroller.clientWidth * 0.7, behavior: behavior });
       });
     }
-    if (!location.hash || location.hash === '#journey') toNow('auto');
+    if (!/^#trace-/.test(location.hash)) toNow('auto');
 
     var claim = function () { var r = jr.querySelector('input[name="jr-claim"]:checked'); return r && r.id !== 'jc-none' ? r.id.slice(3) : null; };
     var NS = 'http://www.w3.org/2000/svg';
@@ -92,8 +92,8 @@
       panel.querySelector('.o').textContent = d.o + (d.w && d.w.length ? ' · with ' + d.w.join(', ') : '');
       panel.querySelector('.b').textContent = d.b;
       var tags = [];
-      if (d.f.length) tags.push('● FORGED: ' + d.f.join(', '));
-      if (d.s.length) tags.push('○ SHARPENED: ' + d.s.join(', '));
+      if (d.f.length) tags.push('● FIRST EVIDENCE: ' + d.f.join(', '));
+      if (d.s.length) tags.push('○ ADDED EVIDENCE: ' + d.s.join(', '));
       if (tags.length) { var t = document.createElement('div'); t.className = 'dt'; t.textContent = tags.join('   '); panel.appendChild(t); }
       if (d.l) { var a = document.createElement('a'); a.href = d.l; a.textContent = 'Open →'; a.className = 'dt'; panel.appendChild(a); }
       panel.hidden = false;
@@ -114,6 +114,23 @@
     });
     window.addEventListener('resize', draw);
     draw();
+    // research.html#trace-<claim>: arriving from a receipt card on the home page
+    var m = /^#trace-([\w-]+)$/.exec(location.hash);
+    var r = m && document.getElementById('jc-' + m[1]);
+    if (r) { r.checked = true; fromReceipt = true; jr.dispatchEvent(new Event('change', { bubbles: true })); }
+  }
+
+
+  /* Marketplace service search (marketplace.html): the full list is static; this only filters it. */
+  var svq = document.querySelector('[data-svc-search]');
+  if (svq) {
+    var svItems = Array.prototype.slice.call(document.querySelectorAll('.sv')), svEmpty = document.querySelector('.sv-empty'), svCount = document.querySelector('.sv-count'), svTotal = svCount ? svCount.textContent : '';
+    svq.addEventListener('input', function () {
+      var q = svq.value.trim().toLowerCase(), shown = 0;
+      svItems.forEach(function (li) { var ok = !q || li.getAttribute('data-search').indexOf(q) > -1; li.hidden = !ok; if (ok) shown++; });
+      if (svEmpty) svEmpty.hidden = shown > 0;
+      if (svCount) svCount.textContent = q ? shown + ' OF ' + svItems.length + ' SERVICES' : svTotal;
+    });
   }
 
   /* Footer year, in case a page is served for years without a rebuild. */
