@@ -1,0 +1,80 @@
+name: Dossier profile
+description: Get listed in the DIBIA Dossier (for village members)
+title: "[Dossier] "
+labels: ["dossier"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill this in and a maintainer will add your card to `dossier/members.js`. Keep every claim verifiable. Do **not** include personal phone numbers or addresses.
+  - type: input
+    id: name
+    attributes:
+      label: Display name
+    validations:
+      required: true
+  - type: input
+    id: alias
+    attributes:
+      label: Alias / call-sign (optional)
+  - type: dropdown
+    id: rank
+    attributes:
+      label: Rank (confirmed by a Jonin or Kage before publishing)
+      options: [Genin, Chunin, Jonin, Special, Anbu, Kage]
+    validations:
+      required: true
+  - type: dropdown
+    id: track
+    attributes:
+      label: Track
+      options: [Industry, Academic, Both]
+    validations:
+      required: true
+  - type: input
+    id: cell
+    attributes:
+      label: Specialty cell
+      placeholder: e.g. Applied AI & Automation
+    validations:
+      required: true
+  - type: input
+    id: headline
+    attributes:
+      label: Headline (one line, outcome first)
+    validations:
+      required: true
+  - type: checkboxes
+    id: jobs
+    attributes:
+      label: Jobs you take
+      options:
+        - label: JOB_01 · Prototype the demo your pitch needs
+        - label: JOB_02 · Integrate an LLM into your workflow
+        - label: JOB_03 · Stand up the data pipeline & dashboard
+        - label: JOB_04 · Audit your app's privacy posture
+        - label: JOB_05 · Automate the annoying thing
+        - label: JOB_06 · Run the user study, get real evidence
+  - type: input
+    id: skills
+    attributes:
+      label: Skills (comma-separated, 3-8)
+    validations:
+      required: true
+  - type: textarea
+    id: proof
+    attributes:
+      label: Proof (2-4 verifiable receipts, one per line)
+    validations:
+      required: true
+  - type: input
+    id: pedigree
+    attributes:
+      label: Orgs / institutions (comma-separated, optional)
+  - type: textarea
+    id: links
+    attributes:
+      label: Links (portfolio, CV, LinkedIn, GitHub, Scholar; full https URLs)
+  - type: markdown
+    attributes:
+      value: Attach a photo (square-ish, 600px+, under 400 KB) by dragging it into a comment below. Optional.
