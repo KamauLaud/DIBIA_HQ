@@ -43,6 +43,96 @@
     vids.forEach(function (v) { vio.observe(v); });
   }
 
+
+  /* Journey (cv.html): everything here is an extra. The CSS :has() rules already highlight a
+     traced claim with JS off; this adds the thread line, the detail panel, prev/next, and opens at NOW. */
+  var jr = document.getElementById('journey-wrap');
+  if (jr) {
+    var scroller = jr.querySelector('.jr-scroll'), body = jr.querySelector('.jr-body'), svg = jr.querySelector('.jr-thread');
+    var panel = jr.querySelector('.jr-detail'), nav = jr.querySelector('.jr-nav'), now = jr.querySelector('.jr-now');
+    var data = {}; try { data = JSON.parse(document.getElementById('journey-data').textContent); } catch (e) {}
+    var behavior = reduced ? 'auto' : 'smooth';
+    var toNow = function (b) { if (now) scroller.scrollTo({ left: Math.max(0, now.offsetLeft - scroller.clientWidth * (scroller.clientWidth < 640 ? 0.45 : 0.62)), behavior: b || behavior }); };
+    if (nav) {
+      nav.hidden = false;
+      nav.addEventListener('click', function (e) {
+        var b = e.target.closest('button'); if (!b) return;
+        if (b.hasAttribute('data-jr-now')) return toNow();
+        scroller.scrollBy({ left: Number(b.getAttribute('data-jr-step')) * scroller.clientWidth * 0.7, behavior: behavior });
+      });
+    }
+    if (!/^#trace-/.test(location.hash)) toNow('auto');
+
+    var claim = function () { var r = jr.querySelector('input[name="jr-claim"]:checked'); return r && r.id !== 'jc-none' ? r.id.slice(3) : null; };
+    var NS = 'http://www.w3.org/2000/svg';
+    var draw = function () {
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var c = claim(); if (!c) return [];
+      var pts = Array.prototype.slice.call(body.querySelectorAll('.it[data-s~="' + c + '"]'))
+        .filter(function (el) { return el.offsetParent !== null; })
+        .map(function (el) {
+          var lane = el.parentElement;
+          return { el: el, x: Number(el.getAttribute('data-x')) + 6, y: lane.offsetTop + el.offsetTop + el.offsetHeight / 2 };
+        })
+        .sort(function (a, b) { return a.x - b.x; });
+      if (pts.length > 1) {
+        var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + p.x + ' ' + p.y; }).join(' ');
+        var path = document.createElementNS(NS, 'path'); path.setAttribute('d', d); svg.appendChild(path);
+      }
+      pts.forEach(function (p) { var ci = document.createElementNS(NS, 'circle'); ci.setAttribute('cx', p.x); ci.setAttribute('cy', p.y); ci.setAttribute('r', 3.5); svg.appendChild(ci); });
+      return pts;
+    };
+    var show = function (el) {
+      var d = data.detail && data.detail[el.id.slice(2)]; if (!d || !panel) return;
+      jr.querySelectorAll('.it.is-open').forEach(function (x) { x.classList.remove('is-open'); });
+      el.classList.add('is-open');
+      var h = '<div class="dd">' + d.d + '</div><h4></h4><p class="o"></p><p class="b"></p>';
+      panel.innerHTML = h;
+      panel.querySelector('h4').textContent = d.t;
+      panel.querySelector('.o').textContent = d.o + (d.w && d.w.length ? ' · with ' + d.w.join(', ') : '');
+      panel.querySelector('.b').textContent = d.b;
+      var tags = [];
+      if (d.f.length) tags.push('● FIRST EVIDENCE: ' + d.f.join(', '));
+      if (d.s.length) tags.push('○ ADDED EVIDENCE: ' + d.s.join(', '));
+      if (tags.length) { var t = document.createElement('div'); t.className = 'dt'; t.textContent = tags.join('   '); panel.appendChild(t); }
+      if (d.l) { var a = document.createElement('a'); a.href = d.l; a.textContent = 'Open →'; a.className = 'dt'; panel.appendChild(a); }
+      panel.hidden = false;
+    };
+    body.addEventListener('click', function (e) { var el = e.target.closest('.it'); if (el) show(el); });
+    body.addEventListener('keydown', function (e) { var el = e.target.closest('.it'); if (el && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); show(el); } });
+
+    var fromReceipt = false;
+    jr.querySelectorAll('.rc-trace').forEach(function (l) { l.addEventListener('click', function () { fromReceipt = true; }); });
+    jr.addEventListener('change', function () {
+      var pts = draw();
+      if (fromReceipt) {
+        fromReceipt = false;
+        document.getElementById('journey').scrollIntoView({ behavior: behavior, block: 'start' });
+        var f = pts.filter(function (p) { return p.el.matches('[data-f~="' + claim() + '"]'); })[0] || pts[0];
+        if (f) { scroller.scrollTo({ left: Math.max(0, f.x - 60), behavior: behavior }); show(f.el); }
+      }
+    });
+    window.addEventListener('resize', draw);
+    draw();
+    // research.html#trace-<claim>: arriving from a receipt card on the home page
+    var m = /^#trace-([\w-]+)$/.exec(location.hash);
+    var r = m && document.getElementById('jc-' + m[1]);
+    if (r) { r.checked = true; fromReceipt = true; jr.dispatchEvent(new Event('change', { bubbles: true })); }
+  }
+
+
+  /* Marketplace service search (marketplace.html): the full list is static; this only filters it. */
+  var svq = document.querySelector('[data-svc-search]');
+  if (svq) {
+    var svItems = Array.prototype.slice.call(document.querySelectorAll('.sv')), svEmpty = document.querySelector('.sv-empty'), svCount = document.querySelector('.sv-count'), svTotal = svCount ? svCount.textContent : '';
+    svq.addEventListener('input', function () {
+      var q = svq.value.trim().toLowerCase(), shown = 0;
+      svItems.forEach(function (li) { var ok = !q || li.getAttribute('data-search').indexOf(q) > -1; li.hidden = !ok; if (ok) shown++; });
+      if (svEmpty) svEmpty.hidden = shown > 0;
+      if (svCount) svCount.textContent = q ? shown + ' OF ' + svItems.length + ' SERVICES' : svTotal;
+    });
+  }
+
   /* Footer year, in case a page is served for years without a rebuild. */
   var y = String(new Date().getFullYear());
   document.querySelectorAll('footer span').forEach(function (s) {

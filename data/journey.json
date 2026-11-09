@@ -1,0 +1,572 @@
+{
+  "_schema": {
+    "kind": "academic | industry | guild — the lane",
+    "type": "span (start→end) | event (one date)",
+    "start/end": "YYYY-MM; end null = present",
+    "forged": "headline claims this entry is the first real evidence for",
+    "sharpened": "claims it adds evidence to",
+    "planned": "true = trajectory (after now), drawn hatched",
+    "with": "people.json ids — who it was forged with (credit is distributed)",
+    "source": "where the date came from; reconcile with LinkedIn",
+    "short": "optional short org name used on receipt cards"
+  },
+  "range": {
+    "start": "2010-01",
+    "end": "2028-06"
+  },
+  "claims": [
+    {
+      "id": "fullstack",
+      "label": "Full-stack",
+      "headline": "Full-stack",
+      "long": "From use case down to hardware specification",
+      "receipt": true
+    },
+    {
+      "id": "methods",
+      "label": "HCI research",
+      "headline": "HCI Researcher",
+      "long": "Instrumented user studies and the statistics behind them",
+      "receipt": true
+    },
+    {
+      "id": "ml",
+      "label": "ML",
+      "headline": "ML",
+      "long": "Machine learning, computer vision, gaze inference",
+      "receipt": true
+    },
+    {
+      "id": "xr",
+      "label": "AR/VR",
+      "headline": "AR/VR",
+      "long": "Building and evaluating AR/VR interaction",
+      "receipt": true
+    },
+    {
+      "id": "privacy",
+      "label": "Privacy",
+      "headline": "Privacy",
+      "long": "Privacy engineered into the signal",
+      "receipt": true
+    },
+    {
+      "id": "hai",
+      "label": "Human-centered AI",
+      "headline": "Human-Centered AI",
+      "long": "Autonomy, trust, and intelligent assistants",
+      "receipt": true
+    },
+    {
+      "id": "teach",
+      "label": "Teaching",
+      "long": "Teaching and mentoring",
+      "receipt": false
+    },
+    {
+      "id": "ops",
+      "label": "Founding",
+      "long": "Founding and running the guild",
+      "receipt": false
+    }
+  ],
+  "entries": [
+    {
+      "id": "rit",
+      "kind": "academic",
+      "type": "span",
+      "start": "2010-09",
+      "end": "2016-05",
+      "title": "B.S. & M.S., Computer Engineering",
+      "org": "Rochester Institute of Technology",
+      "blurb": "Magna cum laude. M.S. on gaze estimation and computer vision.",
+      "forged": [
+        "fullstack",
+        "ml"
+      ],
+      "sharpened": [],
+      "with": [
+        "savakis"
+      ],
+      "source": "CV",
+      "short": "RIT"
+    },
+    {
+      "id": "rit-ta",
+      "kind": "academic",
+      "type": "span",
+      "start": "2012-09",
+      "end": "2014-05",
+      "title": "Teaching Assistant",
+      "org": "RIT",
+      "blurb": "Digital Systems, Assembly Language, Intro to Computer Engineering; mentored underclassmen.",
+      "forged": [
+        "teach"
+      ],
+      "sharpened": [],
+      "source": "CV",
+      "short": "RIT"
+    },
+    {
+      "id": "gem-ms",
+      "kind": "academic",
+      "type": "event",
+      "start": "2013-09",
+      "title": "GEM M.S. Fellowship",
+      "org": "National GEM Consortium",
+      "blurb": "M.S. fellowship, 2013–2016.",
+      "forged": [],
+      "sharpened": [],
+      "source": "CV (month assumed)"
+    },
+    {
+      "id": "intel",
+      "kind": "industry",
+      "type": "span",
+      "start": "2016-09",
+      "end": "2019-08",
+      "title": "SoC Design Engineer & CV Applied Research Scientist",
+      "org": "Intel",
+      "blurb": "Pre-silicon validation for GPU IPs. Built a real-time ML pipeline that found sensitive information in data streams and stripped privacy identifiers, which led to several patent initiatives. Trained 30+ senior engineers on the validation pipeline.",
+      "forged": [
+        "privacy"
+      ],
+      "sharpened": [
+        "fullstack",
+        "ml",
+        "teach"
+      ],
+      "source": "CV",
+      "short": "Intel"
+    },
+    {
+      "id": "strata",
+      "kind": "industry",
+      "type": "event",
+      "start": "2019-03",
+      "title": "Technical white paper, Strata Data Conference",
+      "org": "Intel",
+      "blurb": "The privacy-identifier pipeline, presented at Strata Data 2019.",
+      "forged": [],
+      "sharpened": [
+        "privacy",
+        "ml"
+      ],
+      "source": "CV (month unverified)"
+    },
+    {
+      "id": "vt",
+      "kind": "academic",
+      "type": "span",
+      "start": "2019-09",
+      "end": "2026-06",
+      "title": "Ph.D., Computer Science · Graduate Research Assistant",
+      "org": "Virginia Tech · 3D Interaction Group",
+      "blurb": "Gaze-driven, privacy-aware, context-aware interaction in XR. A privacy–utility design space (avoidance → mitigation → protection), studies up to N=206, and teaching support throughout.",
+      "forged": [
+        "methods",
+        "hai"
+      ],
+      "sharpened": [
+        "privacy",
+        "ml",
+        "xr",
+        "teach"
+      ],
+      "with": [
+        "bowman"
+      ],
+      "link": "research.html",
+      "source": "CV",
+      "short": "Virginia Tech"
+    },
+    {
+      "id": "gem-phd",
+      "kind": "academic",
+      "type": "event",
+      "start": "2019-09",
+      "title": "GEM Ph.D. Fellowship",
+      "org": "National GEM Consortium",
+      "blurb": "Full Ph.D. fellowship.",
+      "forged": [],
+      "sharpened": [],
+      "source": "CV"
+    },
+    {
+      "id": "loupes",
+      "kind": "academic",
+      "type": "event",
+      "start": "2021-03",
+      "title": "Virtual Loupes",
+      "org": "IEEE VR Workshops 2021",
+      "blurb": "An augmented reality aid for microsurgery.",
+      "forged": [
+        "xr"
+      ],
+      "sharpened": [
+        "fullstack"
+      ],
+      "with": [
+        "bowman"
+      ],
+      "source": "CV (IEEE VR is held in March)"
+    },
+    {
+      "id": "adobe",
+      "kind": "industry",
+      "type": "span",
+      "start": "2021-05",
+      "end": "2021-08",
+      "title": "AR/VR Research Intern",
+      "org": "Adobe Research",
+      "blurb": "Lead developer and study designer: notification delivery in VR/AR, keeping messages understandable while distracting users as little as possible. Became GoldiLocks Zoning.",
+      "forged": [],
+      "sharpened": [
+        "xr",
+        "methods",
+        "fullstack"
+      ],
+      "with": [
+        "diverdi"
+      ],
+      "link": "paper-goldilocks.html",
+      "source": "CV",
+      "short": "Adobe Research"
+    },
+    {
+      "id": "clean-ocean",
+      "kind": "academic",
+      "type": "event",
+      "start": "2022-03",
+      "title": "1st of 17 teams, 3DUI Contest",
+      "org": "IEEE VR 2022",
+      "blurb": "Clean the Ocean: new modifications to Go-Go and World-in-Miniature techniques.",
+      "forged": [],
+      "sharpened": [
+        "xr"
+      ],
+      "source": "CV"
+    },
+    {
+      "id": "buildar",
+      "kind": "academic",
+      "type": "event",
+      "start": "2022-03",
+      "title": "BuildAR",
+      "org": "IEEE VR Workshops 2022",
+      "blurb": "A proof-of-concept prototype of intelligent AR in construction.",
+      "forged": [],
+      "sharpened": [
+        "hai",
+        "xr"
+      ],
+      "with": [
+        "bowman",
+        "gabbard"
+      ],
+      "source": "CV"
+    },
+    {
+      "id": "apple",
+      "kind": "industry",
+      "type": "span",
+      "start": "2022-05",
+      "end": "2022-09",
+      "title": "Camera-Hardware Research Intern",
+      "org": "Apple",
+      "blurb": "Ran a perceptual user study tying camera-hardware design specs to the end-user experience on Apple Vision Pro, and turned the findings into hardware recommendations.",
+      "forged": [],
+      "sharpened": [
+        "fullstack",
+        "methods"
+      ],
+      "source": "CV",
+      "short": "Apple"
+    },
+    {
+      "id": "goldilocks",
+      "kind": "academic",
+      "type": "event",
+      "start": "2024-10",
+      "title": "GoldiLocks Zoning",
+      "org": "ACM SUI 2024",
+      "blurb": "Gaze alone, read as passive context, drives task-agnostic VR notification placement.",
+      "forged": [],
+      "sharpened": [
+        "xr",
+        "ml",
+        "methods"
+      ],
+      "with": [
+        "diverdi",
+        "bowman"
+      ],
+      "link": "paper-goldilocks.html",
+      "source": "CV"
+    },
+    {
+      "id": "iar",
+      "kind": "academic",
+      "type": "event",
+      "start": "2024-11",
+      "title": "Towards Intelligent AR",
+      "org": "arXiv 2411.02684",
+      "blurb": "A taxonomy of context, an architecture, and an empirical study.",
+      "forged": [],
+      "sharpened": [
+        "hai"
+      ],
+      "with": [
+        "davari",
+        "stover",
+        "giovannelli",
+        "bowman"
+      ],
+      "source": "CV (arXiv id)"
+    },
+    {
+      "id": "inplaingaze",
+      "kind": "academic",
+      "type": "event",
+      "start": "2026-06",
+      "title": "Hidden in Plain Gaze",
+      "org": "Manuscript, 2026",
+      "blurb": "An engineered gaze representation keeps ~85% of task utility while cutting re-identification ~10× across 206 identities.",
+      "forged": [],
+      "sharpened": [
+        "privacy",
+        "ml",
+        "methods"
+      ],
+      "link": "paper-inplaingaze.html",
+      "source": "news.json"
+    },
+    {
+      "id": "defense",
+      "kind": "academic",
+      "type": "event",
+      "start": "2026-06",
+      "title": "Dissertation defended",
+      "org": "Virginia Tech",
+      "blurb": "Protection Behind the Veil: Gaze, Privacy, and Context-Aware Adaptation in Extended Reality.",
+      "forged": [],
+      "sharpened": [
+        "privacy",
+        "hai"
+      ],
+      "with": [
+        "bowman"
+      ],
+      "link": "research.html#dissertation",
+      "source": "news.json"
+    },
+    {
+      "id": "dibia",
+      "kind": "guild",
+      "type": "span",
+      "start": "2026-06",
+      "end": null,
+      "title": "Founder & guildmaster",
+      "org": "DIBIA",
+      "blurb": "An independent research village: consultancy, marketplace, incubator. Three-person cells on every mission.",
+      "forged": [
+        "ops"
+      ],
+      "sharpened": [
+        "teach"
+      ],
+      "link": "org.html",
+      "source": "VERIFY start month",
+      "short": "DIBIA"
+    },
+    {
+      "id": "purple-flame",
+      "kind": "guild",
+      "type": "event",
+      "start": "2026-07",
+      "title": "The Purple Flame",
+      "org": "SSRC Just Tech Fellowship application",
+      "blurb": "The myth and the mechanism: a 5-minute short plus a 2027 build-year work proposal.",
+      "forged": [],
+      "sharpened": [
+        "ops"
+      ],
+      "link": "index.html#just-tech",
+      "source": "news.json"
+    },
+    {
+      "id": "arpa",
+      "kind": "academic",
+      "type": "event",
+      "start": "2026-10",
+      "title": "Privacy on Autopilot",
+      "org": "IEEE ISMAR 2026",
+      "blurb": "Presented at IEEE ISMAR 2026, Bari. More assistant autonomy moved users into a supervisory “auditor” role: detection accuracy went up with no measured cost to workload or trust (N=30).",
+      "forged": [],
+      "sharpened": [
+        "privacy",
+        "hai",
+        "methods"
+      ],
+      "link": "paper-arpa.html",
+      "source": "news.json"
+    },
+    {
+      "id": "xrsec",
+      "kind": "academic",
+      "type": "event",
+      "start": "2026-10",
+      "title": "Towards Privacy-Aware AR in a Pervasive (Unsafe) Future",
+      "org": "XRSecurity 2026 · ACM MobiCom (poster)",
+      "blurb": "The privacy–utility design space (avoidance, mitigation, protection) and SpatialSENSai as its reference architecture.",
+      "forged": [],
+      "sharpened": [
+        "privacy",
+        "xr",
+        "fullstack"
+      ],
+      "link": "research.html#publications",
+      "source": "memory 2026-09-30"
+    },
+    {
+      "id": "sensai",
+      "kind": "guild",
+      "type": "span",
+      "start": "2026-11",
+      "end": "2027-12",
+      "planned": true,
+      "title": "SpatialSENSai: a context-sensing layer for XR",
+      "org": "DIBIA · planned",
+      "blurb": "A portable Unity/Unreal layer that fuses intrinsic and egocentric signals into a privacy-preserving context stream, so the privacy posture travels with the app.",
+      "forged": [],
+      "sharpened": [
+        "privacy",
+        "xr",
+        "hai",
+        "fullstack"
+      ],
+      "link": "research.html#journey",
+      "source": "plan"
+    },
+    {
+      "id": "digigreenbookz",
+      "kind": "guild",
+      "type": "span",
+      "start": "2026-10",
+      "end": null,
+      "title": "DigiGreenBookZ trip builder",
+      "org": "DIBIA venture",
+      "short": "DigiGreenBookZ",
+      "blurb": "A trip builder for travel planning, built while we use it to plan our own trips.",
+      "forged": [],
+      "sharpened": [
+        "fullstack",
+        "hai"
+      ],
+      "link": "org.html#ventures",
+      "source": "memory 2026-10-11"
+    },
+    {
+      "id": "3dui27",
+      "kind": "academic",
+      "type": "event",
+      "start": "2027",
+      "planned": true,
+      "title": "3DUI Contest: sudo / Aperture",
+      "org": "IEEE VR 2027",
+      "blurb": "A universal remote for shared spatial interaction, built by a DIBIA team for the IEEE VR 2027 3DUI Contest.",
+      "forged": [],
+      "sharpened": [
+        "xr",
+        "hai"
+      ],
+      "source": "VERIFY dates"
+    }
+  ],
+  "receipts": {
+    "fullstack": [
+      {
+        "entry": "rit",
+        "text": "B.S./M.S. in Computer Engineering: digital systems and assembly up through computer vision."
+      },
+      {
+        "entry": "intel",
+        "text": "Pre-silicon validation for GPU IPs; trained 30+ senior engineers on the pipeline."
+      },
+      {
+        "entry": "apple",
+        "text": "Perceptual study tying camera-hardware specs to the user experience on Apple Vision Pro."
+      }
+    ],
+    "methods": [
+      {
+        "entry": "vt",
+        "text": "Instrumented within-, between-subjects and mixed-methods studies, up to N=206; LMM / GLMM / CLMM."
+      },
+      {
+        "entry": "arpa",
+        "text": "Within-subjects autonomy study (N=30), IEEE ISMAR 2026."
+      },
+      {
+        "entry": "defense",
+        "text": "Virginia Tech, June 2026."
+      }
+    ],
+    "ml": [
+      {
+        "entry": "rit",
+        "text": "M.S. on gaze estimation and computer vision."
+      },
+      {
+        "entry": "intel",
+        "text": "Real-time ML pipeline that detects sensitive information in data streams; patent initiatives; Strata 2019 white paper."
+      },
+      {
+        "entry": "inplaingaze",
+        "text": "Engineered gaze features keep ~85% of task utility with ~10× less re-identification across 206 identities."
+      }
+    ],
+    "xr": [
+      {
+        "entry": "loupes",
+        "text": "AR aid for microsurgery, IEEE VRW 2021."
+      },
+      {
+        "entry": "clean-ocean",
+        "text": "IEEE VR 2022 3DUI Contest."
+      },
+      {
+        "entry": "goldilocks",
+        "text": "ACM SUI 2024: gaze-aware notification placement."
+      }
+    ],
+    "privacy": [
+      {
+        "entry": "intel",
+        "text": "Stripped privacy identifiers from live data streams, three years before the PhD."
+      },
+      {
+        "entry": "inplaingaze",
+        "text": "How gaze is represented, not whether it is collected, is the privacy lever."
+      },
+      {
+        "entry": "xrsec",
+        "text": "The privacy–utility design space and the SpatialSENSai architecture, XRSecurity 2026 (ACM MobiCom)."
+      }
+    ],
+    "hai": [
+      {
+        "entry": "buildar",
+        "text": "Intelligent AR in construction, IEEE VRW 2022."
+      },
+      {
+        "entry": "iar",
+        "text": "A taxonomy of context, an architecture, and an empirical study."
+      },
+      {
+        "entry": "arpa",
+        "text": "Autonomy shifts users into a supervisory “auditor” role, with no measured cost to trust."
+      }
+    ]
+  }
+}

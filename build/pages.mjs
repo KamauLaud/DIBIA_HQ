@@ -6,13 +6,13 @@ export const pages = {
     type: 'ProfilePage'
   },
   research: {
-    title: 'Research — Impondo Zenkomo · Cory “Ike” Ilo, PhD',
-    description: 'Three studies, one decision tree: GoldiLocks Zoning (ACM SUI ’24), Hidden in Plain Gaze (manuscript), and Privacy on Autopilot / ARPA (IEEE ISMAR ’26). The dissertation, publications, talks, and the 2027 build plan.',
+    title: 'Research — XR privacy and context-aware interfaces · Cory “Ike” Ilo, PhD',
+    description: 'Publications (ACM SUI 2024, IEEE ISMAR 2026, XRSecurity 2026), a to-scale research journey with planned work, the dissertation and its three studies, talks, and professional memberships (NSBE, Tau Beta Pi, IEEE, ACM).',
     type: 'CollectionPage'
   },
-  cv: { title: 'CV — Cory “Ike” Ilo, PhD', description: 'Curriculum vitae of Cory “Ike” Ilo — Virginia Tech, Apple, Adobe Research, Intel, RIT. Download as PDF.', type: 'WebPage' },
-  org: { title: 'The Org — DIBIA, an independent research village', description: 'DIBIA: consultancy, marketplace, incubator. Three-person research cells, ranks, the founding fellowship of #Tech4Gud, and the stack.', type: 'AboutPage' },
-  marketplace: { title: 'Marketplace — DIBIA · odd tech jobs, research-grade', description: 'Research-oriented developers for hire. Missions matched to cells, trust as currency. Coming soon.', type: 'WebPage' },
+  cv: { title: 'CV — Cory “Ike” Ilo, PhD (moved to the home page)', description: 'The CV now lives on the home page: bio, headline receipts, and the CV as PDF.', type: 'WebPage' },
+  org: { title: 'The Org — DIBIA, a human-compute research collective', description: 'DIBIA: a collective of independent researchers and engineers. Founders Cory “Ike” Ilo and Michael Robles, the ventures in development (SpatialSENSai, sudo / Aperture, DigiGreenBookZ), and how teams are organized.', type: 'AboutPage' },
+  marketplace: { title: 'Marketplace — DIBIA · services from independent researchers and engineers', description: 'Every service offered by the members of the DIBIA Dossier: XR prototypes, privacy reviews, user studies, LLM integration, automation, data and infrastructure. One brief, one contract.', type: 'WebPage' },
   dossier: { title: 'The Dossier — DIBIA · vetted research-grade operatives for startups', description: 'The DIBIA Dossier: vetted research-grade operatives for startups and businesses. Fixed-scope missions, a three-person cell on every job, a Jonin or Kage guiding. Post a mission brief.', type: 'CollectionPage' },
   contact: { title: 'Contact — Cory “Ike” Ilo · DIBIA consultancy', description: 'Book an XR privacy, gaze systems, or human-AI collaboration engagement with Dr. Cory “Ike” Ilo.', type: 'ContactPage' },
   'paper-arpa': { title: 'Privacy on Autopilot (IEEE ISMAR ’26) — XR assistant autonomy and privacy awareness', description: 'ARPA, an AR privacy assistant with three autonomy levels, evaluated in a within-subjects study (N=30). Automation redistributes the privacy burden rather than removing it. IEEE ISMAR 2026, Bari.', type: 'ScholarlyArticle' },

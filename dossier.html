@@ -169,30 +169,28 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   <div class="links">
     <a href="index.html">HOME</a>
     <a href="research.html">RESEARCH</a>
-    <a href="cv.html">CV</a>
     <a href="org.html">THE ORG</a>
     <a href="marketplace.html">MARKETPLACE</a>
     <a href="dossier.html" class="on" aria-current="page">DOSSIER</a>
     <a href="contact.html">CONTACT</a>
   </div>
-  <a class="btn btn-primary btn-sm cta" href="#brief">Post a mission</a>
+  <a class="btn btn-primary btn-sm cta" href="#brief">Start a project</a>
 </nav>
 
 <header>
   <div class="scan"></div>
   <div class="inner wrap">
-    <div class="prompt">dibia@nnewi:~$ ./dossier --open --operatives<span class="cursor"></span></div>
-    <div class="eyebrow em">THE DIBIA DOSSIER — FOR STARTUPS &amp; BUSINESSES</div>
-    <h1>Research ninjas, with backup. Pick the operative; get the whole cell.</h1>
-    <p class="lede" style="font-size:18px;margin-top:24px">Product-focused research on a short clock: the prototype, the integration, the audit, the study your roadmap needs answered this quarter. Browse vetted operatives, post the mission, and a three-person cell ships it with a Jonin or Kage in the guide seat.</p>
+        <div class="eyebrow em">THE DIBIA DOSSIER · FOR STARTUPS AND BUSINESSES</div>
+    <h1>Researchers and engineers for the work your roadmap needs.</h1>
+    <p class="lede" style="font-size:18px;margin-top:24px">DIBIA is a collective of independent researchers and engineers. Each member runs their own practice; DIBIA is the single point of contact. Browse who is available and what they offer, send a project brief, and we staff a small team led by a senior member.</p>
     <div style="display:flex;gap:14px;margin-top:32px;flex-wrap:wrap">
-      <a class="btn btn-primary" href="#brief">Post a mission</a>
-      <a class="btn btn-ghost" href="#operatives">Browse operatives</a>
+      <a class="btn btn-primary" href="#brief">Start a project</a>
+      <a class="btn btn-ghost" href="#operatives">Browse members</a>
     </div>
     <div class="promises">
-      <div><b>VETTED</b><span>Every operative is ranked on the village ladder and backed by verifiable receipts.</span></div>
+      <div><b>VETTED</b><span>Every profile lists verifiable work: papers, shipped systems, past roles.</span></div>
       <div><b>SCOPED IN 48H</b><span>One brief in; a written scope, timeline and price back within two business days.</span></div>
-      <div><b>BACKUP BUILT IN</b><span>No solo freelancers. A cell carries every mission, so nothing stalls on one person.</span></div>
+      <div><b>A TEAM, NOT ONE PERSON</b><span>Projects are staffed by two or three people, so work doesn’t stall on one person.</span></div>
       <div><b>FIXED SCOPE</b><span>Clear deliverables and a definition of done before work starts. No open-ended billing.</span></div>
     </div>
   </div>
@@ -201,73 +199,73 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 
 <section id="operatives" class="sec">
   <div class="wrap">
-    <div class="eyebrow">THE OPERATIVES</div>
-    <h2>Who answers your mission.</h2>
-    <p class="lede">Filter by the job you need done. Request an operative and their cell forms around your problem.</p>
-    <div class="filters" role="group" aria-label="Filter operatives">
-      <input class="search" id="q" type="search" placeholder="search skills, orgs, names" aria-label="Search operatives">
+    <div class="eyebrow">MEMBERS</div>
+    <h2>Who you would work with.</h2>
+    <p class="lede">Filter by the service you need. Request a member and we build the team around them.</p>
+    <div class="filters" role="group" aria-label="Filter members">
+      <input class="search" id="q" type="search" placeholder="search skills, orgs, names" aria-label="Search members">
       <div id="chips" style="display:contents"></div>
     </div>
     <div class="grid" id="grid" aria-live="polite"></div>
-    <p class="empty" id="empty" hidden>NO OPERATIVE MATCHES THAT FILTER. POST THE MISSION ANYWAY; THE VILLAGE WILL STAFF IT.</p>
+    <p class="empty" id="empty" hidden>NO MEMBER MATCHES THAT FILTER. SEND THE BRIEF ANYWAY AND WE WILL FIND THE RIGHT PERSON.</p>
   </div>
 </section>
 
 <section id="packages" class="sec" style="border-top:1px solid var(--line);background:var(--sunken)">
   <div class="wrap">
-    <div class="eyebrow em">MISSION PACKAGES</div>
-    <h2>Three ways to engage. Same cell, same rigor.</h2>
+    <div class="eyebrow em">ENGAGEMENT OPTIONS</div>
+    <h2>Ways to work with us.</h2>
     <div class="pk">
       <div>
         <div class="len">2 WEEKS</div>
-        <h3>Scout Mission</h3>
+        <h3>Discovery sprint</h3>
         <p>De-risk the question before you commit budget. Feasibility spike, technical teardown, or a fast prototype that proves the path.</p>
         <div class="out">OUT: FINDINGS MEMO · DEMO OR SPIKE · GO / NO-GO</div>
       </div>
       <div class="feat">
         <div class="len">4–6 WEEKS</div>
-        <h3>Full Mission</h3>
+        <h3>Project</h3>
         <p>Ship the thing. A working integration, pipeline, study or prototype, documented and handed over so your team owns it.</p>
         <div class="out">OUT: WORKING SYSTEM · DOCS · HANDOFF SESSION</div>
       </div>
       <div>
         <div class="len">MONTHLY</div>
-        <h3>Embedded Jonin</h3>
-        <p>A senior operative on retainer inside your team, with the cell on call for spikes. For roadmaps that keep generating hard questions.</p>
+        <h3>Retainer</h3>
+        <p>A senior member embedded with your team on a monthly retainer, with the wider collective available when you need more hands.</p>
         <div class="out">OUT: STANDING CAPACITY · MONTHLY REVIEW</div>
       </div>
       <div>
         <div class="len">ADD-ON · 1 WEEK</div>
-        <h3>Red-Team Pass</h3>
-        <p>Adversarial review of what you built or bought: privacy posture, prompt injection, data exposure. Bolts onto any mission.</p>
+        <h3>Security and privacy review</h3>
+        <p>Review of what you built or bought: privacy posture, prompt injection, data exposure. Can be added to any project.</p>
         <div class="out">OUT: RISK REPORT · FIX LIST</div>
       </div>
     </div>
-    <p class="note">PRICING IS QUOTED PER MISSION IN THE 48-HOUR SCOPE. EVERY MISSION RETURNS ONE OPEN TEMPLATE TO THE VILLAGE.</p>
+    <p class="note">PRICING IS QUOTED PER PROJECT IN THE 48-HOUR SCOPE.</p>
   </div>
 </section>
 
 <section id="brief" class="sec" style="border-top:1px solid var(--line)">
   <div class="wrap brief">
     <div>
-      <div class="eyebrow">POST A MISSION</div>
+      <div class="eyebrow">START A PROJECT</div>
       <h2>Tell us the problem. We'll come back with a scope.</h2>
       <p class="lede">Five minutes of context saves a week of back-and-forth. Share what you can; nothing here commits you to anything.</p>
       <div class="steps">
-        <div><b>01 · BRIEF</b><p>You send the mission brief below.</p></div>
-        <div><b>02 · SCOPE</b><p>Within 48 hours: written scope, timeline, cell and price. NDA first if you need one.</p></div>
-        <div><b>03 · SHIP</b><p>The cell executes with weekly check-ins and a demo at the end, not a surprise.</p></div>
+        <div><b>01 · BRIEF</b><p>You send the project brief below.</p></div>
+        <div><b>02 · SCOPE</b><p>Within 48 hours: written scope, timeline, team and price. NDA first if you need one.</p></div>
+        <div><b>03 · DELIVER</b><p>The team works in weekly check-ins and ends with a demo and handoff.</p></div>
       </div>
     </div>
     <div class="term">
-      <div class="bar"><i style="background:var(--crimson)"></i><i style="background:var(--amber)"></i><i style="background:oklch(72% 0.17 163)"></i><span>dibia@nnewi:~$ ./mission --new</span></div>
+      <div class="bar"><i style="background:var(--crimson)"></i><i style="background:var(--amber)"></i><i style="background:oklch(72% 0.17 163)"></i><span>PROJECT BRIEF</span></div>
       <form id="mission" novalidate>
         <div class="f"><label for="m-name">YOUR NAME <span class="req">*</span></label><input id="m-name" name="name" autocomplete="name" required></div>
         <div class="f"><label for="m-company">COMPANY <span class="req">*</span></label><input id="m-company" name="company" autocomplete="organization" required></div>
         <div class="f"><label for="m-email">WORK EMAIL <span class="req">*</span></label><input id="m-email" name="email" type="email" autocomplete="email" required></div>
         <div class="f"><label for="m-stage">STAGE</label>
           <select id="m-stage" name="stage"><option value="">Select</option><option>Pre-seed / Seed</option><option>Series A–B</option><option>Growth / Series C+</option><option>SMB / established business</option><option>Enterprise</option><option>Nonprofit / public sector</option></select></div>
-        <div class="f full"><label for="m-job">MISSION TYPE</label>
+        <div class="f full"><label for="m-job">SERVICE</label>
           <select id="m-job" name="job"></select></div>
         <div class="f full"><label for="m-problem">THE PROBLEM <span class="req">*</span></label><textarea id="m-problem" name="problem" required placeholder="What's broken, blocked or unknown? What have you tried?"></textarea></div>
         <div class="f full"><label for="m-done">WHAT DOES DONE LOOK LIKE?</label><textarea id="m-done" name="done" style="min-height:80px" placeholder="The demo, the decision, the shipped feature, the report."></textarea></div>
@@ -275,7 +273,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
           <select id="m-time" name="timeline"><option value="">Select</option><option>ASAP (this month)</option><option>Next 1–3 months</option><option>Exploring / flexible</option></select></div>
         <div class="f"><label for="m-budget">BUDGET RANGE</label>
           <select id="m-budget" name="budget"><option value="">Select</option><option>Under $10k</option><option>$10k–$25k</option><option>$25k–$75k</option><option>$75k+</option><option>Not sure yet</option></select></div>
-        <div class="f"><label for="m-op">REQUESTED OPERATIVE</label><select id="m-op" name="operative"></select></div>
+        <div class="f"><label for="m-op">REQUESTED MEMBER</label><select id="m-op" name="operative"></select></div>
         <div class="f"><label for="m-nda">NDA BEFORE DETAILS?</label>
           <select id="m-nda" name="nda"><option>No</option><option>Yes, ours</option><option>Yes, send yours</option></select></div>
         <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label for="m-website">Website</label><input id="m-website" name="website" tabindex="-1" autocomplete="off"></div>
@@ -284,7 +282,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
           <button class="btn btn-ghost" type="button" id="copy">Copy brief</button>
           <span class="status" id="status" role="status"></span>
         </div>
-        <p class="hint full" style="grid-column:1/-1;margin:0">Sending delivers the brief straight to the intake inbox; a cell replies to your work email within two business days. Prefer email? Copy it and send it from anywhere.</p>
+        <p class="hint full" style="grid-column:1/-1;margin:0">Sending delivers the brief straight to the intake inbox; we reply to your work email within two business days. Prefer email? Copy it and send it from anywhere.</p>
       </form>
     </div>
   </div>
@@ -292,8 +290,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 
 <footer>
   <div class="wrap">
-    <span>© <span id="yr"></span> DIBIA · #TECH4GUD · THE DOSSIER</span>
-    <a id="foot-mail" href="#brief">POST A MISSION</a>
+    <span>© <span id="yr"></span> DIBIA · THE DOSSIER</span>
+    <a id="foot-mail" href="#brief">START A PROJECT</a>
   </div>
 </footer>
 
@@ -301,15 +299,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 <script>
 (function(){
   var D = window.DIBIA_DOSSIER || {members:[], intakeEmail:""};
-  var JOBS = {
-    JOB_01:"Prototype the demo your pitch needs",
-    JOB_02:"Integrate an LLM into your workflow",
-    JOB_03:"Stand up the data pipeline & dashboard",
-    JOB_04:"Audit your app's privacy posture",
-    JOB_05:"Automate the annoying thing",
-    JOB_06:"Run the user study, get real evidence"
-  };
-  var SHORT = {JOB_01:"XR / PROTOTYPE",JOB_02:"LLM / AGENTS",JOB_03:"DATA",JOB_04:"PRIVACY / RED TEAM",JOB_05:"AUTOMATION",JOB_06:"UX RESEARCH"};
+  // Services come from the catalog in dossier/members.js; only services some member offers are shown.
+  var offered = {}; (D.members||[]).forEach(function(m){ (m.jobs||[]).forEach(function(j){ offered[j]=1; }); });
+  var JOBS = {}, SHORT = {};
+  (D.services||[]).forEach(function(v){ if (offered[v.id]) { JOBS[v.id] = v.title; SHORT[v.id] = v.short; } });
+  var RANK_LABEL = {Kage:"Principal",Anbu:"Security",Jonin:"Lead",Special:"Specialist",Chunin:"Engineer",Genin:"Apprentice"};
   var RANK_ORDER = {Kage:0,Anbu:1,Jonin:2,Special:3,Chunin:4,Genin:5};
   var $ = function(s){return document.querySelector(s)};
   function el(tag, attrs, kids){
@@ -330,7 +324,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   var chips = $("#chips");
   ["ALL"].concat(Object.keys(JOBS)).forEach(function(j){
     var b = el("button",{type:"button","class":"chip","aria-pressed": j==="ALL" ? "true":"false", "data-job":j, text: j==="ALL" ? "ALL" : SHORT[j]});
-    b.title = j==="ALL" ? "All operatives" : JOBS[j];
+    b.title = j==="ALL" ? "All members" : JOBS[j];
     b.addEventListener("click", function(){
       active = j;
       chips.querySelectorAll(".chip").forEach(function(c){ c.setAttribute("aria-pressed", c.dataset.job===j ? "true":"false"); });
@@ -345,13 +339,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
     if (m.photo){ var img = el("img",{src:m.photo, alt:"", loading:"lazy"}); img.onerror=function(){ ph.textContent = initials(m.name); }; ph.appendChild(img); }
     else ph.textContent = initials(m.name);
     var badges = el("div",{"class":"badges"},[
-      el("span",{"class":"badge b-rank"+(m.rank==="Kage"?" kage":""), text:(m.rank||"").toUpperCase()+" · "+(m.track||"").toUpperCase()}),
-      el("span",{"class":"badge "+(m.available?"b-on":"b-off")},[el("span",{"class":"dot"}), document.createTextNode(m.available?"TAKING MISSIONS":"BOOKED")]),
+      el("span",{"class":"badge b-rank"+(m.rank==="Kage"?" kage":""), text:(RANK_LABEL[m.rank]||m.rank||"").toUpperCase()+" · "+(m.track||"").toUpperCase()}),
+      el("span",{"class":"badge "+(m.available?"b-on":"b-off")},[el("span",{"class":"dot"}), document.createTextNode(m.available?"AVAILABLE":"BOOKED")]),
       m.draft ? el("span",{"class":"badge b-draft", text:"DRAFT"}) : null
     ]);
     var top = el("div",{"class":"top"},[ph, el("div",null,[
       el("h3",{text:m.name}),
-      m.alias ? el("div",{"class":"alias", text:m.alias}) : null,
       badges
     ])]);
     var proof = el("ul",null,(m.proof||[]).map(function(p){ return el("li",{text:p}); }));
@@ -377,8 +370,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
 
   function slot(){
     return el("article",{"class":"op slot"},[
-      el("div",{"class":"eyebrow em", text:"YOUR CELL HERE"}),
-      el("p",{text:"Village member? Add your profile to the Dossier with a pull request to dossier/members.js, or open a “Dossier profile” issue on the repo."})
+      el("div",{"class":"eyebrow em", text:"JOIN THE DOSSIER"}),
+      el("p",{text:"DIBIA member? Add your profile to the Dossier with a pull request to dossier/members.js, or open a “Dossier profile” issue on the repo."})
     ]);
   }
 
@@ -400,10 +393,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
   /* form selects */
   var jobSel = $("#m-job");
   jobSel.appendChild(el("option",{value:"", text:"Select or describe below"}));
-  Object.keys(JOBS).forEach(function(j){ jobSel.appendChild(el("option",{value:j, text:j.replace("_"," ")+" · "+JOBS[j]})); });
+  Object.keys(JOBS).forEach(function(j){ jobSel.appendChild(el("option",{value:j, text:JOBS[j]})); });
   jobSel.appendChild(el("option",{value:"OTHER", text:"Something odd (describe below)"}));
   var opSel = $("#m-op");
-  opSel.appendChild(el("option",{value:"", text:"Match me with the right cell"}));
+  opSel.appendChild(el("option",{value:"", text:"Match me with the right person"}));
   members.forEach(function(m){ opSel.appendChild(el("option",{value:m.id, text:m.name+" · "+m.cell})); });
 
   /* brief composer */
@@ -413,14 +406,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
     var op = members.filter(function(m){return m.id===val("operative")})[0];
     var job = val("job");
     return [
-      "DIBIA MISSION BRIEF",
+      "DIBIA PROJECT BRIEF",
       "",
       "Name: "+val("name"),
       "Company: "+val("company"),
       "Email: "+val("email"),
       "Stage: "+(val("stage")||"—"),
-      "Mission type: "+(job ? (JOBS[job] ? job+" · "+JOBS[job] : "Other") : "—"),
-      "Requested operative: "+(op ? op.name : "Match me"),
+      "Service: "+(job ? (JOBS[job] || "Other") : "—"),
+      "Requested member: "+(op ? op.name : "Match me"),
       "Timeline: "+(val("timeline")||"—"),
       "Budget: "+(val("budget")||"—"),
       "NDA first: "+val("nda"),
@@ -438,7 +431,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
     status.style.color=""; return true;
   }
   function openMail(){
-    var subj = "DIBIA mission — "+val("company");
+    var subj = "DIBIA project brief — "+val("company");
     location.href = "mailto:"+encodeURIComponent(D.intakeEmail).replace("%40","@")+"?subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(compose());
     status.textContent = "OPENING YOUR EMAIL APP…";
   }

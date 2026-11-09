@@ -8,13 +8,28 @@
   "collapseAfter": 6,
   "news": [
     {
-      "date": "2026-10-05",
+      "date": "2027",
       "kind": "talk",
       "public": true,
       "upcoming": true,
-      "text": "<b>Presenting at IEEE ISMAR 2026, Bari.</b> <i>Privacy on Autopilot</i> — the ARPA study on assistant autonomy and privacy awareness — runs in the research track, Oct 5–9.",
-      "link": "paper-arpa.html",
-      "short": "PRESENTING “PRIVACY ON AUTOPILOT” · IEEE ISMAR 2026 · BARI · OCT 5–9"
+      "text": "<b>Upcoming: IEEE VR 2027 3DUI Contest.</b> Competing with <i>sudo / Aperture</i>, a universal remote for shared spatial interaction. Details soon.",
+      "link": null,
+      "short": "UPCOMING · IEEE VR 2027 3DUI CONTEST · SUDO / APERTURE",
+      "verify": "Add dates/location and a project page when ready."
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "paper",
+      "public": true,
+      "text": "<b>Workshop poster accepted at XRSecurity 2026 (ACM MobiCom, Austin).</b> <i>Towards Privacy-Aware AR in a Pervasive (Unsafe) Future</i> lays out the privacy–utility design space behind SpatialSENSai.",
+      "link": "research.html#publications"
+    },
+    {
+      "date": "2026-10-05",
+      "kind": "talk",
+      "public": true,
+      "text": "<b>Presented <i>Privacy on Autopilot</i> at IEEE ISMAR 2026, Bari.</b> The ARPA study on how assistant autonomy affects privacy awareness, in the research track.",
+      "link": "paper-arpa.html"
     },
     {
       "date": "2026-09",
@@ -35,7 +50,7 @@
       "kind": "venture",
       "public": true,
       "text": "<b>The Purple Flame submitted to the SSRC Just Tech Fellowship (2027 cohort).</b> The myth and the mechanism — a 5-minute Afro-cyberpunk short plus a 2027 build-year work proposal.",
-      "link": "index.html#film",
+      "link": "index.html#just-tech",
       "verify": "Submission month and application status."
     },
     {

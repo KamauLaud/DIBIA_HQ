@@ -3,7 +3,7 @@
 Static site, zero runtime dependencies. What GitHub Pages serves is the set of `*.html` files at the repo root plus `assets/` and `_ds/`. Those HTML files are **generated** — edit the sources, run the build, commit both.
 
 ```
-data/            ← the record: publications.json · news.json · talks.json · people.json · site.json
+data/            ← the record: publications.json · news.json · talks.json · people.json · site.json · journey.json
 src/             ← page templates (dc-runtime format, with <!-- @@marker --> slots) + the runtime used only at build time
 build/           ← render.mjs (JSON → cards) · build.mjs (headless hydrate + strip runtime) · og.mjs · check.mjs · pages.mjs (titles/descriptions)
 assets/          ← photos (≤1600px JPEG), paper figures (WebP), fonts, site.js (~2 KB), og-card.png, brand/ (DIBIA Netrunners emblem, nav mark, icons), ilo.bib + bib/<id>.bib
@@ -19,6 +19,9 @@ _ds/             ← DIBIA / #Tech4Gud design system (tokens + self-hosted fonts
 | Add / change a paper or its status | `data/publications.json` — `status`, `statusLabel`, `links.{pdf,doi,arxiv,video,code}` | `npm run build` |
 | Add a talk or award | `data/talks.json` (`talks`, `recognition`) | `npm run build` |
 | Link a co-author or guild member | `data/people.json` — set `url` | `npm run build` |
+| Add a role, paper, award, or planned item to the journey (research.html) / receipts (home) | `data/journey.json` — `entries` (lane, dates, `forged` / `sharpened` claims) and `receipts` | `npm run build` |
+| Add or change a venture on the chip board (home + org.html) | `data/ventures.json` | `npm run build` |
+| Add a Dossier member, a service, or a founder | `dossier/members.js` (`services` catalog, member `jobs`, `founder: true`) — the Marketplace service list and the Org founders are built from it | `npm run build` |
 | Change emails (`email` = primary, `emailAcademic` = academic) / social links / thesis line | `data/site.json` | `npm run build && npm run og` |
 | Change page titles / descriptions | `build/pages.mjs` | `npm run build` |
 | Change layout or copy | `src/<page>.html` | `npm run build` |
