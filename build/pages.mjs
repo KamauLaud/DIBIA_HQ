@@ -10,7 +10,7 @@ export const pages = {
     description: 'Three studies, one decision tree: GoldiLocks Zoning (ACM SUI ’24), Hidden in Plain Gaze (manuscript), and Privacy on Autopilot / ARPA (IEEE ISMAR ’26). The dissertation, publications, talks, and the 2027 build plan.',
     type: 'CollectionPage'
   },
-  cv: { title: 'CV — Cory “Ike” Ilo, PhD', description: 'Curriculum vitae of Cory “Ike” Ilo — Virginia Tech, Apple, Adobe Research, Intel, RIT. Download as PDF.', type: 'WebPage' },
+  cv: { title: 'CV, receipts & journey — Cory “Ike” Ilo, PhD · Full-stack HCI · ML · AR/VR · Privacy', description: 'Every claim in “Full-Stack HCI Researcher · ML · AR/VR · Privacy · Human-Centered AI”, itemized with receipts, and a to-scale journey from RIT and Intel through Adobe, Apple, and Virginia Tech to DIBIA. Download the CV as PDF.', type: 'ProfilePage' },
   org: { title: 'The Org — DIBIA, an independent research village', description: 'DIBIA: consultancy, marketplace, incubator. Three-person research cells, ranks, the founding fellowship of #Tech4Gud, and the stack.', type: 'AboutPage' },
   marketplace: { title: 'Marketplace — DIBIA · odd tech jobs, research-grade', description: 'Research-oriented developers for hire. Missions matched to cells, trust as currency. Coming soon.', type: 'WebPage' },
   dossier: { title: 'The Dossier — DIBIA · vetted research-grade operatives for startups', description: 'The DIBIA Dossier: vetted research-grade operatives for startups and businesses. Fixed-scope missions, a three-person cell on every job, a Jonin or Kage guiding. Post a mission brief.', type: 'CollectionPage' },

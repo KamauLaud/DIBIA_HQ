@@ -126,6 +126,16 @@
       ],
       "name": "W. Zheng",
       "url": null
+    },
+    {
+      "id": "savakis",
+      "match": [
+        "A. Savakis",
+        "Andreas Savakis"
+      ],
+      "name": "Andreas Savakis",
+      "url": null,
+      "role": "M.S. advisor, RIT"
     }
   ]
 }
